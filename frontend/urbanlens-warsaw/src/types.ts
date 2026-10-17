@@ -19,6 +19,13 @@ export interface Place extends Location {
 export interface Analysis {
   location: Location;
   radius_m?: number;
+  scores?: { mobility: number };
+  features?: {
+    nearest_stop_m: number;
+    stop_groups_500m: number;
+    stop_groups_1000m: number;
+  };
+  nearby?: { total: number; limit: number; truncated: boolean };
   places: Place[];
   unavailable: Category[];
   sources: { name: string; url?: string; retrieved_at?: string }[];
@@ -32,6 +39,7 @@ export interface Analysis {
   demo: boolean;
 }
 export interface AnalyzeRequest {
+  label?: string;
   latitude: number;
   longitude: number;
   radius_m: number;

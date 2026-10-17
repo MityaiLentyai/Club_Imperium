@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowUpRight,
@@ -39,6 +39,7 @@ const cats: {
   { id: "parking", label: "Parking", icon: ParkingCircle, color: "purple" },
 ];
 function App() {
+  const viewGeneration = useRef(0);
   const [mode, setMode] = useState<"demo" | "live">("demo"),
     [location, setLocation] = useState<Location>(homes[0]),
     [query, setQuery] = useState(homes[0].label),
@@ -67,6 +68,9 @@ function App() {
       setError("Choose a location within Warsaw.");
       return;
     }
+    viewGeneration.current += 1;
+    setBusy(false);
+    setSearching(false);
     setLocation(p);
     setQuery(p.label);
     setResult(null);
@@ -74,6 +78,9 @@ function App() {
     setError("");
   }
   function changeMode(m: "demo" | "live") {
+    viewGeneration.current += 1;
+    setBusy(false);
+    setSearching(false);
     setMode(m);
     setResult(null);
     setSaved([]);
@@ -84,6 +91,7 @@ function App() {
     setTab("explore");
   }
   async function searchAddress(dest = false) {
+    const generation = viewGeneration.current;
     setError("");
     setSearching(true);
     try {
@@ -100,6 +108,7 @@ function App() {
         dest ? setDestMatches(matches) : setMatches(matches);
       } else {
         const found = await geocode(q);
+        if (generation !== viewGeneration.current) return;
         if (!found.length)
           throw new Error(
             "No matching Warsaw address. Try another address or select a point on the map.",
@@ -107,12 +116,13 @@ function App() {
         dest ? setDestMatches(found) : setMatches(found);
       }
     } catch (e) {
-      setError((e as Error).message);
+      if (generation === viewGeneration.current) setError((e as Error).message);
     } finally {
-      setSearching(false);
+      if (generation === viewGeneration.current) setSearching(false);
     }
   }
   async function run() {
+    const generation = viewGeneration.current;
     setBusy(true);
     setError("");
     try {
@@ -124,6 +134,7 @@ function App() {
                 p.label.toLowerCase().includes(query.toLowerCase().trim()),
               )
             : await geocode(query);
+        if (generation !== viewGeneration.current) return;
         if (found.length !== 1) {
           setMatches(found);
           throw new Error(
@@ -140,6 +151,7 @@ function App() {
         mode === "demo"
           ? demoAnalysis(target, radius)
           : await analyze({ ...target, radius_m: radius, destination });
+      if (generation !== viewGeneration.current) return;
       setResult({ ...data, radius_m: radius });
       setTab("explore");
       setTimeout(
@@ -150,9 +162,9 @@ function App() {
         80,
       );
     } catch (e) {
-      setError((e as Error).message);
+      if (generation === viewGeneration.current) setError((e as Error).message);
     } finally {
-      setBusy(false);
+      if (generation === viewGeneration.current) setBusy(false);
     }
   }
   function save() {
@@ -321,6 +333,9 @@ function App() {
                   id="radius"
                   value={radius}
                   onChange={(e) => {
+                    viewGeneration.current += 1;
+                    setBusy(false);
+                    setSearching(false);
                     setRadius(Number(e.target.value));
                     setResult(null);
                   }}
@@ -445,6 +460,21 @@ function App() {
                 {savedCurrent ? "Added to comparison" : "Compare this home"}
               </button>
             </div>
+            {result.scores && result.features && (
+              <div className="status-note" aria-label="Mobility Score">
+                <TrainFront size={20} />
+                <span>
+                  <strong>Mobility Score: {result.scores.mobility}/100</strong>
+                  {" · "}Nearest stop: {meters(result.features.nearest_stop_m)}
+                  {" · "}{result.features.stop_groups_500m} stop groups within 500 m
+                  {" · "}{result.features.stop_groups_1000m} within 1 km.
+                  {" "}Score uses fixed radii; map markers use your selected radius.
+                </span>
+              </div>
+            )}
+            {result.nearby?.truncated && (
+              <p className="status-note">Showing the nearest {result.places.length} of {result.nearby.total} transport platforms within this radius.</p>
+            )}
             <div className="metrics">
               {cats.map((c) => {
                 const list = result.places
@@ -629,10 +659,8 @@ function App() {
                     </button>
                   </div>
                 )}
-                {destination && mode === "live" && (
-                  <button className="outline-btn" onClick={run} disabled={busy}>
-                    Check journey <ArrowRight size={16} />
-                  </button>
+                {mode === "live" && (
+                  <p className="empty-small">Journey times and routing are unavailable. Destination distances are straight line only.</p>
                 )}
                 {result.commute && (
                   <p className="empty-small">
@@ -717,6 +745,12 @@ function App() {
                     </tr>
                   </thead>
                   <tbody>
+                    {saved.some((home) => home.scores) && (
+                      <tr>
+                        <td>Mobility Score</td>
+                        {[0, 1].map((i) => <td key={i}>{saved[i]?.scores ? `${saved[i].scores!.mobility}/100` : "—"}</td>)}
+                      </tr>
+                    )}
                     <tr>
                       <td>Search radius</td>
                       {[0, 1].map((i) => (
@@ -841,7 +875,7 @@ function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Warsaw Open Data — planned stop dataset{" "}
+                Warsaw Open Data — transport stop dataset{" "}
                 <ArrowUpRight size={16} />
               </a>
               <a

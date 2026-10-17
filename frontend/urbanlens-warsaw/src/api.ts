@@ -17,17 +17,18 @@ export async function analyze(
     throw new Error(
       "Live analysis is not connected yet. Add VITE_API_BASE_URL and rebuild, or explore Demo mode.",
     );
-  const r = await fetch(`${API_BASE_URL}/analyze`, {
+  const r = await fetch(`${API_BASE_URL}/api/score`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
+    body: JSON.stringify({ latitude: request.latitude, longitude: request.longitude, radius_m: request.radius_m }),
     signal: signal || AbortSignal.timeout(20000),
   });
-  if (!r.ok)
-    throw new Error(
-      `Analysis unavailable (HTTP ${r.status}). Please try again.`,
-    );
-  return adaptAnalysis(await r.json(), request);
+  if (!r.ok) throw new Error(await responseError(r));
+  const raw = await r.json();
+  if (!Number.isFinite(raw?.scores?.mobility) || raw.scores.mobility < 0 || raw.scores.mobility > 100 ||
+      !Number.isFinite(raw?.features?.nearest_stop_m) || !Array.isArray(raw?.places))
+    throw new Error("The backend returned an invalid score response.");
+  return adaptAnalysis(raw, request);
 }
 const categories: Category[] = [
   "transport",
@@ -84,7 +85,15 @@ export function adaptAnalysis(raw: any, request: AnalyzeRequest): Analysis {
     }
   }
   return {
-    location: { ...request, label: raw.location?.label || "Selected location" },
+    location: {
+      latitude: raw.location?.latitude ?? request.latitude,
+      longitude: raw.location?.longitude ?? request.longitude,
+      label: raw.location?.address || raw.location?.label || request.label || "Selected location",
+    },
+    radius_m: raw.radius_m ?? request.radius_m,
+    scores: raw.scores,
+    features: raw.features,
+    nearby: raw.nearby,
     places,
     unavailable: [
       ...new Set([
@@ -103,41 +112,27 @@ export function adaptAnalysis(raw: any, request: AnalyzeRequest): Analysis {
     demo: false,
   };
 }
-let lastSearch = 0;
-const cache = new Map<string, Location[]>();
+async function responseError(response: Response): Promise<string> {
+  try {
+    const body = await response.json();
+    if (typeof body.detail === "string") return body.detail;
+    if (Array.isArray(body.detail))
+      return body.detail.map((error: { msg?: string }) => error.msg || "Invalid input").join("; ");
+  } catch { /* Fall back to the HTTP status for non-JSON errors. */ }
+  return `Service unavailable (HTTP ${response.status}). Please try again.`;
+}
+
 export async function geocode(query: string): Promise<Location[]> {
   const q = query.trim();
-  if (q.length < 3) throw new Error("Enter a street and building number.");
-  const cached = cache.get(q.toLowerCase());
-  if (cached) return cached;
-  if (Date.now() - lastSearch < 1100)
-    throw new Error("Please wait a moment before searching again.");
-  lastSearch = Date.now();
-  const u = new URL(
-    env.VITE_GEOCODER_URL || "https://nominatim.openstreetmap.org/search",
-  );
-  u.search = new URLSearchParams({
-    q: `${q}, Warsaw, Poland`,
-    format: "jsonv2",
-    limit: "5",
-    countrycodes: "pl",
-    viewbox: "20.75,52.39,21.28,52.09",
-    bounded: "1",
-  }).toString();
-  const r = await fetch(u, {
-    signal: AbortSignal.timeout(12000),
-    referrerPolicy: "strict-origin-when-cross-origin",
+  if (q.length < 3 || q.length > 300) throw new Error("Enter an address between 3 and 300 characters.");
+  if (!API_BASE_URL) throw new Error("Address search is not connected. Set VITE_API_BASE_URL.");
+  const response = await fetch(`${API_BASE_URL}/api/geocode?${new URLSearchParams({ address: q })}`, {
+    signal: AbortSignal.timeout(20000),
   });
-  if (!r.ok)
-    throw new Error("Address search unavailable. Select a point on the map.");
-  const raw = await r.json();
-  const points = raw
-    .map((p: any) => ({
-      label: String(p.display_name),
-      latitude: Number(p.lat),
-      longitude: Number(p.lon),
-    }))
-    .filter(inWarsaw);
-  cache.set(q.toLowerCase(), points);
-  return points;
+  if (!response.ok) throw new Error(await responseError(response));
+  const raw = await response.json();
+  const location = { label: raw.address, latitude: raw.latitude, longitude: raw.longitude };
+  if (typeof location.label !== "string" || !inWarsaw(location))
+    throw new Error("The address service returned an invalid Warsaw location.");
+  return [location];
 }
