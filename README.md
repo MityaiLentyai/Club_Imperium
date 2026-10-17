@@ -2,7 +2,7 @@
 
 Warsaw Open Data hackathon project (`MityaiLentyai/Club_Imperium`). The FastAPI backend scores transport accessibility using the committed `data/stops_clean.csv` dataset. It supports coordinates or a Warsaw address for integration with the team's React + TypeScript + Vite frontend.
 
-The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. No other LifeScore categories are implemented yet.
+The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. Park and listed-parking proximity features are also available from official local snapshots. See [Parks + Parking documentation](docs/parks-parking.md) for sources, refresh commands, response fields and limitations. No Green or Parking Score is inferred from incomplete coverage.
 
 ## Configuration layout
 
@@ -90,28 +90,27 @@ Additional response fields:
 - `radius_m`: the requested marker radius.
 - `places`: transport platform objects with `id` (`stop_id:platform`), `stop_id`, `platform`, `category: "transport"`, `label` (CSV stop name), `latitude`, `longitude`, `distance_m`, and `distance_type: "straight_line"`. Coordinates come from the real CSV; distances use the projected EPSG:2180 geometry. Lists are sorted nearest first and limited to 200 platforms.
 - `nearby`: `{ "total": <platform count within radius>, "limit": 200, "truncated": <boolean> }`. Counts refer to platforms, while scoring density counts unique stop groups. A capped list is explicitly marked.
-- `unavailable`: `["grocery", "pharmacy", "green", "parking"]`. An empty transport list means zero nearby platforms, not unavailable data.
+- `unavailable`: always includes grocery/pharmacy; includes green/parking only if their optional local snapshots cannot be loaded. An empty transport list means zero nearby platforms, not unavailable data.
 - `sources`: a source-name list identifying `stops_clean.csv`. No live retrieval timestamp is invented for this static dataset.
 
-`POST /api/score/address` uses the same contract and adds `location.address`. `/api/geocode` retains its single-object response. No `/analyze` endpoint is needed. Grocery/pharmacy/park/parking data and travel-time routing are not implemented. Destination straight-line comparisons remain a frontend calculation; destinations are not sent to scoring.
+`POST /api/score/address` uses the same contract and adds `location.address`. `/api/geocode` retains its single-object response. No `/analyze` endpoint is needed. Grocery/pharmacy data and travel-time routing are not implemented. Parks and listed parking extend this contract as documented in [Parks + Parking](docs/parks-parking.md). Destination straight-line comparisons remain a frontend calculation; destinations are not sent to scoring.
 
 ## TypeScript and Vite frontend integration
 
-The React or TypeScript + HTML/CSS frontend can use the same API. Keep Vite configuration and frontend dependencies inside `frontend/urbanlens-warsaw/`. Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/urbanlens-warsaw/.env.local` for local development; use the deployed backend's HTTPS URL for production. Restart Vite after changing environment variables. This URL is public client configuration; never place secrets in `VITE_` variables.
+The React or TypeScript + HTML/CSS frontend can use the same API. Keep Vite configuration and frontend dependencies inside `frontend/UrbanLens-Warsaw/urbanlens-warsaw/`. Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/UrbanLens-Warsaw/urbanlens-warsaw/.env.local` for local development; use the deployed backend's HTTPS URL for production. Restart Vite after changing environment variables. This URL is public client configuration; never place secrets in `VITE_` variables.
 
 Run the frontend in a second terminal from the repository root (Node 22 was used for verification):
 
 ```bash
-cd frontend/urbanlens-warsaw
+cd frontend/UrbanLens-Warsaw/urbanlens-warsaw
 npm ci
-cp .env.example .env.local
-npm run dev -- --port 5173 --strictPort
+VITE_API_BASE_URL=http://localhost:8000 npm run dev -- --port 5173 --strictPort
 ```
 
 Open <http://localhost:5173>, select **Live**, submit an address or pick a map location, then explore. Demo mode uses its existing illustrative fixtures and never calls scoring/geocoding. Live mode never falls back to fixtures. Stops shown on the map are individual platforms.
 
 ```bash
-# From frontend/urbanlens-warsaw:
+# From frontend/UrbanLens-Warsaw/urbanlens-warsaw:
 ./node_modules/.bin/tsc --noEmit
 npm test
 npm run build
@@ -148,6 +147,7 @@ Errors use FastAPI's `detail` envelope: validation errors return a list; service
 | `GEOCODING_USER_AGENT` | For address routes | No default; app identifier and real team contact. Coordinate scoring and health work without it. |
 | `CORS_ORIGINS` | For deployed React integration | `http://localhost:5173`; comma-separated exact origins, e.g. `https://your-frontend.example,http://localhost:5173`. No trailing slash. Restart after changing. |
 | `GEOCODING_URL` | No | `https://nominatim.openstreetmap.org/search`; switch to another Nominatim-compatible provider without code changes. |
+| `WARSAW_API_TOKEN` | Only for parking snapshot refresh | Backend-only token for the official parking endpoint; scoring uses local files and needs no token. |
 | `PORT` | On Render | Render supplies it; local launch uses port 8000. |
 | `PYTHON_VERSION` | In Render config | `3.11.11` in `render.yaml`. |
 
@@ -161,7 +161,7 @@ The backend serializes outbound requests, spaces request starts by at least 1.1 
 
 Queries are constrained to Poland and a conservative Warsaw bounding box; responses are checked against that box and city/town/village fields when supplied. This rejects clearly foreign results, but is not an exact municipal-boundary check. No new boundary dataset is introduced.
 
-The frontend must visibly display “© OpenStreetMap contributors” linked to <https://www.openstreetmap.org/copyright> when using geocoding results. OpenStreetMap data is under ODbL. This backend task does not change frontend files; the frontend team must add that attribution and submit searches only on explicit user action. Do not send confidential information to the public geocoder.
+The frontend must visibly display “© OpenStreetMap contributors” linked to <https://www.openstreetmap.org/copyright> when using geocoding results. OpenStreetMap data is under ODbL. The frontend displays OpenStreetMap attribution and submits searches only on explicit user action. Do not send confidential information to the public geocoder.
 
 ## Deploy on Render
 
@@ -180,4 +180,4 @@ Set `CORS_ORIGINS` to the exact React origin and `GEOCODING_USER_AGENT` to your 
 
 After deployment, check `/api/health`, `/docs`, and coordinate scoring. Test address scoring manually with one explicitly submitted Warsaw address after configuring the User-Agent. Health reports process liveness; it does not probe the external geocoder.
 
-Frontend hosting: configure a separate static site with root `frontend/urbanlens-warsaw`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. The frontend no longer contacts Nominatim directly; provider/contact settings live only on the backend. Map tiles still require access to OpenStreetMap.
+Frontend hosting: configure a separate static site with root `frontend/UrbanLens-Warsaw/urbanlens-warsaw`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. Live frontend address searches retain the existing direct Nominatim integration; backend address routes use the backend provider/contact settings. Map tiles still require access to OpenStreetMap.
