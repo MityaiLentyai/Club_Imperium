@@ -1,5 +1,7 @@
 # UrbanLens Warsaw — backend MVP
 
+> Address lookup and boundary validation have subsequently changed. See [citywide address handling](citywide-addresses.md) for the current contract and limitations. Older rectangular-boundary and external-only geocoding statements below describe the preceding version.
+
 This branch integrates the backend/data portions of Parks + Parking from PR #7 and the existing Mobility 2.0 source/cache. It adds sports-site features, walking/driving routing, a partial personalized index and a two-location comparison API. Frontend changes were explicitly reverted: `git diff origin/main -- frontend` is empty. The source branches and original uncommitted work were not modified. No new dependencies or production deployment configuration were introduced.
 
 ## Run locally

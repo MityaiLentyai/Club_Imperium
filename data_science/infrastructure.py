@@ -108,4 +108,6 @@ def nearby_features(latitude, longitude, radius_m, dataset, category, limit=50):
     return ({keys[0]: round(measured[0][0], 1) if measured else None,
              keys[1]: len(nearby)}, places,
             {"status": "available", "total": len(nearby), "limit": limit,
-             "truncated": len(nearby) > limit, **dataset["metadata"]})
+             "truncated": len(nearby) > limit, **dataset["metadata"],
+             "coverage_status": "unverified" if category == "green" else "partial",
+             "count_basis": "verified_snapshot_objects", "citywide_inventory_complete": False})

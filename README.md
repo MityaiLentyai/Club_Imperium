@@ -24,7 +24,7 @@ python -m pip install -r configs/requirements.txt
 cp configs/.env.example .env
 ```
 
-Edit `.env`: set `GEOCODING_USER_AGENT` to identify Warsaw LifeScore and include your team's real contact email or URL. The example contact is a placeholder. Then load the environment and start FastAPI:
+Municipal address lookup works offline from the committed index. For Nominatim fallback, edit `.env`: set `GEOCODING_USER_AGENT` to identify Warsaw LifeScore and include your team's real contact email or URL. The example contact is a placeholder. Then load the environment and start FastAPI:
 
 ```bash
 set -a
@@ -54,7 +54,7 @@ Existing response shapes are preserved.
 | `POST /api/commute` | JSON `origin`, `destination` coordinate objects | Straight-line baseline, walking/driving routes or explicit unavailability; transit unavailable |
 | `POST /api/compare` | Exactly two `locations`, optional shared `weights`, `destination`, `include_routes` | Measured feature/score comparisons with missing-data and comparability warnings |
 
-Scoring coordinates must be finite and within the supported Warsaw service envelope: latitude 52.0–52.4 and longitude 20.75–21.3, inclusive. These conservative bounds cover outer neighborhoods and are not an exact municipal-boundary check. Unsupported coordinates and unsafe projection results return HTTP 422. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace.
+Scoring coordinates must be finite and inside the validated official Warsaw district union, including a 0.5 m boundary precision band. If boundary data is unavailable, the legacy rectangle is used with explicit degraded evidence in `area_validation`. See [citywide address handling](docs/citywide-addresses.md) for source coverage, address normalization, fallback behavior and known limitations. Unsupported coordinates and unsafe projection results return HTTP 422. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace.
 
 ```bash
 curl http://localhost:8000/api/health
