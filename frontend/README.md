@@ -28,4 +28,4 @@ npm run build   # type check + production build
 
 ## Backend contract
 
-Live mode uses `POST /api/score`, `POST /api/score/address` and `GET /api/geocode` (see the root README). A category counts as available only when the backend reports on it; otherwise it shows "No data yet". `sports` is supported for the newer backend on `origin/main`; `/api/commute` and `/api/compare` are not used yet.
+Live mode uses `POST /api/score`, `POST /api/score/address` and `GET /api/geocode` (see the root README). A category counts as available only when the backend reports on it; otherwise it shows "No data yet". Park, parking and sports places are shown when the backend returns them; `/api/commute` and `/api/compare` are not used yet.

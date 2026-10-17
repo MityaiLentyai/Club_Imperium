@@ -1,8 +1,8 @@
-# UrbanLens Warsaw
+# OLO — Warsaw neighborhood explorer
 
 Warsaw Open Data hackathon project (`MityaiLentyai/Club_Imperium`). The FastAPI backend scores transport accessibility using the committed `data/stops_clean.csv` dataset. It supports coordinates or a Warsaw address for integration with the team's React + TypeScript + Vite frontend.
 
-The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. Park, listed-parking and verified educational sports-site proximity features are available from official local snapshots. Observed transport lines, actual walking/driving routes, personalized partial LifeScore and measured address comparisons are available through backend APIs. See [Backend MVP setup and contracts](docs/complete-mvp.md). **This branch changes only backend/Data Science; `frontend/` is unchanged from `origin/main`. New UI integrations are not included.** See [Parks + Parking documentation](docs/parks-parking.md) for sources, refresh commands, response fields and limitations. No Green, Parking, Sports or Commute Score is inferred from incomplete evidence.
+The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. Park, listed-parking and verified educational sports-site proximity features are available from official local snapshots. Observed transport lines, actual walking/driving routes, personalized partial LifeScore and measured address comparisons are available through backend APIs. See [Backend MVP setup and contracts](docs/complete-mvp.md). See [Parks + Parking documentation](docs/parks-parking.md) for sources, refresh commands, response fields and limitations. No Green, Parking, Sports or Commute Score is inferred from incomplete evidence.
 
 ## Configuration layout
 
@@ -97,25 +97,25 @@ Additional response fields:
 
 `POST /api/score/address` uses the same contract and adds `location.address`. `/api/geocode` retains its single-object response. No `/analyze` endpoint is needed. Grocery/pharmacy data and transit journey routing are not implemented. Walking/driving routes are available separately through `/api/commute`. Parks and listed parking extend this contract as documented in [Parks + Parking](docs/parks-parking.md). Scoring remains offline. Destination baselines and optional walking/driving routes are exposed separately through `/api/commute` and `/api/compare`.
 
-## Frontend handoff (no frontend changes in this branch)
+## Frontend
 
-The frontend team can integrate the API described above. The current frontend files are unchanged and its Live client still requires adaptation; the commands below only start that existing application. Keep Vite configuration and frontend dependencies inside `frontend/UrbanLens-Warsaw/urbanlens-warsaw/`. Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/UrbanLens-Warsaw/urbanlens-warsaw/.env.local` for local development; use the deployed backend's HTTPS URL for production. Restart Vite after changing environment variables. This URL is public client configuration; never place secrets in `VITE_` variables.
-
-For the frontend team, the unchanged application can be started separately from the repository root:
+The OLO web app lives in `frontend/` (React + TypeScript + Vite + Leaflet). See [frontend/README.md](frontend/README.md) for its screens and behavior. Start the backend first, then run the app from the repository root in a second terminal (Node 22):
 
 ```bash
-cd frontend/UrbanLens-Warsaw/urbanlens-warsaw
+cd frontend
 npm ci
-VITE_API_BASE_URL=http://localhost:8000 npm run dev -- --port 5173 --strictPort
+cp .env.example .env.local   # VITE_API_BASE_URL=http://localhost:8000
+npm run dev -- --port 5173 --strictPort
 ```
 
-The unchanged frontend requires separate API integration before it can display the new backend features. For this branch, verify behavior through http://localhost:8000/docs or the curl examples in the backend MVP documentation. Sports data has deliberately limited coverage; the API labels its personalized index as partial while only Mobility qualifies.
+Open http://localhost:5173. With `VITE_API_BASE_URL` set the app starts in Live mode; without it, in Demo mode with illustrative places. The mode can be switched in **Data & sources**. `VITE_API_BASE_URL` is public client configuration; never place secrets in `VITE_` variables. Restart Vite after changing environment variables.
+
+Live mode currently uses `POST /api/score`, `POST /api/score/address` and `GET /api/geocode`. It shows the Mobility Score, transport stops and the park, parking and sports places the backend returns; categories the backend doesn't report are shown as "No data yet". `/api/commute`, `/api/compare` and LifeScore weights are not wired into the UI yet: the Commute tab shows straight-line distance, and the Compare page compares saved homes in the browser.
 
 ```bash
-# From frontend/UrbanLens-Warsaw/urbanlens-warsaw:
-./node_modules/.bin/tsc --noEmit
-npm test
-npm run build
+# From frontend/:
+npm test        # model tests
+npm run build   # type check + production build
 ```
 
 Set the backend's `CORS_ORIGINS` to the exact frontend origin (`http://localhost:5173` by default). CORS is already environment-configurable; the frontend does not need to add CORS response headers. Send JSON with `Content-Type: application/json`:
@@ -184,7 +184,7 @@ Set `CORS_ORIGINS` to the exact React origin and `GEOCODING_USER_AGENT` to your 
 
 After deployment, check `/api/health`, `/docs`, and coordinate scoring. Test address scoring manually with one explicitly submitted Warsaw address after configuring the User-Agent. Health reports process liveness; it does not probe the external geocoder.
 
-Frontend hosting: configure a separate static site with root `frontend/UrbanLens-Warsaw/urbanlens-warsaw`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. Backend address routes expose `/api/geocode` with server-side provider/contact settings; wiring the unchanged frontend to them is separate work. Map tiles still require access to OpenStreetMap.
+Frontend hosting: configure a separate static site with root `frontend`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. Address search goes through the backend's `/api/geocode`, so provider/contact settings stay server-side. Map tiles still require access to OpenStreetMap.
 
 Current source coverage, sports refresh/reproduction, weight normalization, route cache limits and comparison warnings are documented in [Backend MVP](docs/complete-mvp.md). Review those limitations before deployment; this feature does not change production configuration.
 
