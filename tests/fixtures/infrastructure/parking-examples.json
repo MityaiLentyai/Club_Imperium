@@ -4,7 +4,7 @@
     "section_elements": [
       {
         "title": "Przykład zapytania dla pobrania Utrudnienia drogowe",
-        "content": "curl --location --request POST 'https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca' --header 'Authorization: token_uzytkownika'"        
+        "content": "curl --location --request POST 'https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca' --header 'Authorization: token_uzytkownika'"
       }
     ]
   },
