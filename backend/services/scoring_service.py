@@ -15,6 +15,8 @@ from data_science.green import load_parks, calculate_green_features
 from data_science.parking import load_parking, calculate_parking_features
 from data_science.sports import load_sports, calculate_sports_features
 from data_science.life_score import calculate_life_score
+from data_science.data_quality import describe_data, score_eligibility
+from data_science.infrastructure import DATA_DIR
 from data_science.mobility import (
     calculate_mobility_features,
     calculate_mobility_score,
@@ -23,22 +25,47 @@ from data_science.mobility import (
 
 @lru_cache(maxsize=1)
 def get_stops():
-    return load_stops()
+    try:
+        stops = load_stops()
+        if stops.empty:
+            raise ValueError("No transport records")
+        return stops
+    except (OSError, ValueError) as exc:
+        raise HTTPException(status_code=503, detail="Transport snapshot is unavailable or invalid") from exc
 
 
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=3)
+def _cached_optional(category, path, modified, size):
+    return {"green": load_parks, "parking": load_parking, "sports": load_sports}[category](path)
+
+
+def _optional(category):
+    path = DATA_DIR / f"{category}.geojson"
+    try:
+        info = path.stat()
+        return _cached_optional(category, path, info.st_mtime_ns, info.st_size)
+    except OSError:
+        return None
+
+
 def get_parks():
-    return load_parks()
+    return _optional("green")
 
 
-@lru_cache(maxsize=1)
 def get_parking():
-    return load_parking()
+    return _optional("parking")
 
 
-@lru_cache(maxsize=1)
 def get_sports():
-    return load_sports()
+    return _optional("sports")
+
+
+def get_data_status():
+    try:
+        stops = get_stops()
+    except HTTPException:
+        stops = None
+    return describe_data(stops, get_stop_lines(), {"green": get_parks(), "parking": get_parking(), "sports": get_sports()})
 
 
 @lru_cache(maxsize=1)
@@ -124,11 +151,13 @@ def get_location_score(latitude, longitude, radius_m=1000, weights=None):
         sources.append({"name": "Warsaw Open Data / ZTM — observed transport lines", "url": SOURCE_URL,
                         "retrieved_at": line_features["line_data_coverage"]["latest_retrieved_at"]})
     unavailable = ["grocery", "pharmacy"]
-    for category, calculate, dataset in (
-        ("green", calculate_green_features, get_parks()),
-        ("parking", calculate_parking_features, get_parking()),
-        ("sports", calculate_sports_features, get_sports()),
+    optional = {"green": get_parks(), "parking": get_parking(), "sports": get_sports()}
+    for category, calculate in (
+        ("green", calculate_green_features),
+        ("parking", calculate_parking_features),
+        ("sports", calculate_sports_features),
     ):
+        dataset = optional[category]
         extra_features, extra_places, metadata = calculate(latitude, longitude, radius_m, dataset)
         features.update(extra_features)
         places.extend(extra_places)
@@ -139,8 +168,15 @@ def get_location_score(latitude, longitude, radius_m=1000, weights=None):
             sources.append({"name": f"Warsaw {category} snapshot", "url": metadata["source_url"],
                             "retrieved_at": metadata["retrieved_at"]})
 
+    eligibility = score_eligibility(optional)
+    life_score = calculate_life_score({"mobility": mobility_score}, weights)
+    for category, policy in eligibility.items():
+        if not policy["eligible"]:
+            life_score["excluded"][category] = policy["reason"]
+
     return {
-        "life_score": calculate_life_score({"mobility": mobility_score}, weights),
+        "life_score": life_score,
+        "score_eligibility": eligibility,
         "line_features": line_features,
         "location": {
             "latitude": latitude,

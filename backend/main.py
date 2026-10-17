@@ -4,10 +4,11 @@ from typing import Annotated
 
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.concurrency import run_in_threadpool
 
 from backend.schemas import Address, AddressScoreRequest, ScoreRequest, CommuteRequest, ComparisonRequest
 from backend.services.geocoding_service import geocode_address
-from backend.services.scoring_service import get_location_score
+from backend.services.scoring_service import get_location_score, get_data_status
 from backend.services.routing_service import get_commute
 from backend.services.comparison_service import get_comparison
 
@@ -53,7 +54,7 @@ async def geocode_location(address: Annotated[Address, Query()]):
 async def score_address(request: AddressScoreRequest):
     location = await geocode_address(request.address)
 
-    result = get_location_score(
+    result = await run_in_threadpool(get_location_score,
         location["latitude"],
         location["longitude"],
         request.radius_m,
@@ -73,4 +74,9 @@ async def commute(request: CommuteRequest):
 @app.post("/api/compare")
 async def compare_locations(request: ComparisonRequest):
     return await get_comparison(request)
+
+
+@app.get("/api/data/status")
+def data_status():
+    return get_data_status()
 

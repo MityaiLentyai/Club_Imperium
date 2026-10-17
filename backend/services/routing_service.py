@@ -3,9 +3,11 @@ import asyncio
 from collections import OrderedDict
 import copy
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 import math
 import os
 import time
+from urllib.parse import urlsplit
 
 import httpx
 from pyproj import Geod
@@ -15,6 +17,7 @@ USER_AGENT = "UrbanLens-Warsaw/1.0 (https://github.com/MityaiLentyai/Club_Imperi
 CACHE_TTL = 86400
 CACHE_LIMIT = 128
 MAX_BYTES = 1_000_000
+QUEUE_TIMEOUT = 2.0
 _cache = OrderedDict()
 _lock = asyncio.Lock()
 _last_request = 0.0
@@ -72,7 +75,11 @@ async def _fetch_route(client, base_url, origin, destination, profile):
                 seconds = float(response.headers.get("Retry-After", "60"))
                 seconds = max(60, min(seconds, 3600)) if math.isfinite(seconds) else 60
             except ValueError:
-                seconds = 60
+                try:
+                    retry_at = parsedate_to_datetime(response.headers["Retry-After"])
+                    seconds = max(60, (retry_at - datetime.now(timezone.utc)).total_seconds())
+                except (ValueError, TypeError, KeyError, OverflowError):
+                    seconds = 60
             _cooldown_until = time.monotonic() + seconds
         response.raise_for_status()
         chunks, size = [], 0
@@ -100,7 +107,21 @@ async def get_commute(origin, destination, *, include_routes=True):
         reason = "Routes not requested" if not include_routes else "Routing disabled"
         result.update({mode: {"status": "unavailable", "reason": reason} for mode in ("walking", "driving")})
         return result
-    async with _lock:
+    try:
+        parsed = urlsplit(base)
+        if parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
+            raise ValueError("Invalid provider configuration")
+    except ValueError:
+        result.update({mode: {"status": "unavailable", "reason": "Routing provider configuration is invalid"} for mode in ("walking", "driving")})
+        return result
+    if base != DEFAULT_BASE_URL:
+        result["attribution"].update(name="Configured OSRM / © OpenStreetMap contributors", url=base)
+    try:
+        await asyncio.wait_for(_lock.acquire(), timeout=QUEUE_TIMEOUT)
+    except TimeoutError:
+        result.update({mode: {"status": "unavailable", "reason": "Routing queue busy; retry later"} for mode in ("walking", "driving")})
+        return result
+    try:
         async with httpx.AsyncClient(timeout=8.0, follow_redirects=False) as client:
             for mode in ("walking", "driving"):
                 key = (base, origin.latitude, origin.longitude, destination.latitude, destination.longitude, mode)
@@ -122,4 +143,6 @@ async def get_commute(origin, destination, *, include_routes=True):
                 while len(_cache) > CACHE_LIMIT:
                     _cache.popitem(last=False)
                 result[mode] = {**route, "cached": False}
+    finally:
+        _lock.release()
     return result

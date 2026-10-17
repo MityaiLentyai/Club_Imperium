@@ -28,7 +28,7 @@ def load_snapshot(category, path=None):
         if (data.get("type") != "FeatureCollection"
                 or not isinstance(data.get("features"), list)
                 or not isinstance(data.get("metadata"), dict)
-                or not data["metadata"].get("retrieved_at")
+                or "retrieved_at" not in data["metadata"]
                 or not data["metadata"].get("source_url")):
             return None
         records, seen, seen_points = [], set(), set()
@@ -59,12 +59,14 @@ def load_snapshot(category, path=None):
                 if category in ("parking", "sports"):
                     seen_points.add(key)
                 records.append((props, geom, projected))
-            except (KeyError, TypeError, ValueError, ShapelyError):
+            except (KeyError, TypeError, ValueError, AttributeError, ShapelyError):
                 continue
         # Nonempty files with no usable geometry are corrupt, not empty coverage.
         if data["features"] and not records:
             return None
-        return {"metadata": data["metadata"], "records": records}
+        metadata = {**data["metadata"], "usable_record_count": len(records),
+                    "rejected_record_count": len(data["features"]) - len(records)}
+        return {"metadata": metadata, "records": records}
     except (OSError, ValueError, TypeError, AttributeError):
         return None
 
@@ -101,7 +103,7 @@ def nearby_features(latitude, longitude, radius_m, dataset, category, limit=50):
                     place[key] = props[key]
             place["availability_status"] = "unknown_observation_time"
         if category == "sports":
-            for key in ("sport_types", "schedules", "address", "coordinate_source"):
+            for key in ("sport_types", "schedules", "address", "coordinate_source", "coordinate_retrieved_at"):
                 if key in props:
                     place[key] = props[key]
         places.append(place)
