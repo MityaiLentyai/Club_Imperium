@@ -9,3 +9,9 @@ def block_external_http(monkeypatch):
         raise AssertionError("External HTTP is forbidden in tests")
 
     monkeypatch.setattr(httpx.AsyncClient, "get", blocked)
+
+    def blocked_sync(*args, **kwargs):
+        raise AssertionError("External HTTP is forbidden in tests")
+
+    monkeypatch.setattr(httpx.HTTPTransport, "handle_request", blocked_sync)
+    monkeypatch.setattr(httpx.AsyncHTTPTransport, "handle_async_request", blocked)

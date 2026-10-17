@@ -115,7 +115,7 @@ def test_api_real_snapshots_radius_mobility_and_backward_compatibility():
     assert {'green', 'parking'} <= {p['category'] for p in large['places']}
     for result in (small, large):
         assert all(p['distance_m'] <= result['radius_m'] for p in result['places'])
-        assert len(result['places']) <= 300
+        assert len(result['places']) <= 350
         assert len({p['id'] for p in result['places']}) == len(result['places'])
         assert 'green' not in result['unavailable']
         assert 'parking' not in result['unavailable']

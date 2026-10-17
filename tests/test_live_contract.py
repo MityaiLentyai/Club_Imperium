@@ -16,6 +16,7 @@ COORDINATES = {"latitude": 52.2297, "longitude": 21.0122}
 def mobility_contract_without_optional_datasets(monkeypatch):
     monkeypatch.setattr(scoring_service, 'get_parks', lambda: None)
     monkeypatch.setattr(scoring_service, 'get_parking', lambda: None)
+    monkeypatch.setattr(scoring_service, 'get_sports', lambda: None)
 
 
 def test_radius_filters_real_platforms_without_changing_score():
@@ -25,7 +26,7 @@ def test_radius_filters_real_platforms_without_changing_score():
     assert small['features'] == large['features']
     assert small['places']
     assert small['nearby']['total'] <= large['nearby']['total']
-    assert small['unavailable'] == ['grocery', 'pharmacy', 'green', 'parking']
+    assert small['unavailable'] == ['grocery', 'pharmacy', 'green', 'parking', 'sports']
     stops = scoring_service.get_stops()
     point = gpd.GeoSeries([Point(COORDINATES['longitude'], COORDINATES['latitude'])], crs='EPSG:4326').to_crs(stops.crs).iloc[0]
     for result in (small, large):
