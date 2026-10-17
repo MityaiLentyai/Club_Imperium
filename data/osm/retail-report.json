@@ -1,0 +1,172 @@
+{
+  "selected_source_objects": 8555,
+  "selected_by_osm_type": {
+    "node": 6279,
+    "way": 2276
+  },
+  "rejected_or_excluded": {
+    "outside_warsaw": 5723
+  },
+  "assembled_inside_warsaw_before_deduplication": 2832,
+  "processed_at": "2026-10-17T22:49:27.153246+00:00",
+  "source_timestamp": "2026-10-16T20:21:21Z",
+  "source": {
+    "source_url": "https://download.geofabrik.de/europe/poland/mazowieckie-261016.osm.pbf",
+    "catalogue_url": "https://download.geofabrik.de/europe/poland/mazowieckie.html",
+    "retrieved_at": "2026-10-17T22:48:04.085870+00:00",
+    "bytes": 300997920,
+    "md5": "51e3c3a99056fabba1cf15bb3af806e8",
+    "sha256": "3053758704befb8d4824f25a2bf25f841dd3a62cab3f37c18baa0e19707ad5a5",
+    "http_last_modified": "Sat, 17 Oct 2026 00:14:38 GMT"
+  },
+  "full_extract_processed": true,
+  "output_facilities": 2831,
+  "merged_duplicate_objects": 1,
+  "deduplication": [
+    {
+      "kept": "way/34571702",
+      "merged": "node/2343054807",
+      "reason": "matching_identity_and_containment_or_equal_geometry"
+    }
+  ],
+  "by_kind": {
+    "convenience": 1716,
+    "supermarket": 500,
+    "grocery": 32,
+    "pharmacy": 583
+  },
+  "by_osm_type": {
+    "node": 2537,
+    "way": 294
+  },
+  "by_district": {
+    "Bemowo": 142,
+    "Białołęka": 186,
+    "Bielany": 146,
+    "Mokotów": 381,
+    "Ochota": 131,
+    "Praga-Południe": 263,
+    "Praga-Północ": 105,
+    "Rembertów": 31,
+    "Targówek": 160,
+    "Ursus": 109,
+    "Ursynów": 208,
+    "Wawer": 104,
+    "Wesoła": 38,
+    "Wilanów": 71,
+    "Wola": 313,
+    "Włochy": 99,
+    "Śródmieście": 262,
+    "Żoliborz": 82
+  },
+  "boundary_clipped": 0,
+  "by_district_and_kind": {
+    "Bemowo": {
+      "convenience": 82,
+      "supermarket": 27,
+      "pharmacy": 32,
+      "grocery": 1
+    },
+    "Białołęka": {
+      "supermarket": 46,
+      "convenience": 108,
+      "pharmacy": 32
+    },
+    "Bielany": {
+      "convenience": 77,
+      "supermarket": 34,
+      "pharmacy": 35
+    },
+    "Mokotów": {
+      "convenience": 254,
+      "pharmacy": 69,
+      "supermarket": 49,
+      "grocery": 9
+    },
+    "Ochota": {
+      "convenience": 77,
+      "supermarket": 21,
+      "pharmacy": 32,
+      "grocery": 1
+    },
+    "Praga-Południe": {
+      "convenience": 157,
+      "pharmacy": 61,
+      "grocery": 2,
+      "supermarket": 43
+    },
+    "Praga-Północ": {
+      "convenience": 65,
+      "pharmacy": 24,
+      "grocery": 1,
+      "supermarket": 15
+    },
+    "Rembertów": {
+      "convenience": 14,
+      "supermarket": 10,
+      "pharmacy": 7
+    },
+    "Targówek": {
+      "convenience": 97,
+      "supermarket": 28,
+      "pharmacy": 35
+    },
+    "Ursus": {
+      "convenience": 75,
+      "supermarket": 18,
+      "pharmacy": 16
+    },
+    "Ursynów": {
+      "convenience": 121,
+      "supermarket": 37,
+      "grocery": 4,
+      "pharmacy": 46
+    },
+    "Wawer": {
+      "supermarket": 31,
+      "convenience": 48,
+      "pharmacy": 25
+    },
+    "Wesoła": {
+      "pharmacy": 8,
+      "convenience": 15,
+      "supermarket": 15
+    },
+    "Wilanów": {
+      "pharmacy": 14,
+      "convenience": 37,
+      "grocery": 3,
+      "supermarket": 17
+    },
+    "Wola": {
+      "convenience": 207,
+      "pharmacy": 55,
+      "supermarket": 47,
+      "grocery": 4
+    },
+    "Włochy": {
+      "convenience": 61,
+      "pharmacy": 15,
+      "supermarket": 21,
+      "grocery": 2
+    },
+    "Śródmieście": {
+      "convenience": 170,
+      "grocery": 3,
+      "supermarket": 30,
+      "pharmacy": 59
+    },
+    "Żoliborz": {
+      "convenience": 51,
+      "supermarket": 11,
+      "grocery": 2,
+      "pharmacy": 18
+    }
+  },
+  "without_name": 162,
+  "with_opening_hours": 2205,
+  "with_any_address": 1708,
+  "missing_object_timestamp": 0,
+  "reproduction_verified_at": "2026-10-17T22:52:18.253811+00:00",
+  "reproduction_identical_features": true
+}

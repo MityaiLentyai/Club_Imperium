@@ -15,6 +15,7 @@ from data_science.green import load_parks, calculate_green_features
 from data_science.parking import load_parking, calculate_parking_features
 from data_science.sports import load_sports, calculate_sports_features
 from data_science.life_score import calculate_life_score
+from data_science.osm_retail import load_retail, calculate_retail_features
 from data_science.mobility import (
     calculate_mobility_features,
     calculate_mobility_score,
@@ -129,7 +130,18 @@ def get_location_score(latitude, longitude, radius_m=1000, weights=None):
     if line_features["line_data_coverage"]["known_platforms"]:
         sources.append({"name": "Warsaw Open Data / ZTM — observed transport lines", "url": SOURCE_URL,
                         "retrieved_at": line_features["line_data_coverage"]["latest_retrieved_at"]})
-    unavailable = ["grocery", "pharmacy"]
+    retail_features, retail_places, retail_datasets = calculate_retail_features(
+        latitude, longitude, radius_m, load_retail())
+    features.update(retail_features)
+    places.extend(retail_places)
+    datasets.update(retail_datasets)
+    unavailable = [category for category, metadata in retail_datasets.items() if metadata["status"] == "unavailable"]
+    if retail_datasets["grocery"]["status"] == "available":
+        metadata = retail_datasets["grocery"]
+        sources.append({"name": metadata["attribution"], "url": metadata["attribution_url"],
+                        "source_url": metadata["source_url"], "license": metadata["license"],
+                        "license_url": metadata["license_url"], "retrieved_at": metadata["retrieved_at"],
+                        "source_timestamp": metadata["source_timestamp"]})
     for category, calculate, dataset in (
         ("green", calculate_green_features, get_parks()),
         ("parking", calculate_parking_features, get_parking()),

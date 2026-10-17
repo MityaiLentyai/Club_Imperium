@@ -144,7 +144,8 @@ def test_score_contract_for_frontend_adapter(point):
     assert result['radius_m'] == 1000
     assert result['scores'] == {'mobility':result['life_score']['value']}
     assert result['life_score']['normalized_weights'] == {'mobility':100}
-    assert {'grocery', 'pharmacy'} <= set(result['unavailable'])
+    assert all(result['datasets'][c]['status'] == 'available' for c in ('grocery', 'pharmacy'))
+    assert not {'grocery', 'pharmacy'} & set(result['unavailable'])
     assert all(isinstance(s['name'], str) for s in result['sources'])
     for p in result['places']:
         assert {'id','category','label','latitude','longitude','distance_m','distance_type'} <= p.keys()

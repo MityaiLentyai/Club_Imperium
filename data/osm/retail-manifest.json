@@ -1,0 +1,29 @@
+{
+  "file": "retail-dbcab17ffca0d8b1.geojson.gz",
+  "sha256": "dbcab17ffca0d8b137d7b233a2d3006eeb50c1b6b6e48a29e49cdcee724c0bf0",
+  "record_count": 2831,
+  "metadata": {
+    "source_url": "https://download.geofabrik.de/europe/poland/mazowieckie-261016.osm.pbf",
+    "catalogue_url": "https://download.geofabrik.de/europe/poland/mazowieckie.html",
+    "retrieved_at": "2026-10-17T22:48:04.085870+00:00",
+    "bytes": 300997920,
+    "md5": "51e3c3a99056fabba1cf15bb3af806e8",
+    "sha256": "3053758704befb8d4824f25a2bf25f841dd3a62cab3f37c18baa0e19707ad5a5",
+    "http_last_modified": "Sat, 17 Oct 2026 00:14:38 GMT",
+    "source_timestamp": "2026-10-16T20:21:21Z",
+    "processed_at": "2026-10-17T22:49:27.153246+00:00",
+    "attribution": "© OpenStreetMap contributors",
+    "attribution_url": "https://www.openstreetmap.org/copyright",
+    "license": "ODbL-1.0",
+    "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+    "coverage_status": "osm_snapshot",
+    "citywide_inventory_complete": false,
+    "boundary_sha256": "68288de0a22b18f63120689b0b8c2667e158a06389eb71da62f77d5d47f3d43c",
+    "metric_crs": "EPSG:2180",
+    "limitations": [
+      "Complete selected tags from this regional extract, not a complete real-world business inventory.",
+      "Names, addresses, opening hours and object timestamps may be absent or outdated.",
+      "Conservative deduplication can retain unresolved duplicates; proximity alone never merges facilities."
+    ]
+  }
+}
