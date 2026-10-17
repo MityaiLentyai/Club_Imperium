@@ -66,7 +66,7 @@ MAX_NEARBY_STOPS = 200
 
 
 def get_location_score(latitude, longitude, radius_m=1000, weights=None):
-    validate_supported_coordinates(latitude, longitude)
+    area_validation = validate_supported_coordinates(latitude, longitude)
     if not 1 <= radius_m <= 2000:
         raise HTTPException(status_code=422, detail="Radius must be between 1 and 2000 metres")
     stops = get_stops()
@@ -146,6 +146,7 @@ def get_location_score(latitude, longitude, radius_m=1000, weights=None):
                             "retrieved_at": metadata["retrieved_at"]})
 
     return {
+        "area_validation": area_validation,
         "life_score": calculate_life_score({"mobility": mobility_score}, weights),
         "line_features": line_features,
         "location": {

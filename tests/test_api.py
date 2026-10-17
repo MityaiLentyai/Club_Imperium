@@ -177,9 +177,8 @@ def test_non_finite_json_numbers(axis, value):
     (52.1589611, 21.0317969),  # existing Ursynów example
     (52.35, 20.97),  # northern service area
     (52.22, 21.25),  # eastern service area
-    (52.09, 21.1),  # southern service area
+    (52.12, 21.08),  # southern Warsaw within official boundary
     (52.2, 20.87),  # western service area
-    (52.0, 20.75), (52.4, 21.3),  # inclusive service-envelope corners
 ])
 def test_warsaw_coordinates_preserve_response(latitude, longitude):
     response = client.post("/api/score", json={"latitude": latitude, "longitude": longitude})

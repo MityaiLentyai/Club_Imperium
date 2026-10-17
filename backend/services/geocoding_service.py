@@ -7,6 +7,9 @@ from collections import OrderedDict
 
 import httpx
 from fastapi import HTTPException
+from starlette.concurrency import run_in_threadpool
+from data_science.address_lookup import lookup as lookup_address, parse_query, building_key
+from data_science.geography import membership, DISTRICTS
 
 
 GEOCODING_URL = "https://nominatim.openstreetmap.org/search"
@@ -41,6 +44,19 @@ async def geocode_address(address: str):
             status_code=422,
             detail="Address must contain between 3 and 300 characters",
         )
+
+    parsed = parse_query(address)
+    if parsed is None:
+        raise HTTPException(status_code=422, detail="Include a street and building number, or select a map point")
+    local = await run_in_threadpool(lookup_address, address)
+    if local["status"] == "invalid_address":
+        raise HTTPException(status_code=422, detail="Include a street and building number, or select a map point")
+    if local["status"] == "ambiguous":
+        raise HTTPException(status_code=422, detail="Address is ambiguous; include the district or select a map point")
+    if local["status"] == "found":
+        result = local["result"]
+        if membership(result["latitude"], result["longitude"])[0]:
+            return result.copy()
 
     cache_key = address.casefold()
     now = time.monotonic()
@@ -129,10 +145,11 @@ async def geocode_address(address: str):
                     None,
                 )
                 in_warsaw = (
-                    52.0 <= latitude <= 52.4
-                    and 20.75 <= longitude <= 21.3
+                    membership(latitude, longitude)[0]
                     and details.get("country_code", "pl").casefold() == "pl"
-                    and (city is None or city.casefold() in {"warszawa", "warsaw"})
+                    and (city is None or city.casefold() in {"warszawa", "warsaw"} | {d.casefold() for d in DISTRICTS})
+                    and isinstance(details.get("house_number"), str)
+                    and building_key(details["house_number"]) == parsed["building"]
                 )
                 if in_warsaw:
                     result = {
