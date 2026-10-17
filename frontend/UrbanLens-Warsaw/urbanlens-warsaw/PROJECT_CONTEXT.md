@@ -10,7 +10,7 @@ React + TypeScript + Vite + Leaflet. src/main.tsx: UI/state. src/style.css: resp
 
 ## User design preferences
 
-User disliked generic dashboards, too much small text, repetitive icons and visually dull screens. Latest revision: powder-blue panel, navy headline, strong blue action, larger readable text, fewer labels and generous spacing. Keep the map on the right on desktop. Expand results down the page, not in a tiny sidebar. Stack search and map on mobile. Do not return to dark green. References favor strong visual hierarchy and uncluttered layouts. Scope future changes to user requests.
+User dislikes generic dashboards and excessive text. The latest two sketches require two interface states: a large starting map beside search; after address selection, search moves to upper left, map shrinks into upper right, and a full-width rectangular analysis workspace appears below both. The bottom workspace uses a narrow navigation rail, category list and detail area. Back to search restores the initial state. Keep desktop within one viewport, with internal scrolling where needed. Preserve Light/Dark and all existing functions.
 
 ## Features
 
@@ -30,4 +30,4 @@ Export has a successful TypeScript/Vite production build and six passing tests. 
 
 ## Portable export
 
-The folder contains full frontend source. Hosting identity, Git credentials, node_modules and dist are excluded. Published reference: https://urbanlens-warsaw-neighborhood.blondwave4.chatgpt.site.
+The folder contains full frontend source. Hosting identity, Git credentials, node_modules and dist are excluded. This archive updates source only; any previously published website has not been updated.

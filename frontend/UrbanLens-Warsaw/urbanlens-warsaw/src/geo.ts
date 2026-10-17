@@ -13,10 +13,10 @@ export function distance(a: Location, b: Location): number {
 export const inWarsaw = (p: Location) =>
   Number.isFinite(p.latitude) &&
   Number.isFinite(p.longitude) &&
-  p.latitude >= 52.0 &&
-  p.latitude <= 52.4 &&
+  p.latitude >= 52.09 &&
+  p.latitude <= 52.39 &&
   p.longitude >= 20.75 &&
-  p.longitude <= 21.3;
+  p.longitude <= 21.28;
 export const meters = (n: number | undefined) =>
   n === undefined
     ? "Unavailable"
