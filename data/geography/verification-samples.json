@@ -1,0 +1,136 @@
+{
+  "method": "Nearest unambiguous municipal address to each official district representative point",
+  "samples": [
+    {
+      "district": "Bemowo",
+      "address_id": "1275083",
+      "query": "ulica Powstańców Śląskich 87B, Bemowo",
+      "latitude": 52.244788,
+      "longitude": 20.909957
+    },
+    {
+      "district": "Białołęka",
+      "address_id": "1450741",
+      "query": "ulica Borecka 4B, Białołęka",
+      "latitude": 52.327116,
+      "longitude": 21.006675
+    },
+    {
+      "district": "Bielany",
+      "address_id": "1869757",
+      "query": "ulica Zgrupowania AK „Kampinos” 42D, Bielany",
+      "latitude": 52.293286,
+      "longitude": 20.921873
+    },
+    {
+      "district": "Mokotów",
+      "address_id": "1592668",
+      "query": "ulica Ludwika Idzikowskiego 1D, Mokotów",
+      "latitude": 52.190621,
+      "longitude": 21.041341
+    },
+    {
+      "district": "Ochota",
+      "address_id": "1307856",
+      "query": "ulica Opaczewska 15, Ochota",
+      "latitude": 52.210138,
+      "longitude": 20.971303
+    },
+    {
+      "district": "Praga-Południe",
+      "address_id": "1440983",
+      "query": "ulica 1 Praskiego Pułku WP 10, Praga-Południe",
+      "latitude": 52.238069,
+      "longitude": 21.084537
+    },
+    {
+      "district": "Praga-Północ",
+      "address_id": "1312296",
+      "query": "ulica Instytutowa 1, Praga-Północ",
+      "latitude": 52.267249,
+      "longitude": 21.025051
+    },
+    {
+      "district": "Rembertów",
+      "address_id": "1313781",
+      "query": "ulica Szafarzy 1, Rembertów",
+      "latitude": 52.265368,
+      "longitude": 21.148624
+    },
+    {
+      "district": "Targówek",
+      "address_id": "1328462",
+      "query": "ulica Błażeja 11, Targówek",
+      "latitude": 52.283762,
+      "longitude": 21.060055
+    },
+    {
+      "district": "Ursus",
+      "address_id": "1338705",
+      "query": "ulica Orląt Lwowskich 2, Ursus",
+      "latitude": 52.195614,
+      "longitude": 20.88145
+    },
+    {
+      "district": "Ursynów",
+      "address_id": "1345464",
+      "query": "ulica Kanarkowa 6C, Ursynów",
+      "latitude": 52.136392,
+      "longitude": 21.028734
+    },
+    {
+      "district": "Wawer",
+      "address_id": "1463475",
+      "query": "ulica Zagajnikowa 12, Wawer",
+      "latitude": 52.193139,
+      "longitude": 21.173574
+    },
+    {
+      "district": "Wesoła",
+      "address_id": "1404812",
+      "query": "ulica Szkolna 14, Wesoła",
+      "latitude": 52.228234,
+      "longitude": 21.231379
+    },
+    {
+      "district": "Wilanów",
+      "address_id": "1413486",
+      "query": "ulica Ruczaj 89, Wilanów",
+      "latitude": 52.150334,
+      "longitude": 21.11274
+    },
+    {
+      "district": "Wola",
+      "address_id": "1429967",
+      "query": "ulica Sokołowska 6, Wola",
+      "latitude": 52.234793,
+      "longitude": 20.960698
+    },
+    {
+      "district": "Włochy",
+      "address_id": "1422833",
+      "query": "Aleja Krakowska 118, Włochy",
+      "latitude": 52.18009,
+      "longitude": 20.949105
+    },
+    {
+      "district": "Śródmieście",
+      "address_id": "1322117",
+      "query": "ulica Konstantego Ildefonsa Gałczyńskiego 3, Śródmieście",
+      "latitude": 52.234239,
+      "longitude": 21.019813
+    },
+    {
+      "district": "Żoliborz",
+      "address_id": "1435528",
+      "query": "ulica Adama Mickiewicza 33C, Żoliborz",
+      "latitude": 52.270961,
+      "longitude": 20.983724
+    }
+  ],
+  "normalization_audit": {
+    "normalization_unparseable_records": 0,
+    "examples": [],
+    "canonical_street_building_district_ambiguous_groups": 0
+  }
+}

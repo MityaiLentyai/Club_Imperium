@@ -1,0 +1,33 @@
+{
+  "record_count": 126923,
+  "canonical_queries_unparseable": 0,
+  "canonical_round_trip_mismatches": 20,
+  "ambiguous_district_qualified_canonical_records": 0,
+  "ambiguous_district_qualified_unicode_alias_keys": 1,
+  "ambiguous_district_qualified_folded_alias_keys": 1,
+  "unparseable_ids": [],
+  "round_trip_mismatch_ids": [
+    "1308178",
+    "1308179",
+    "1308181",
+    "1308182",
+    "1308183",
+    "1308184",
+    "1308185",
+    "1308186",
+    "1308187",
+    "1308679",
+    "1308680",
+    "1308681",
+    "1308683",
+    "1308684",
+    "1308685",
+    "1308696",
+    "1308697",
+    "1309025",
+    "1437876",
+    "1450905"
+  ],
+  "ambiguous_canonical_ids": [],
+  "scope": "Canonical source-address audit only; not universal free-text resolution or current address completeness"
+}

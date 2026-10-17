@@ -1,0 +1,16 @@
+{
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "wfs:PUNKTY_ADRESOWE_WGS84",
+    "maxFeatures": "200000",
+    "outputFormat": "GML2"
+  },
+  "retrieved_at": "2026-10-17T22:05:13.632851+00:00",
+  "sha256": "315c26a891852d44857d974ecbb97339584e53f49268acc03836fda8dee136c4",
+  "raw_file": "raw/addresses-315c26a891852d44.gml.gz",
+  "uncompressed_bytes": 55996562,
+  "max_bytes": 128000000
+}
