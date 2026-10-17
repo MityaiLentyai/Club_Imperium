@@ -1,3 +1,4 @@
+from starlette.concurrency import run_in_threadpool
 """Two-home comparison with explicit opt-in for external routing."""
 from backend.schemas import AddressScoreRequest, RoutePoint
 from backend.services.geocoding_service import geocode_address
@@ -11,7 +12,7 @@ async def get_comparison(request):
     for location in request.locations:
         resolved = await geocode_address(location.address) if isinstance(location, AddressScoreRequest) else {
             "latitude": location.latitude, "longitude": location.longitude}
-        result = get_location_score(resolved["latitude"], resolved["longitude"], location.radius_m, weights=request.weights)
+        result = await run_in_threadpool(get_location_score, resolved["latitude"], resolved["longitude"], location.radius_m, weights=request.weights)
         if "address" in resolved:
             result["location"]["address"] = resolved["address"]
         if request.destination is not None:
