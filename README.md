@@ -48,6 +48,7 @@ Existing response shapes are preserved.
 | Endpoint | Input | Result |
 | --- | --- | --- |
 | `GET /api/health` | None | `{"status":"ok"}` (process liveness) |
+| `GET /api/data/status` | None | Offline coverage, observation timestamps, source limits and category-score eligibility |
 | `GET /api/geocode` | `address` query parameter | Address and coordinates |
 | `POST /api/score` | JSON `latitude`, `longitude`, optional `radius_m` | Location, Mobility Score, transport features |
 | `POST /api/score/address` | JSON `address`, optional `radius_m`, `weights` | Score response with resolved address in `location` |
@@ -187,3 +188,5 @@ After deployment, check `/api/health`, `/docs`, and coordinate scoring. Test add
 Frontend hosting: configure a separate static site with root `frontend/UrbanLens-Warsaw/urbanlens-warsaw`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. Backend address routes expose `/api/geocode` with server-side provider/contact settings; wiring the unchanged frontend to them is separate work. Map tiles still require access to OpenStreetMap.
 
 Current source coverage, sports refresh/reproduction, weight normalization, route cache limits and comparison warnings are documented in [Backend MVP](docs/complete-mvp.md). Review those limitations before deployment; this feature does not change production configuration.
+
+Coverage follow-up: 16 verified sports sites across six districts, real route checks for three municipal-verified Warsaw addresses, automatic optional-snapshot reload and bounded routing queues. See [coverage verification and frontend handoff](docs/coverage-verification.md).
