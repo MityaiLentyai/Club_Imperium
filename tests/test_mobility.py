@@ -1,4 +1,5 @@
 
+"python -m pytest tests/test_mobility.py -v"
 import pytest
 
 from data_science.data_loader import load_stops
