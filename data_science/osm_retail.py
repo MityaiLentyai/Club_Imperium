@@ -40,6 +40,13 @@ def _load(path, modified, size):
                 or not data['metadata']['source_timestamp'] or not data['metadata']['retrieved_at']
                 or data['metadata']['license'] != 'ODbL-1.0'):
             return None
+        metadata = data['metadata']
+        required_metadata = ('source_url', 'source_timestamp', 'retrieved_at', 'processed_at',
+                             'attribution', 'attribution_url', 'license', 'license_url', 'sha256')
+        if (not all(isinstance(metadata.get(k), str) and metadata[k] for k in required_metadata)
+                or metadata.get('coverage_status') != 'osm_snapshot'
+                or metadata.get('citywide_inventory_complete') is not False):
+            return None
         records, geometries, seen = [], [], set()
         for feature in data['features']:
             props = feature['properties']; geom = shape(feature['geometry'])

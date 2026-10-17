@@ -131,7 +131,7 @@ def test_valid_empty_snapshot_means_verified_zero_not_unavailable():
 
 
 def test_snapshot_integrity_and_cache(tmp_path,monkeypatch):
-    meta={'source_timestamp':'2026-10-16T20:21:21Z','retrieved_at':'2026-10-17T22:48:04Z','license':'ODbL-1.0'}
+    meta=json.loads(retail.MANIFEST.read_text())['metadata']
     raw=json.dumps({'type':'FeatureCollection','metadata':meta,'features':[]}).encode()
     packed=gzip.compress(raw)
     p=tmp_path/'snapshot.geojson.gz';p.write_bytes(packed)
@@ -272,3 +272,14 @@ def test_download_failure_does_not_publish_partial_snapshot(tmp_path,monkeypatch
 def test_retail_categories_do_not_create_numeric_score_weights():
     result=TestClient(app).post('/api/score',json={'latitude':52.2297,'longitude':21.0122,'weights':{'grocery':100}})
     assert result.status_code==422
+
+
+def test_incomplete_optional_metadata_is_unavailable_instead_of_a_score_error(tmp_path,monkeypatch):
+    meta=json.loads(retail.MANIFEST.read_text())['metadata'];meta.pop('attribution')
+    packed=gzip.compress(json.dumps({'type':'FeatureCollection','metadata':meta,'features':[]}).encode())
+    path=tmp_path/'retail.geojson.gz';path.write_bytes(packed)
+    manifest=tmp_path/'manifest.json';manifest.write_text(json.dumps({'file':path.name,'sha256':hashlib.sha256(packed).hexdigest(),'record_count':0,'metadata':meta}))
+    monkeypatch.setattr(retail,'MANIFEST',manifest);retail._load.cache_clear()
+    assert retail.load_retail() is None
+    result=TestClient(app).post('/api/score',json={'latitude':52.2297,'longitude':21.0122})
+    assert result.status_code==200 and result.json()['datasets']['grocery']['status']=='unavailable'
