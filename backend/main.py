@@ -5,9 +5,11 @@ from typing import Annotated
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.schemas import Address, AddressScoreRequest, ScoreRequest
+from backend.schemas import Address, AddressScoreRequest, ScoreRequest, CommuteRequest, ComparisonRequest
 from backend.services.geocoding_service import geocode_address
 from backend.services.scoring_service import get_location_score
+from backend.services.routing_service import get_commute
+from backend.services.comparison_service import get_comparison
 
 
 app = FastAPI(
@@ -38,6 +40,7 @@ def score_location(request: ScoreRequest):
         request.latitude,
         request.longitude,
         request.radius_m,
+        weights=request.weights,
     )
 
 
@@ -54,9 +57,20 @@ async def score_address(request: AddressScoreRequest):
         location["latitude"],
         location["longitude"],
         request.radius_m,
+        weights=request.weights,
     )
 
     result["location"]["address"] = location["address"]
 
     return result
+
+
+@app.post("/api/commute")
+async def commute(request: CommuteRequest):
+    return await get_commute(request.origin, request.destination)
+
+
+@app.post("/api/compare")
+async def compare_locations(request: ComparisonRequest):
+    return await get_comparison(request)
 

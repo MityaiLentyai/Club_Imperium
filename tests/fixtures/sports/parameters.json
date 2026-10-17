@@ -1,0 +1,103 @@
+[
+  {
+    "section_name": "Parametry wywołania",
+    "section_elements": [
+      {
+        "name": "token_uzytkownika",
+        "type": "token",
+        "description": "Token API - obowiązkowy"
+      }
+    ]
+  },
+  {
+    "section_name": "Parametry odpowiedzi",
+    "section_elements": [
+
+        {
+          "name": "Dzielnica",
+          "type": "String",
+          "description": "Dzielnica"
+        },
+        {
+          "name": "Adres obiektu",
+          "type": "String",
+          "description": "Adres obiektu"
+        },
+        {
+          "name": "Nazwa placówki oświatowej",
+          "type": "String",
+          "description": "Nazwa placówki oświatowej"
+        },
+        {
+          "name": "Typ obiektu",
+          "type": "String",
+          "description": "Typ obiektu"
+        },
+        {
+          "name": "Boisk uniwersalne zawiera",
+          "type": "String",
+          "description": "Wyposażenie boiska uniwersalnego"
+        },
+        {
+          "name": "Rodzaj nawierzchni",
+          "type": "String",
+          "description": "Rodzaj nawierzchni"
+        },
+        {
+          "name": "Obiekt wyposażony w trybuny",
+          "type": "String",
+          "description": "Czy obiekt jest wyposażony w trybuny"
+        },
+        {
+          "name": "Obiekt wyposażony w piłkochwyty",
+          "type": "String",
+          "description": "Czy obiekt jest wyposażony w piłkochwyty"
+        },
+        {
+          "name": "Poniedziałek",
+          "type": "String",
+          "description": "Godziny dostępności w ponidziałek"
+        },
+        {
+          "name": "Wtorek",
+          "type": "String",
+          "description": "Godziny dostępności we wtorek"
+        },
+        {
+          "name": "Środa",
+          "type": "String",
+          "description": "Godziny dostępności w środę"
+        },
+        {
+          "name": "Czwartek",
+          "type": "String",
+          "description": "Godziny dostępności w czwartek"
+        },
+        {
+          "name": "Piątek",
+          "type": "String",
+          "description": "Godziny dostępności w piątek"
+        },
+        {
+          "name": "Sobota",
+          "type": "String",
+          "description": "Godziny dostępności w sobotę"
+        },
+        {
+          "name": "Niedziela",
+          "type": "String",
+          "description": "Godziny dostępności w niedzielę"
+        },
+        {
+          "name": "Uwagi",
+          "type": "String",
+          "description": "Uwagi"
+        },
+        {
+          "name": "Data aktualizacji",
+          "type": "Date",
+          "description": "Data aktualizacji danych"
+        }
+    ]
+  }
+]

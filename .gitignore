@@ -3,3 +3,6 @@
 __pycache__/
 .env
 .ipynb_checkpoints/
+
+# Local development verification artifacts; never commit credentials or generated caches.
+.local/

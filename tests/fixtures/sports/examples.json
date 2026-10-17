@@ -1,0 +1,20 @@
+[
+  {
+    "section_name": "Przykład wywołania",
+    "section_elements": [
+      {
+        "title": "Przykład zapytania dla pobrania zasobu otwarte boiska",
+        "content": "curl --location --request POST 'https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska' --header 'Authorization: token_uzytkownika'"
+      }
+    ]
+  },
+  {
+    "section_name": "Przykład odpowiedzi",
+    "section_elements": [
+      {
+        "title": "Przykład odpowiedzi dla zasobu otwarte boiska",
+        "content": "[\n  {\n\t\"Dzielnica\": \"Żoliborz\",\n\t\"Adres obiektu\": \"ul. Elbląska 51\",\n\t\"Nazwa placówki oświatowej\": \"LXIV Liceum Ogólnokształcące im. Stanisława Ignacego Witkiewicza \\\"Witkacego\\\"\",\n\t\"Typ obiektu\": \"boiska uniwersalne/wielozadaniowe\",\n\t\"Boisk uniwersalne zawiera\": \"boiska do piłki ręcznej-boiska do koszykówki-boiska do siatkówki-boiska do piłki nożnej\",\n\t\"Rodzaj nawierzchni\": \"polireutan lub podobne\",\n\t\"Obiekt wyposażony w trybuny\": \"NIE\",\n\t\"Obiekt wyposażony w piłkochwyty\": \"TAK\",\n\t\"Poniedziałek\": \"Od 17:00 do 22:00\",\n\t\"Wtorek\": \"Od 17:00 do 22:00\",\n\t\"Środa\": \"Od 17:00 do 22:00\",\n\t\"Czwartek\": \"Od 17:00 do 22:00\",\n\t\"Piątek\": \"Od 17:00 do 22:00\",\n\t\"Sobota\": \"Od 10:00 do 22:00\",\n\t\"Niedziela\": \"Od 10:00 do 22:00\",\n\t\"Uwagi\": \"wejście na teren szkoły przez otwartą furtkę obok bramy wjazdowej\",\n\t\"Data aktualizacji\": \"2026-07-02\"\n  },...\n]"
+      }
+    ]
+  }
+]
