@@ -103,6 +103,9 @@ test("documented /api/score/address example gets a readable label", () => {
   assert.match(a.location.label, /^Marszałkowska 83, /);
   assert.equal(readableAddress("83, Marszałkowska, Koszyki", "x"), "Marszałkowska 83, Koszyki");
   assert.equal(readableAddress(undefined, "typed"), "typed");
+  assert.equal(readableAddress("ulica Marszałkowska 83, Śródmieście, Warszawa", "x"), "Marszałkowska 83, Śródmieście, Warszawa");
+  assert.equal(readableAddress("aleja Jana Pawła II 10, Wola", "x"), "al. Jana Pawła II 10, Wola");
+  assert.equal(readableAddress("plac Konstytucji 1", "x"), "pl. Konstytucji 1");
 });
 test("documented /api/commute example: GeoJSON order is swapped for Leaflet", () => {
   const raw = example("/api/commute");

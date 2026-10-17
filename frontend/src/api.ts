@@ -180,13 +180,21 @@ const finite = (n: unknown) =>
   typeof n === "number" && Number.isFinite(n) ? n : undefined;
 const finiteOrNull = (n: unknown) => finite(n) ?? null;
 
-// Nominatim display names start with the house number ("83, Marszałkowska, Koszyki, …").
-// Put the street first so the short form reads "Marszałkowska 83".
+// Short street-type forms as written on Warsaw street signs; "ulica" is usually omitted.
+const streetTypes: [RegExp, string][] = [
+  [/^ulica\s+/i, ""],
+  [/^aleja\s+/i, "al. "],
+  [/^plac\s+/i, "pl. "],
+];
+
+// Makes geocoder labels read like a resident would write them. Nominatim display names
+// start with the house number ("83, Marszałkowska, Koszyki, …") and the municipal index
+// spells out the street type ("ulica Marszałkowska 83, …"); both become "Marszałkowska 83, …".
 export function readableAddress(display: unknown, fallback: string): string {
   if (typeof display !== "string" || !display.trim()) return fallback;
   const parts = display.split(",").map((s) => s.trim()).filter(Boolean);
-  if (parts.length > 1 && /^\d+[\w/-]*$/.test(parts[0]))
-    return [`${parts[1]} ${parts[0]}`, ...parts.slice(2)].join(", ");
+  if (parts.length > 1 && /^\d+[\w/-]*$/.test(parts[0])) parts.splice(0, 2, `${parts[1]} ${parts[0]}`);
+  parts[0] = streetTypes.reduce((s, [re, short]) => s.replace(re, short), parts[0]);
   return parts.join(", ");
 }
 

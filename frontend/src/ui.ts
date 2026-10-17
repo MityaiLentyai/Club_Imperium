@@ -54,9 +54,11 @@ export function nameSpot(a: Analysis): Analysis {
 }
 
 // The backend lists every platform of a stop separately; residents think in stops,
-// so rows with the same name collapse into one, keeping the nearest platform first.
+// so transport rows with the same name collapse into one, keeping the nearest platform
+// first. Other categories keep every place: two shops of one chain are two shops.
 export type Row = { place: Place; ids: string[] };
 export function rowsOf(r: Analysis, c: Category): Row[] {
+  if (c !== "transport") return placesOf(r, c).map((place) => ({ place, ids: [place.id] }));
   const rows = new Map<string, Row>();
   for (const p of placesOf(r, c)) {
     const row = rows.get(p.label);
