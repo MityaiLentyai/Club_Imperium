@@ -1,5 +1,7 @@
 # Complete available-source coverage and backend stabilization
 
+> Address lookup and boundary validation have subsequently changed. See [citywide address handling](citywide-addresses.md) for the current contract and limitations. Older rectangular-boundary and external-only geocoding statements below describe the preceding version.
+
 Base: `origin/main` at `7de3ef9` (PRs #8 and #9 merged). Python backend, Data Science, data evidence, tests and documentation only. No frontend, scoring formula, dependency or deployment-setting changes. No deployment or merge performed.
 
 ## Actual coverage
