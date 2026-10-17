@@ -1,3 +1,4 @@
+from starlette.concurrency import run_in_threadpool
 
 import os
 from typing import Annotated
@@ -53,7 +54,8 @@ async def geocode_location(address: Annotated[Address, Query()]):
 async def score_address(request: AddressScoreRequest):
     location = await geocode_address(request.address)
 
-    result = get_location_score(
+    result = await run_in_threadpool(
+        get_location_score,
         location["latitude"],
         location["longitude"],
         request.radius_m,

@@ -15,6 +15,7 @@ USER_AGENT = "UrbanLens-Warsaw/1.0 (https://github.com/MityaiLentyai/Club_Imperi
 CACHE_TTL = 86400
 CACHE_LIMIT = 128
 MAX_BYTES = 1_000_000
+QUEUE_TIMEOUT = 2.0
 _cache = OrderedDict()
 _lock = asyncio.Lock()
 _last_request = 0.0
@@ -100,7 +101,13 @@ async def get_commute(origin, destination, *, include_routes=True):
         reason = "Routes not requested" if not include_routes else "Routing disabled"
         result.update({mode: {"status": "unavailable", "reason": reason} for mode in ("walking", "driving")})
         return result
-    async with _lock:
+    try:
+        await asyncio.wait_for(_lock.acquire(), timeout=QUEUE_TIMEOUT)
+    except TimeoutError:
+        result.update({mode: {"status": "unavailable", "reason": "Routing queue busy; retry later"}
+                       for mode in ("walking", "driving")})
+        return result
+    try:
         async with httpx.AsyncClient(timeout=8.0, follow_redirects=False) as client:
             for mode in ("walking", "driving"):
                 key = (base, origin.latitude, origin.longitude, destination.latitude, destination.longitude, mode)
@@ -122,4 +129,6 @@ async def get_commute(origin, destination, *, include_routes=True):
                 while len(_cache) > CACHE_LIMIT:
                     _cache.popitem(last=False)
                 result[mode] = {**route, "cached": False}
+    finally:
+        _lock.release()
     return result

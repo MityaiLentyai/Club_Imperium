@@ -23,7 +23,13 @@ from data_science.mobility import (
 
 @lru_cache(maxsize=1)
 def get_stops():
-    return load_stops()
+    try:
+        stops = load_stops()
+        if stops.empty:
+            raise ValueError("Empty transport snapshot")
+        return stops
+    except (OSError, ValueError, KeyError) as exc:
+        raise HTTPException(status_code=503, detail="Transport dataset unavailable") from exc
 
 
 @lru_cache(maxsize=1)

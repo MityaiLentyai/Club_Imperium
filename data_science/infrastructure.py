@@ -59,7 +59,7 @@ def load_snapshot(category, path=None):
                 if category in ("parking", "sports"):
                     seen_points.add(key)
                 records.append((props, geom, projected))
-            except (KeyError, TypeError, ValueError, ShapelyError):
+            except (KeyError, TypeError, ValueError, AttributeError, ShapelyError):
                 continue
         # Nonempty files with no usable geometry are corrupt, not empty coverage.
         if data["features"] and not records:
