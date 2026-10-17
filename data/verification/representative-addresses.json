@@ -1,0 +1,44 @@
+[
+  {
+    "label": "Marszałkowska 83",
+    "street": "ulica Marszałkowska",
+    "number": "83",
+    "district": "Śródmieście",
+    "point": {
+      "longitude": 21.013683,
+      "latitude": 52.225763,
+      "address_id": "1323047"
+    },
+    "source_url": "https://wfs.um.warszawa.pl/serwis",
+    "raw_file": "83-Śródmieście.gml",
+    "retrieved_at": "2026-10-17T20:26:14.913580+00:00"
+  },
+  {
+    "label": "Stokłosy 7",
+    "street": "ulica Stokłosy",
+    "number": "7",
+    "district": "Ursynów",
+    "point": {
+      "longitude": 21.031856,
+      "latitude": 52.158969,
+      "address_id": "1348303"
+    },
+    "source_url": "https://wfs.um.warszawa.pl/serwis",
+    "raw_file": "7-Ursynów.gml",
+    "retrieved_at": "2026-10-17T20:26:16.187501+00:00"
+  },
+  {
+    "label": "Ząbkowska 12",
+    "street": "ulica Ząbkowska",
+    "number": "12",
+    "district": "Praga-Północ",
+    "point": {
+      "longitude": 21.0399,
+      "latitude": 52.253043,
+      "address_id": "1312064"
+    },
+    "source_url": "https://wfs.um.warszawa.pl/serwis",
+    "raw_file": "12-Praga-Północ.gml",
+    "retrieved_at": "2026-10-17T20:26:17.466751+00:00"
+  }
+]

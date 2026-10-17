@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-10-17T20:28:56.495145+00:00",
+  "address_checks": [
+    {
+      "address": "Marszałkowska 83",
+      "http_status": 200,
+      "location": {
+        "latitude": 52.2257099,
+        "longitude": 21.0136397,
+        "address": "83, Marszałkowska, Koszyki, Śródmieście Południowe, Śródmieście, Warszawa, województwo mazowieckie, 00-683, Polska"
+      },
+      "scores": {
+        "mobility": 92.2
+      },
+      "detail": null,
+      "elapsed_seconds": 0.515
+    },
+    {
+      "address": "Stokłosy 7",
+      "http_status": 200,
+      "location": {
+        "latitude": 52.1589611,
+        "longitude": 21.0317969,
+        "address": "7, Stokłosy, Ursynów Północny, Ursynów, Warszawa, województwo mazowieckie, 02-787, Polska"
+      },
+      "scores": {
+        "mobility": 72.2
+      },
+      "detail": null,
+      "elapsed_seconds": 0.878
+    },
+    {
+      "address": "Ząbkowska 12",
+      "http_status": 200,
+      "location": {
+        "latitude": 52.2529905,
+        "longitude": 21.039868,
+        "address": "12, Ząbkowska, Skaryszew, Stara Praga, Praga-Północ, Warszawa, województwo mazowieckie, 03-735, Polska"
+      },
+      "scores": {
+        "mobility": 88.0
+      },
+      "detail": null,
+      "elapsed_seconds": 1.135
+    }
+  ],
+  "score_performance": {
+    "requests": 30,
+    "median_ms": 15.71,
+    "p95_ms": 30.69,
+    "maximum_ms": 58.12,
+    "scope": "local TestClient, warm process, no external scoring I/O; hardware-specific, not an SLA"
+  },
+  "performance_checked_at": "2026-10-17T20:32:40.837825+00:00",
+  "status_endpoint": {
+    "http_status": 200,
+    "external_requests": false
+  },
+  "compare_endpoint": {
+    "http_status": 200,
+    "measured_rows": 15,
+    "external_routes_requested": false
+  }
+}

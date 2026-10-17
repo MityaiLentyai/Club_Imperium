@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-17T20:31:51.205679+00:00",
+  "parks": {
+    "snapshot_records": 60,
+    "wfs_layer": "ns92528565:PLACE_SKWERY",
+    "municipal_inventory_url": "https://zzw.waw.pl/nasze-tereny/parki/",
+    "municipal_inventory_sha256": "670dcedf18e15d471c624aa6b996902507edaee426614c2eb543e50f6867467e",
+    "confirmed_inventory_name": "Park Żerański",
+    "name_present_in_municipal_inventory": true,
+    "name_present_in_snapshot": false,
+    "conclusion": "Inventory completeness is not established; at least this municipal park name is absent from the named-park snapshot. No new polygon inferred or fabricated."
+  },
+  "parking": {
+    "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/20ec668b-e5f3-4cbf-aeeb-eb825f3c8731",
+    "scope": "Participating Public Areas Authority, Municipal Roads Authority and Palace of Culture and Science Administration facilities only",
+    "current_availability": "Unverified observation timestamps; not exposed"
+  },
+  "transit": {
+    "official_timetable_page": "https://www.ztm.waw.pl/pliki-do-pobrania/dane-rozkladowe/",
+    "checked_http_status": 403,
+    "access_issue": "Official page presented a JavaScript anti-bot challenge; no attempt to bypass it",
+    "configured_timetable_feed": false,
+    "configured_transit_router": false,
+    "journey_times_estimated": false,
+    "required_before_implementation": [
+      "Current validated timetable graph, service calendars, trip/stop mappings",
+      "Schedule-aware routing engine or documented trusted itinerary provider",
+      "Explicit departure instant and Europe/Warsaw time handling",
+      "Walking transfer access and separate waiting/transfer/vehicle durations"
+    ]
+  },
+  "credential_operations": {
+    "line_expansion": "Prepared, not requested; separate approval pending after automatic review rejection",
+    "parking_refresh": "Not requested; catalogue coverage checked without authentication"
+  }
+}

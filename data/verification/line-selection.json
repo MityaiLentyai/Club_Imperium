@@ -1,0 +1,148 @@
+{
+  "status": "planned_not_requested",
+  "maximum_requests": 20,
+  "attempts_per_platform": 1,
+  "selection_method": "Nearest previously uncached platforms at three municipal-verified address anchors; quotas 7, 7, 6, within 1500 metres",
+  "platforms": [
+    {
+      "stop_id": "7012",
+      "platform": "04",
+      "stop_name": "Hoża",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 32.2
+    },
+    {
+      "stop_id": "7012",
+      "platform": "01",
+      "stop_name": "Hoża",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 40.0
+    },
+    {
+      "stop_id": "7012",
+      "platform": "02",
+      "stop_name": "Hoża",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 104.1
+    },
+    {
+      "stop_id": "7012",
+      "platform": "03",
+      "stop_name": "Hoża",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 169.7
+    },
+    {
+      "stop_id": "7011",
+      "platform": "05",
+      "stop_name": "Pl. Konstytucji",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 286.3
+    },
+    {
+      "stop_id": "7011",
+      "platform": "03",
+      "stop_name": "Pl. Konstytucji",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 334.5
+    },
+    {
+      "stop_id": "7011",
+      "platform": "04",
+      "stop_name": "Pl. Konstytucji",
+      "anchor": "Marszałkowska 83",
+      "distance_m": 347.2
+    },
+    {
+      "stop_id": "3293",
+      "platform": "01",
+      "stop_name": "Wiolinowa",
+      "anchor": "Stokłosy 7",
+      "distance_m": 107.1
+    },
+    {
+      "stop_id": "3293",
+      "platform": "02",
+      "stop_name": "Wiolinowa",
+      "anchor": "Stokłosy 7",
+      "distance_m": 126.6
+    },
+    {
+      "stop_id": "3132",
+      "platform": "04",
+      "stop_name": "Metro Stokłosy",
+      "anchor": "Stokłosy 7",
+      "distance_m": 265.1
+    },
+    {
+      "stop_id": "3127",
+      "platform": "04",
+      "stop_name": "Metro Ursynów",
+      "anchor": "Stokłosy 7",
+      "distance_m": 354.5
+    },
+    {
+      "stop_id": "3120",
+      "platform": "03",
+      "stop_name": "Ursynów Płn.",
+      "anchor": "Stokłosy 7",
+      "distance_m": 357.0
+    },
+    {
+      "stop_id": "3132",
+      "platform": "01",
+      "stop_name": "Metro Stokłosy",
+      "anchor": "Stokłosy 7",
+      "distance_m": 357.9
+    },
+    {
+      "stop_id": "3132",
+      "platform": "02",
+      "stop_name": "Metro Stokłosy",
+      "anchor": "Stokłosy 7",
+      "distance_m": 385.0
+    },
+    {
+      "stop_id": "1032",
+      "platform": "02",
+      "stop_name": "Markowska",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 205.5
+    },
+    {
+      "stop_id": "1003",
+      "platform": "07",
+      "stop_name": "Dw. Wileński",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 306.3
+    },
+    {
+      "stop_id": "1920",
+      "platform": "80",
+      "stop_name": "Warszawa Wileńska",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 316.5
+    },
+    {
+      "stop_id": "1003",
+      "platform": "04",
+      "stop_name": "Dw. Wileński",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 342.0
+    },
+    {
+      "stop_id": "1305",
+      "platform": "02",
+      "stop_name": "Okrzei",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 352.5
+    },
+    {
+      "stop_id": "1032",
+      "platform": "01",
+      "stop_name": "Markowska",
+      "anchor": "Ząbkowska 12",
+      "distance_m": 379.2
+    }
+  ]
+}
