@@ -26,7 +26,7 @@ Backend CORS defaults to http://localhost:5173. Coordinate scoring needs neither
 | Observed lines | 15 platforms at 3 stop groups; 33 distinct observed line identifiers | Existing Mobility 2.0 cache; small sample, not citywide service coverage |
 | Parks | 60 `OBIEKT=Park` polygons from 430 named public spaces | Parks only; square greenery and completeness are unverified |
 | Parking | 18 valid facilities from 19 source rows | Participating ZTP/ZDM/PKiN operators; one row lacked coordinates |
-| Sports | 7 located sites from an 8-site sample; 1 unresolved | Source has 1,227 records grouped into 308 distinct site addresses; sample is concentrated in Żoliborz |
+| Sports | All 308 source addresses processed; 293 located, consolidated into 291 points; 15 unresolved | 1,227 source records (25 exact duplicate rows); located sites in all 18 districts; educational sites only |
 | Routing | Actual network routes for walking/driving via FOSSGIS OSRM | Provider estimates; no live traffic or transit journey service |
 
 Snapshot files include exact retrieval timestamps and source metadata. Stop IDs, platform IDs and line identifiers remain strings, preserving leading zeroes. Cached lines are observed availability, not a timetable, frequency or live service guarantee. Missing/failed line observations are distinct from known-empty observations.
@@ -54,18 +54,19 @@ python -m data_science.ingest_stop_lines --limit 15 --dry-run
 
 The existing line pipeline caps each explicit run at 20 platforms, caches/resumes successful observations, preserves failures and uses no network during scoring. No additional line requests were made for this branch.
 
-Sports refresh (manual operator action, never part of scoring):
+Sports reproduction (offline; manual operator action, never part of scoring):
 
 ```bash
-# One authenticated sports-source request plus at most 8 public exact-address WFS queries:
-python -m data_science.ingest_sports --limit 8
-# Reproduce the committed sample with zero external requests:
-python -m data_science.ingest_sports --input data/infrastructure/raw/sports-965750657b6f133f.json --limit 8 --offline --output data/infrastructure
+python -m data_science.complete_sports --input data/infrastructure/raw/sports-965750657b6f133f.json --offline --batch-size 50
+python -m data_science.audit_infrastructure
+python -m data_science.complete_lines --max-batches 400 --max-requests 20000 --dry-run
 ```
 
-`--input` can reuse any saved official sports response without another authenticated request. `--limit` accepts 1–10 sites, defaults to 8 and never automatically advances to another batch. Exact-address requests cap responses at five features. Responses and negative matches are cached under `data/infrastructure/sports_addresses/`; there is no automatic geocoding or citywide enrichment. Only supported street formats are matched; unresolved cases remain explicit. Address responses are preserved for offline reproduction. Successful snapshot replacement is atomic and content-addressed raw archives are retained. Empty/failed enrichment preserves the previous sports snapshot.
+Every unique source address is considered. Checkpoints reuse verified positive and negative municipal responses across runs and batch-size changes. Network enrichment uses sequential form-POST WFS requests with up to 50 exact addresses each, 1.1-second spacing and response limits. Municipal query exceptions remain failures, never successful empty matches; failed batches can be resumed at smaller sizes. Coordinates are never guessed. All 308 addresses have been attempted; 15 remain unmatched. Original names, schedules, sports types and source address lists are retained when co-located addresses are consolidated.
 
-All official downloads are capped at 8 MB with HTTP timeouts. Sports source arrays above 2,000 rows are rejected. No new optional snapshot is required to keep transport scoring responsive. Park/parking/sports snapshots are cached for each backend worker; restart after replacing them. The line cache reloads when its file timestamp/size changes. No token, `.env`, generated cache or personal report is committed. Local inspection artifacts are kept in ignored `.local/` rather than discarded.
+The legacy `ingest_sports --limit` command is retained for bounded development samples and refuses to overwrite a fuller snapshot. Use `complete_sports` for the current full-source data. For line ingestion, `complete_lines` advances beyond previously attempted keys, retains successful empty results and failures, and caps HTTP requests including retries. Multi-batch live ingestion requires operator-verified official usage limits; none were established during this review, so no bulk authenticated line ingestion was executed. See [the current coverage/handoff report](data-coverage-final.md) for the policy gate, commands and actual counts.
+
+All official downloads are capped at 8 MB with HTTP timeouts. Sports source arrays above 2,000 rows are rejected. No new optional snapshot is required to keep transport scoring responsive. Park/parking/sports snapshots are cached for each backend worker; restart after replacing them. The line cache reloads when its file timestamp/size changes. No token, `.env`, bytecode cache or personal report is committed. Official raw evidence and persistent municipal ingestion caches are intentionally versioned for offline reproduction. Local inspection artifacts are kept in ignored `.local/` rather than discarded.
 
 ## Scores and personalization
 
@@ -171,4 +172,4 @@ Try the sports-site point `(52.263332, 20.961636)` in `/api/score` to inspect th
 
 ## Production considerations and remaining limits
 
-Before deployment, verify park completeness and source reuse terms, sports sample expansion and access-hour freshness, parking operator coverage/timestamp/tariff semantics, and routing-provider capacity/privacy/availability. Sports sample expansion is an explicit bounded operator action, not an automatic citywide job. Full transit journeys require a verified routing service and timetable data. Broader LifeScore eligibility requires justified category scores; adjusting weights cannot create missing evidence. No production service, deployment setting or shared branch was changed, and this PR must be reviewed before merge.
+Before deployment, verify park completeness and source reuse terms, unresolved sports addresses and access-hour freshness, parking operator coverage/timestamp/tariff semantics, and routing-provider capacity/privacy/availability. Sports source processing is complete, but educational-source coverage and current access remain limited; refresh is an explicit operator action. Full transit journeys require a verified routing service and timetable data. Broader LifeScore eligibility requires justified category scores; adjusting weights cannot create missing evidence. No production service, deployment setting or shared branch was changed, and this PR must be reviewed before merge.

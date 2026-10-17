@@ -1,0 +1,1512 @@
+{
+  "checked_at": "2026-10-17T21:47:11.133729+00:00",
+  "examples": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/health"
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "status": "ok"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/score",
+        "json": {
+          "latitude": 52.2297,
+          "longitude": 21.0122,
+          "radius_m": 1
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "life_score": {
+            "value": 92.7,
+            "status": "partial",
+            "label": "Partial LifeScore",
+            "requested_weights": {
+              "mobility": 20.0,
+              "green": 20.0,
+              "parking": 20.0,
+              "sports": 20.0,
+              "commute": 20.0
+            },
+            "normalized_weights": {
+              "mobility": 100.0
+            },
+            "contributions": [
+              {
+                "category": "mobility",
+                "score": 92.7,
+                "weight_percent": 100.0
+              }
+            ],
+            "excluded": {
+              "green": "No validated numeric category score",
+              "parking": "No validated numeric category score",
+              "sports": "No validated numeric category score",
+              "commute": "No validated numeric category score"
+            },
+            "explanation": "Weighted mean of eligible scores with positive weights; missing scores are excluded, never zero."
+          },
+          "line_features": {
+            "distinct_lines_500m": null,
+            "distinct_lines_1000m": null,
+            "distinct_lines_radius": 0,
+            "radius_m": 1,
+            "nearest_stop_lines": null,
+            "line_data_coverage": {
+              "data_status": "loaded",
+              "known_platforms": 15,
+              "total_platforms": 6652,
+              "failed_platforms": 0,
+              "refresh_failed_platforms": 0,
+              "latest_retrieved_at": "2026-10-17T19:26:38.124266+00:00",
+              "within_500m": {
+                "status": "missing",
+                "known_platforms": 0,
+                "total_platforms": 25,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": 0.0
+              },
+              "within_1000m": {
+                "status": "missing",
+                "known_platforms": 0,
+                "total_platforms": 98,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": 0.0
+              },
+              "within_radius": {
+                "status": "no_platforms",
+                "known_platforms": 0,
+                "total_platforms": 0,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": null
+              }
+            }
+          },
+          "location": {
+            "latitude": 52.2297,
+            "longitude": 21.0122
+          },
+          "scores": {
+            "mobility": 92.7
+          },
+          "features": {
+            "nearest_stop_m": 30.7,
+            "stop_groups_500m": 7,
+            "stop_groups_1000m": 24,
+            "nearest_park_m": 786.3,
+            "parks_within_radius": 0,
+            "nearest_listed_parking_m": 314.9,
+            "listed_parking_within_radius": 0,
+            "nearest_sports_facility_m": 562.1,
+            "sports_facilities_within_radius": 0
+          },
+          "radius_m": 1,
+          "places": [],
+          "unavailable": [
+            "grocery",
+            "pharmacy"
+          ],
+          "datasets": {
+            "green": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "source_records": 430,
+              "classifications": {
+                "Skwer": 171,
+                "Rondo": 121,
+                "Zaułek": 3,
+                "Park": 60,
+                "Plac": 67,
+                "Osiedle": 1,
+                "Rynek": 4,
+                "Skwerek": 1,
+                "Kopiec": 1,
+                "Zakątek": 1
+              },
+              "source_crs": "EPSG:2178",
+              "source_url": "https://wfs.um.warszawa.pl/serwis",
+              "request_parameters": {
+                "service": "WFS",
+                "version": "1.1.0",
+                "request": "GetFeature",
+                "typeName": "ns92528565:PLACE_SKWERY",
+                "maxFeatures": 500,
+                "outputFormat": "GML2"
+              },
+              "coverage": "Named park polygons only; completeness of Warsaw green space is unverified",
+              "sha256": "ee33fa4d25b1815c35ece052e0f76cc46e34044c26c1c2e35c781bdcf49255b9",
+              "record_count": 60,
+              "raw_file": "raw/green-ee33fa4d25b1815c.gml",
+              "last_verified_at": "2026-10-17T21:45:17.183411+00:00",
+              "retrieved_at": "2026-10-17T21:45:17.185282+00:00",
+              "processed_at": "2026-10-17T21:45:17.185282+00:00"
+            },
+            "parking": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "source_records": 19,
+              "provider_response_timestamp": "2026-10-17T23:45:01",
+              "source_url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+              "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/20ec668b-e5f3-4cbf-aeeb-eb825f3c8731",
+              "coverage": "Participating ZTP, ZDM and PKiN facilities only; incomplete coverage",
+              "availability": "Observation timestamp absent; no current availability published",
+              "sha256": "d8be8f7e8fe46af1b2b58697174bd0e0349115002e9ca5a07966b45c153cc245",
+              "record_count": 18,
+              "raw_file": "raw/parking-d8be8f7e8fe46af1.json",
+              "last_verified_at": "2026-10-17T21:45:28.942720+00:00",
+              "retrieved_at": "2026-10-17T21:45:28.944226+00:00",
+              "processed_at": "2026-10-17T21:45:28.944226+00:00"
+            },
+            "sports": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "selected_sites": 308,
+              "unresolved_addresses": [
+                "Aleja Wojska Polskiego 1A",
+                "Trakt Brzeski (Wesoła) 18",
+                "Plac Wojska Polskiego (Wesoła) 28",
+                "Aleja Jana Pawła II 26A",
+                "Plac Stanisława Małachowskiego 1",
+                "ul. gen. Karola Ziemskiego \"Wachnowskiego\" 22",
+                "Szanajcy 17/19",
+                "Aleja Stanów Zjednoczonych 27",
+                "Aleja Stanów Zjednoczonych 24",
+                "ul. Jana Bytnara Rudego 15A",
+                "Aleja Niepodległości 27",
+                "ul. B. Limanowskiego 9, 02-943 Warszawa",
+                "ul. P.Gruszczyńskiego 12",
+                "Aleja Władysława Reymonta 25",
+                "Aleja Władysława Reymonta 16"
+              ],
+              "unresolved_count": 15,
+              "source_sites": 308,
+              "source_url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+              "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/32a0ad2d-06d7-4e9c-acef-17a35c083d8c",
+              "source_records": 1227,
+              "coordinate_source_url": "https://wfs.um.warszawa.pl/serwis",
+              "source_crs": "EPSG:4326",
+              "coverage": "Saved educational sports source: 308/308 site addresses attempted; incomplete Warsaw sports inventory; address-point proxies",
+              "retrieved_at": "2026-10-17T19:59:30.725512+00:00",
+              "sha256": "965750657b6f133fb03474a336a5e8fa27c265841e0491b5ec8856f529800bf5",
+              "record_count": 291,
+              "raw_file": "raw/sports-965750657b6f133f.json",
+              "processed_sites": 308,
+              "geolocated_addresses": 293,
+              "processed_at": "2026-10-17T21:44:03.538747+00:00",
+              "attempted_sites": 308
+            }
+          },
+          "nearby": {
+            "total": 0,
+            "limit": 200,
+            "truncated": false
+          },
+          "sources": [
+            {
+              "name": "Warsaw transport stops (stops_clean.csv)"
+            },
+            {
+              "name": "Warsaw Open Data / ZTM — observed transport lines",
+              "url": "https://dane.um.warszawa.pl/en/catalogue/8eb065b6-f3a0-41d4-a842-732c6c1c3063",
+              "retrieved_at": "2026-10-17T19:26:38.124266+00:00"
+            },
+            {
+              "name": "Warsaw green snapshot",
+              "url": "https://wfs.um.warszawa.pl/serwis",
+              "retrieved_at": "2026-10-17T21:45:17.185282+00:00"
+            },
+            {
+              "name": "Warsaw parking snapshot",
+              "url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+              "retrieved_at": "2026-10-17T21:45:28.944226+00:00"
+            },
+            {
+              "name": "Warsaw sports snapshot",
+              "url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+              "retrieved_at": "2026-10-17T19:59:30.725512+00:00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/geocode",
+        "query": {
+          "address": "Marszałkowska 83"
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "address": "83, Marszałkowska, Koszyki, Śródmieście Południowe, Śródmieście, Warszawa, województwo mazowieckie, 00-683, Polska",
+          "latitude": 52.2257099,
+          "longitude": 21.0136397
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/score/address",
+        "json": {
+          "address": "Marszałkowska 83",
+          "radius_m": 1
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "life_score": {
+            "value": 92.2,
+            "status": "partial",
+            "label": "Partial LifeScore",
+            "requested_weights": {
+              "mobility": 20.0,
+              "green": 20.0,
+              "parking": 20.0,
+              "sports": 20.0,
+              "commute": 20.0
+            },
+            "normalized_weights": {
+              "mobility": 100.0
+            },
+            "contributions": [
+              {
+                "category": "mobility",
+                "score": 92.2,
+                "weight_percent": 100.0
+              }
+            ],
+            "excluded": {
+              "green": "No validated numeric category score",
+              "parking": "No validated numeric category score",
+              "sports": "No validated numeric category score",
+              "commute": "No validated numeric category score"
+            },
+            "explanation": "Weighted mean of eligible scores with positive weights; missing scores are excluded, never zero."
+          },
+          "line_features": {
+            "distinct_lines_500m": null,
+            "distinct_lines_1000m": null,
+            "distinct_lines_radius": 0,
+            "radius_m": 1,
+            "nearest_stop_lines": null,
+            "line_data_coverage": {
+              "data_status": "loaded",
+              "known_platforms": 15,
+              "total_platforms": 6652,
+              "failed_platforms": 0,
+              "refresh_failed_platforms": 0,
+              "latest_retrieved_at": "2026-10-17T19:26:38.124266+00:00",
+              "within_500m": {
+                "status": "missing",
+                "known_platforms": 0,
+                "total_platforms": 22,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": 0.0
+              },
+              "within_1000m": {
+                "status": "missing",
+                "known_platforms": 0,
+                "total_platforms": 102,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": 0.0
+              },
+              "within_radius": {
+                "status": "no_platforms",
+                "known_platforms": 0,
+                "total_platforms": 0,
+                "failed_platforms": 0,
+                "refresh_failed_platforms": 0,
+                "fraction": null
+              }
+            }
+          },
+          "location": {
+            "latitude": 52.2257099,
+            "longitude": 21.0136397,
+            "address": "83, Marszałkowska, Koszyki, Śródmieście Południowe, Śródmieście, Warszawa, województwo mazowieckie, 00-683, Polska"
+          },
+          "scores": {
+            "mobility": 92.2
+          },
+          "features": {
+            "nearest_stop_m": 37.7,
+            "stop_groups_500m": 7,
+            "stop_groups_1000m": 25,
+            "nearest_park_m": 627.2,
+            "parks_within_radius": 0,
+            "nearest_listed_parking_m": 163.3,
+            "listed_parking_within_radius": 0,
+            "nearest_sports_facility_m": 211.8,
+            "sports_facilities_within_radius": 0
+          },
+          "radius_m": 1,
+          "places": [],
+          "unavailable": [
+            "grocery",
+            "pharmacy"
+          ],
+          "datasets": {
+            "green": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "source_records": 430,
+              "classifications": {
+                "Skwer": 171,
+                "Rondo": 121,
+                "Zaułek": 3,
+                "Park": 60,
+                "Plac": 67,
+                "Osiedle": 1,
+                "Rynek": 4,
+                "Skwerek": 1,
+                "Kopiec": 1,
+                "Zakątek": 1
+              },
+              "source_crs": "EPSG:2178",
+              "source_url": "https://wfs.um.warszawa.pl/serwis",
+              "request_parameters": {
+                "service": "WFS",
+                "version": "1.1.0",
+                "request": "GetFeature",
+                "typeName": "ns92528565:PLACE_SKWERY",
+                "maxFeatures": 500,
+                "outputFormat": "GML2"
+              },
+              "coverage": "Named park polygons only; completeness of Warsaw green space is unverified",
+              "sha256": "ee33fa4d25b1815c35ece052e0f76cc46e34044c26c1c2e35c781bdcf49255b9",
+              "record_count": 60,
+              "raw_file": "raw/green-ee33fa4d25b1815c.gml",
+              "last_verified_at": "2026-10-17T21:45:17.183411+00:00",
+              "retrieved_at": "2026-10-17T21:45:17.185282+00:00",
+              "processed_at": "2026-10-17T21:45:17.185282+00:00"
+            },
+            "parking": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "source_records": 19,
+              "provider_response_timestamp": "2026-10-17T23:45:01",
+              "source_url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+              "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/20ec668b-e5f3-4cbf-aeeb-eb825f3c8731",
+              "coverage": "Participating ZTP, ZDM and PKiN facilities only; incomplete coverage",
+              "availability": "Observation timestamp absent; no current availability published",
+              "sha256": "d8be8f7e8fe46af1b2b58697174bd0e0349115002e9ca5a07966b45c153cc245",
+              "record_count": 18,
+              "raw_file": "raw/parking-d8be8f7e8fe46af1.json",
+              "last_verified_at": "2026-10-17T21:45:28.942720+00:00",
+              "retrieved_at": "2026-10-17T21:45:28.944226+00:00",
+              "processed_at": "2026-10-17T21:45:28.944226+00:00"
+            },
+            "sports": {
+              "status": "available",
+              "total": 0,
+              "limit": 50,
+              "truncated": false,
+              "selected_sites": 308,
+              "unresolved_addresses": [
+                "Aleja Wojska Polskiego 1A",
+                "Trakt Brzeski (Wesoła) 18",
+                "Plac Wojska Polskiego (Wesoła) 28",
+                "Aleja Jana Pawła II 26A",
+                "Plac Stanisława Małachowskiego 1",
+                "ul. gen. Karola Ziemskiego \"Wachnowskiego\" 22",
+                "Szanajcy 17/19",
+                "Aleja Stanów Zjednoczonych 27",
+                "Aleja Stanów Zjednoczonych 24",
+                "ul. Jana Bytnara Rudego 15A",
+                "Aleja Niepodległości 27",
+                "ul. B. Limanowskiego 9, 02-943 Warszawa",
+                "ul. P.Gruszczyńskiego 12",
+                "Aleja Władysława Reymonta 25",
+                "Aleja Władysława Reymonta 16"
+              ],
+              "unresolved_count": 15,
+              "source_sites": 308,
+              "source_url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+              "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/32a0ad2d-06d7-4e9c-acef-17a35c083d8c",
+              "source_records": 1227,
+              "coordinate_source_url": "https://wfs.um.warszawa.pl/serwis",
+              "source_crs": "EPSG:4326",
+              "coverage": "Saved educational sports source: 308/308 site addresses attempted; incomplete Warsaw sports inventory; address-point proxies",
+              "retrieved_at": "2026-10-17T19:59:30.725512+00:00",
+              "sha256": "965750657b6f133fb03474a336a5e8fa27c265841e0491b5ec8856f529800bf5",
+              "record_count": 291,
+              "raw_file": "raw/sports-965750657b6f133f.json",
+              "processed_sites": 308,
+              "geolocated_addresses": 293,
+              "processed_at": "2026-10-17T21:44:03.538747+00:00",
+              "attempted_sites": 308
+            }
+          },
+          "nearby": {
+            "total": 0,
+            "limit": 200,
+            "truncated": false
+          },
+          "sources": [
+            {
+              "name": "Warsaw transport stops (stops_clean.csv)"
+            },
+            {
+              "name": "Warsaw Open Data / ZTM — observed transport lines",
+              "url": "https://dane.um.warszawa.pl/en/catalogue/8eb065b6-f3a0-41d4-a842-732c6c1c3063",
+              "retrieved_at": "2026-10-17T19:26:38.124266+00:00"
+            },
+            {
+              "name": "Warsaw green snapshot",
+              "url": "https://wfs.um.warszawa.pl/serwis",
+              "retrieved_at": "2026-10-17T21:45:17.185282+00:00"
+            },
+            {
+              "name": "Warsaw parking snapshot",
+              "url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+              "retrieved_at": "2026-10-17T21:45:28.944226+00:00"
+            },
+            {
+              "name": "Warsaw sports snapshot",
+              "url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+              "retrieved_at": "2026-10-17T19:59:30.725512+00:00"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/commute",
+        "json": {
+          "origin": {
+            "latitude": 52.2257099,
+            "longitude": 21.0136397
+          },
+          "destination": {
+            "latitude": 52.1589611,
+            "longitude": 21.0317969
+          }
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "origin": {
+            "latitude": 52.2257099,
+            "longitude": 21.0136397
+          },
+          "destination": {
+            "latitude": 52.1589611,
+            "longitude": 21.0317969
+          },
+          "baseline": {
+            "distance_m": 7530.3,
+            "distance_type": "straight_line"
+          },
+          "transit": {
+            "status": "unavailable",
+            "reason": "No verified timetable and transit routing service configured"
+          },
+          "attribution": {
+            "name": "FOSSGIS OSRM / © OpenStreetMap contributors",
+            "url": "https://routing.openstreetmap.de/about.html",
+            "fix_map_url": "https://www.openstreetmap.org/fixthemap"
+          },
+          "walking": {
+            "status": "available",
+            "distance_m": 8251.6,
+            "duration_minutes": 109.4,
+            "geometry": {
+              "coordinates": [
+                [
+                  21.013776,
+                  52.22574
+                ],
+                [
+                  21.015338,
+                  52.223145
+                ],
+                [
+                  21.015503,
+                  52.221369
+                ],
+                [
+                  21.015969,
+                  52.221341
+                ],
+                [
+                  21.015546,
+                  52.218435
+                ],
+                [
+                  21.015987,
+                  52.216307
+                ],
+                [
+                  21.017352,
+                  52.213665
+                ],
+                [
+                  21.018452,
+                  52.212812
+                ],
+                [
+                  21.018101,
+                  52.212561
+                ],
+                [
+                  21.020134,
+                  52.211391
+                ],
+                [
+                  21.022492,
+                  52.205621
+                ],
+                [
+                  21.023774,
+                  52.197633
+                ],
+                [
+                  21.024283,
+                  52.186218
+                ],
+                [
+                  21.024934,
+                  52.186123
+                ],
+                [
+                  21.02501,
+                  52.183231
+                ],
+                [
+                  21.025961,
+                  52.182465
+                ],
+                [
+                  21.026117,
+                  52.180979
+                ],
+                [
+                  21.028072,
+                  52.179101
+                ],
+                [
+                  21.026421,
+                  52.174364
+                ],
+                [
+                  21.026448,
+                  52.168914
+                ],
+                [
+                  21.026989,
+                  52.168783
+                ],
+                [
+                  21.027137,
+                  52.167665
+                ],
+                [
+                  21.026033,
+                  52.167424
+                ],
+                [
+                  21.026106,
+                  52.16569
+                ],
+                [
+                  21.026684,
+                  52.164165
+                ],
+                [
+                  21.02776,
+                  52.164131
+                ],
+                [
+                  21.028998,
+                  52.160306
+                ],
+                [
+                  21.030957,
+                  52.158661
+                ],
+                [
+                  21.03171,
+                  52.158977
+                ]
+              ],
+              "type": "LineString"
+            },
+            "snap_distances_m": [
+              9.9,
+              6.2
+            ],
+            "duration_type": "provider_estimate",
+            "traffic": "not_live",
+            "retrieved_at": "2026-10-17T21:47:14.905407+00:00",
+            "provider": "FOSSGIS OSRM / OpenStreetMap",
+            "provider_url": "https://routing.openstreetmap.de",
+            "cached": false
+          },
+          "driving": {
+            "status": "available",
+            "distance_m": 8112.4,
+            "duration_minutes": 15.1,
+            "geometry": {
+              "coordinates": [
+                [
+                  21.013841,
+                  52.225631
+                ],
+                [
+                  21.015914,
+                  52.22225
+                ],
+                [
+                  21.014917,
+                  52.216839
+                ],
+                [
+                  21.017163,
+                  52.213346
+                ],
+                [
+                  21.020248,
+                  52.211387
+                ],
+                [
+                  21.023042,
+                  52.203636
+                ],
+                [
+                  21.024544,
+                  52.186746
+                ],
+                [
+                  21.023364,
+                  52.183397
+                ],
+                [
+                  21.025486,
+                  52.182719
+                ],
+                [
+                  21.025898,
+                  52.180819
+                ],
+                [
+                  21.027737,
+                  52.179008
+                ],
+                [
+                  21.026101,
+                  52.174322
+                ],
+                [
+                  21.027088,
+                  52.162646
+                ],
+                [
+                  21.027343,
+                  52.161882
+                ],
+                [
+                  21.030586,
+                  52.162061
+                ],
+                [
+                  21.031865,
+                  52.158871
+                ]
+              ],
+              "type": "LineString"
+            },
+            "snap_distances_m": [
+              16.3,
+              11.0
+            ],
+            "duration_type": "provider_estimate",
+            "traffic": "not_live",
+            "retrieved_at": "2026-10-17T21:47:15.946499+00:00",
+            "provider": "FOSSGIS OSRM / OpenStreetMap",
+            "provider_url": "https://routing.openstreetmap.de",
+            "cached": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/compare",
+        "json": {
+          "locations": [
+            {
+              "address": "Marszałkowska 83",
+              "radius_m": 1
+            },
+            {
+              "address": "Stokłosy 7",
+              "radius_m": 1
+            }
+          ],
+          "weights": {
+            "mobility": 10,
+            "sports": 90
+          },
+          "destination": {
+            "latitude": 52.2529905,
+            "longitude": 21.039868
+          }
+        }
+      },
+      "response": {
+        "status_code": 200,
+        "json": {
+          "locations": [
+            {
+              "life_score": {
+                "value": 92.2,
+                "status": "partial",
+                "label": "Partial LifeScore",
+                "requested_weights": {
+                  "mobility": 10.0,
+                  "green": 0.0,
+                  "parking": 0.0,
+                  "sports": 90.0,
+                  "commute": 0.0
+                },
+                "normalized_weights": {
+                  "mobility": 100.0
+                },
+                "contributions": [
+                  {
+                    "category": "mobility",
+                    "score": 92.2,
+                    "weight_percent": 100.0
+                  }
+                ],
+                "excluded": {
+                  "green": "No validated numeric category score",
+                  "parking": "No validated numeric category score",
+                  "sports": "No validated numeric category score",
+                  "commute": "No validated numeric category score"
+                },
+                "explanation": "Weighted mean of eligible scores with positive weights; missing scores are excluded, never zero."
+              },
+              "line_features": {
+                "distinct_lines_500m": null,
+                "distinct_lines_1000m": null,
+                "distinct_lines_radius": 0,
+                "radius_m": 1,
+                "nearest_stop_lines": null,
+                "line_data_coverage": {
+                  "data_status": "loaded",
+                  "known_platforms": 15,
+                  "total_platforms": 6652,
+                  "failed_platforms": 0,
+                  "refresh_failed_platforms": 0,
+                  "latest_retrieved_at": "2026-10-17T19:26:38.124266+00:00",
+                  "within_500m": {
+                    "status": "missing",
+                    "known_platforms": 0,
+                    "total_platforms": 22,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": 0.0
+                  },
+                  "within_1000m": {
+                    "status": "missing",
+                    "known_platforms": 0,
+                    "total_platforms": 102,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": 0.0
+                  },
+                  "within_radius": {
+                    "status": "no_platforms",
+                    "known_platforms": 0,
+                    "total_platforms": 0,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": null
+                  }
+                }
+              },
+              "location": {
+                "latitude": 52.2257099,
+                "longitude": 21.0136397,
+                "address": "83, Marszałkowska, Koszyki, Śródmieście Południowe, Śródmieście, Warszawa, województwo mazowieckie, 00-683, Polska"
+              },
+              "scores": {
+                "mobility": 92.2
+              },
+              "features": {
+                "nearest_stop_m": 37.7,
+                "stop_groups_500m": 7,
+                "stop_groups_1000m": 25,
+                "nearest_park_m": 627.2,
+                "parks_within_radius": 0,
+                "nearest_listed_parking_m": 163.3,
+                "listed_parking_within_radius": 0,
+                "nearest_sports_facility_m": 211.8,
+                "sports_facilities_within_radius": 0
+              },
+              "radius_m": 1,
+              "places": [],
+              "unavailable": [
+                "grocery",
+                "pharmacy"
+              ],
+              "datasets": {
+                "green": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "source_records": 430,
+                  "classifications": {
+                    "Skwer": 171,
+                    "Rondo": 121,
+                    "Zaułek": 3,
+                    "Park": 60,
+                    "Plac": 67,
+                    "Osiedle": 1,
+                    "Rynek": 4,
+                    "Skwerek": 1,
+                    "Kopiec": 1,
+                    "Zakątek": 1
+                  },
+                  "source_crs": "EPSG:2178",
+                  "source_url": "https://wfs.um.warszawa.pl/serwis",
+                  "request_parameters": {
+                    "service": "WFS",
+                    "version": "1.1.0",
+                    "request": "GetFeature",
+                    "typeName": "ns92528565:PLACE_SKWERY",
+                    "maxFeatures": 500,
+                    "outputFormat": "GML2"
+                  },
+                  "coverage": "Named park polygons only; completeness of Warsaw green space is unverified",
+                  "sha256": "ee33fa4d25b1815c35ece052e0f76cc46e34044c26c1c2e35c781bdcf49255b9",
+                  "record_count": 60,
+                  "raw_file": "raw/green-ee33fa4d25b1815c.gml",
+                  "last_verified_at": "2026-10-17T21:45:17.183411+00:00",
+                  "retrieved_at": "2026-10-17T21:45:17.185282+00:00",
+                  "processed_at": "2026-10-17T21:45:17.185282+00:00"
+                },
+                "parking": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "source_records": 19,
+                  "provider_response_timestamp": "2026-10-17T23:45:01",
+                  "source_url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+                  "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/20ec668b-e5f3-4cbf-aeeb-eb825f3c8731",
+                  "coverage": "Participating ZTP, ZDM and PKiN facilities only; incomplete coverage",
+                  "availability": "Observation timestamp absent; no current availability published",
+                  "sha256": "d8be8f7e8fe46af1b2b58697174bd0e0349115002e9ca5a07966b45c153cc245",
+                  "record_count": 18,
+                  "raw_file": "raw/parking-d8be8f7e8fe46af1.json",
+                  "last_verified_at": "2026-10-17T21:45:28.942720+00:00",
+                  "retrieved_at": "2026-10-17T21:45:28.944226+00:00",
+                  "processed_at": "2026-10-17T21:45:28.944226+00:00"
+                },
+                "sports": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "selected_sites": 308,
+                  "unresolved_addresses": [
+                    "Aleja Wojska Polskiego 1A",
+                    "Trakt Brzeski (Wesoła) 18",
+                    "Plac Wojska Polskiego (Wesoła) 28",
+                    "Aleja Jana Pawła II 26A",
+                    "Plac Stanisława Małachowskiego 1",
+                    "ul. gen. Karola Ziemskiego \"Wachnowskiego\" 22",
+                    "Szanajcy 17/19",
+                    "Aleja Stanów Zjednoczonych 27",
+                    "Aleja Stanów Zjednoczonych 24",
+                    "ul. Jana Bytnara Rudego 15A",
+                    "Aleja Niepodległości 27",
+                    "ul. B. Limanowskiego 9, 02-943 Warszawa",
+                    "ul. P.Gruszczyńskiego 12",
+                    "Aleja Władysława Reymonta 25",
+                    "Aleja Władysława Reymonta 16"
+                  ],
+                  "unresolved_count": 15,
+                  "source_sites": 308,
+                  "source_url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+                  "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/32a0ad2d-06d7-4e9c-acef-17a35c083d8c",
+                  "source_records": 1227,
+                  "coordinate_source_url": "https://wfs.um.warszawa.pl/serwis",
+                  "source_crs": "EPSG:4326",
+                  "coverage": "Saved educational sports source: 308/308 site addresses attempted; incomplete Warsaw sports inventory; address-point proxies",
+                  "retrieved_at": "2026-10-17T19:59:30.725512+00:00",
+                  "sha256": "965750657b6f133fb03474a336a5e8fa27c265841e0491b5ec8856f529800bf5",
+                  "record_count": 291,
+                  "raw_file": "raw/sports-965750657b6f133f.json",
+                  "processed_sites": 308,
+                  "geolocated_addresses": 293,
+                  "processed_at": "2026-10-17T21:44:03.538747+00:00",
+                  "attempted_sites": 308
+                }
+              },
+              "nearby": {
+                "total": 0,
+                "limit": 200,
+                "truncated": false
+              },
+              "sources": [
+                {
+                  "name": "Warsaw transport stops (stops_clean.csv)"
+                },
+                {
+                  "name": "Warsaw Open Data / ZTM — observed transport lines",
+                  "url": "https://dane.um.warszawa.pl/en/catalogue/8eb065b6-f3a0-41d4-a842-732c6c1c3063",
+                  "retrieved_at": "2026-10-17T19:26:38.124266+00:00"
+                },
+                {
+                  "name": "Warsaw green snapshot",
+                  "url": "https://wfs.um.warszawa.pl/serwis",
+                  "retrieved_at": "2026-10-17T21:45:17.185282+00:00"
+                },
+                {
+                  "name": "Warsaw parking snapshot",
+                  "url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+                  "retrieved_at": "2026-10-17T21:45:28.944226+00:00"
+                },
+                {
+                  "name": "Warsaw sports snapshot",
+                  "url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+                  "retrieved_at": "2026-10-17T19:59:30.725512+00:00"
+                }
+              ],
+              "commute": {
+                "origin": {
+                  "latitude": 52.2257099,
+                  "longitude": 21.0136397
+                },
+                "destination": {
+                  "latitude": 52.2529905,
+                  "longitude": 21.039868
+                },
+                "baseline": {
+                  "distance_m": 3524.9,
+                  "distance_type": "straight_line"
+                },
+                "transit": {
+                  "status": "unavailable",
+                  "reason": "No verified timetable and transit routing service configured"
+                },
+                "attribution": {
+                  "name": "FOSSGIS OSRM / © OpenStreetMap contributors",
+                  "url": "https://routing.openstreetmap.de/about.html",
+                  "fix_map_url": "https://www.openstreetmap.org/fixthemap"
+                },
+                "walking": {
+                  "status": "unavailable",
+                  "reason": "Routes not requested"
+                },
+                "driving": {
+                  "status": "unavailable",
+                  "reason": "Routes not requested"
+                }
+              }
+            },
+            {
+              "life_score": {
+                "value": 72.2,
+                "status": "partial",
+                "label": "Partial LifeScore",
+                "requested_weights": {
+                  "mobility": 10.0,
+                  "green": 0.0,
+                  "parking": 0.0,
+                  "sports": 90.0,
+                  "commute": 0.0
+                },
+                "normalized_weights": {
+                  "mobility": 100.0
+                },
+                "contributions": [
+                  {
+                    "category": "mobility",
+                    "score": 72.2,
+                    "weight_percent": 100.0
+                  }
+                ],
+                "excluded": {
+                  "green": "No validated numeric category score",
+                  "parking": "No validated numeric category score",
+                  "sports": "No validated numeric category score",
+                  "commute": "No validated numeric category score"
+                },
+                "explanation": "Weighted mean of eligible scores with positive weights; missing scores are excluded, never zero."
+              },
+              "line_features": {
+                "distinct_lines_500m": null,
+                "distinct_lines_1000m": null,
+                "distinct_lines_radius": 0,
+                "radius_m": 1,
+                "nearest_stop_lines": null,
+                "line_data_coverage": {
+                  "data_status": "loaded",
+                  "known_platforms": 15,
+                  "total_platforms": 6652,
+                  "failed_platforms": 0,
+                  "refresh_failed_platforms": 0,
+                  "latest_retrieved_at": "2026-10-17T19:26:38.124266+00:00",
+                  "within_500m": {
+                    "status": "missing",
+                    "known_platforms": 0,
+                    "total_platforms": 16,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": 0.0
+                  },
+                  "within_1000m": {
+                    "status": "missing",
+                    "known_platforms": 0,
+                    "total_platforms": 44,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": 0.0
+                  },
+                  "within_radius": {
+                    "status": "no_platforms",
+                    "known_platforms": 0,
+                    "total_platforms": 0,
+                    "failed_platforms": 0,
+                    "refresh_failed_platforms": 0,
+                    "fraction": null
+                  }
+                }
+              },
+              "location": {
+                "latitude": 52.1589611,
+                "longitude": 21.0317969,
+                "address": "7, Stokłosy, Ursynów Północny, Ursynów, Warszawa, województwo mazowieckie, 02-787, Polska"
+              },
+              "scores": {
+                "mobility": 72.2
+              },
+              "features": {
+                "nearest_stop_m": 103.4,
+                "stop_groups_500m": 4,
+                "stop_groups_1000m": 15,
+                "nearest_park_m": 572.8,
+                "parks_within_radius": 0,
+                "nearest_listed_parking_m": 2394.3,
+                "listed_parking_within_radius": 0,
+                "nearest_sports_facility_m": 256.1,
+                "sports_facilities_within_radius": 0
+              },
+              "radius_m": 1,
+              "places": [],
+              "unavailable": [
+                "grocery",
+                "pharmacy"
+              ],
+              "datasets": {
+                "green": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "source_records": 430,
+                  "classifications": {
+                    "Skwer": 171,
+                    "Rondo": 121,
+                    "Zaułek": 3,
+                    "Park": 60,
+                    "Plac": 67,
+                    "Osiedle": 1,
+                    "Rynek": 4,
+                    "Skwerek": 1,
+                    "Kopiec": 1,
+                    "Zakątek": 1
+                  },
+                  "source_crs": "EPSG:2178",
+                  "source_url": "https://wfs.um.warszawa.pl/serwis",
+                  "request_parameters": {
+                    "service": "WFS",
+                    "version": "1.1.0",
+                    "request": "GetFeature",
+                    "typeName": "ns92528565:PLACE_SKWERY",
+                    "maxFeatures": 500,
+                    "outputFormat": "GML2"
+                  },
+                  "coverage": "Named park polygons only; completeness of Warsaw green space is unverified",
+                  "sha256": "ee33fa4d25b1815c35ece052e0f76cc46e34044c26c1c2e35c781bdcf49255b9",
+                  "record_count": 60,
+                  "raw_file": "raw/green-ee33fa4d25b1815c.gml",
+                  "last_verified_at": "2026-10-17T21:45:17.183411+00:00",
+                  "retrieved_at": "2026-10-17T21:45:17.185282+00:00",
+                  "processed_at": "2026-10-17T21:45:17.185282+00:00"
+                },
+                "parking": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "source_records": 19,
+                  "provider_response_timestamp": "2026-10-17T23:45:01",
+                  "source_url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+                  "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/20ec668b-e5f3-4cbf-aeeb-eb825f3c8731",
+                  "coverage": "Participating ZTP, ZDM and PKiN facilities only; incomplete coverage",
+                  "availability": "Observation timestamp absent; no current availability published",
+                  "sha256": "d8be8f7e8fe46af1b2b58697174bd0e0349115002e9ca5a07966b45c153cc245",
+                  "record_count": 18,
+                  "raw_file": "raw/parking-d8be8f7e8fe46af1.json",
+                  "last_verified_at": "2026-10-17T21:45:28.942720+00:00",
+                  "retrieved_at": "2026-10-17T21:45:28.944226+00:00",
+                  "processed_at": "2026-10-17T21:45:28.944226+00:00"
+                },
+                "sports": {
+                  "status": "available",
+                  "total": 0,
+                  "limit": 50,
+                  "truncated": false,
+                  "selected_sites": 308,
+                  "unresolved_addresses": [
+                    "Aleja Wojska Polskiego 1A",
+                    "Trakt Brzeski (Wesoła) 18",
+                    "Plac Wojska Polskiego (Wesoła) 28",
+                    "Aleja Jana Pawła II 26A",
+                    "Plac Stanisława Małachowskiego 1",
+                    "ul. gen. Karola Ziemskiego \"Wachnowskiego\" 22",
+                    "Szanajcy 17/19",
+                    "Aleja Stanów Zjednoczonych 27",
+                    "Aleja Stanów Zjednoczonych 24",
+                    "ul. Jana Bytnara Rudego 15A",
+                    "Aleja Niepodległości 27",
+                    "ul. B. Limanowskiego 9, 02-943 Warszawa",
+                    "ul. P.Gruszczyńskiego 12",
+                    "Aleja Władysława Reymonta 25",
+                    "Aleja Władysława Reymonta 16"
+                  ],
+                  "unresolved_count": 15,
+                  "source_sites": 308,
+                  "source_url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+                  "catalogue_url": "https://dane.um.warszawa.pl/en/catalogue/32a0ad2d-06d7-4e9c-acef-17a35c083d8c",
+                  "source_records": 1227,
+                  "coordinate_source_url": "https://wfs.um.warszawa.pl/serwis",
+                  "source_crs": "EPSG:4326",
+                  "coverage": "Saved educational sports source: 308/308 site addresses attempted; incomplete Warsaw sports inventory; address-point proxies",
+                  "retrieved_at": "2026-10-17T19:59:30.725512+00:00",
+                  "sha256": "965750657b6f133fb03474a336a5e8fa27c265841e0491b5ec8856f529800bf5",
+                  "record_count": 291,
+                  "raw_file": "raw/sports-965750657b6f133f.json",
+                  "processed_sites": 308,
+                  "geolocated_addresses": 293,
+                  "processed_at": "2026-10-17T21:44:03.538747+00:00",
+                  "attempted_sites": 308
+                }
+              },
+              "nearby": {
+                "total": 0,
+                "limit": 200,
+                "truncated": false
+              },
+              "sources": [
+                {
+                  "name": "Warsaw transport stops (stops_clean.csv)"
+                },
+                {
+                  "name": "Warsaw Open Data / ZTM — observed transport lines",
+                  "url": "https://dane.um.warszawa.pl/en/catalogue/8eb065b6-f3a0-41d4-a842-732c6c1c3063",
+                  "retrieved_at": "2026-10-17T19:26:38.124266+00:00"
+                },
+                {
+                  "name": "Warsaw green snapshot",
+                  "url": "https://wfs.um.warszawa.pl/serwis",
+                  "retrieved_at": "2026-10-17T21:45:17.185282+00:00"
+                },
+                {
+                  "name": "Warsaw parking snapshot",
+                  "url": "https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca",
+                  "retrieved_at": "2026-10-17T21:45:28.944226+00:00"
+                },
+                {
+                  "name": "Warsaw sports snapshot",
+                  "url": "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska",
+                  "retrieved_at": "2026-10-17T19:59:30.725512+00:00"
+                }
+              ],
+              "commute": {
+                "origin": {
+                  "latitude": 52.1589611,
+                  "longitude": 21.0317969
+                },
+                "destination": {
+                  "latitude": 52.2529905,
+                  "longitude": 21.039868
+                },
+                "baseline": {
+                  "distance_m": 10477.3,
+                  "distance_type": "straight_line"
+                },
+                "transit": {
+                  "status": "unavailable",
+                  "reason": "No verified timetable and transit routing service configured"
+                },
+                "attribution": {
+                  "name": "FOSSGIS OSRM / © OpenStreetMap contributors",
+                  "url": "https://routing.openstreetmap.de/about.html",
+                  "fix_map_url": "https://www.openstreetmap.org/fixthemap"
+                },
+                "walking": {
+                  "status": "unavailable",
+                  "reason": "Routes not requested"
+                },
+                "driving": {
+                  "status": "unavailable",
+                  "reason": "Routes not requested"
+                }
+              }
+            }
+          ],
+          "comparisons": [
+            {
+              "metric": "mobility_score",
+              "values": [
+                92.2,
+                72.2
+              ],
+              "unit": "points",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "partial_life_score",
+              "values": [
+                92.2,
+                72.2
+              ],
+              "unit": "points",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "nearest_stop_m",
+              "values": [
+                37.7,
+                103.4
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "stop_groups_500m",
+              "values": [
+                7,
+                4
+              ],
+              "unit": "stop_groups",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "nearest_park_m",
+              "values": [
+                627.2,
+                572.8
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "comparable",
+              "advantage": "b",
+              "reason": null
+            },
+            {
+              "metric": "parks_within_radius",
+              "values": [
+                0,
+                0
+              ],
+              "unit": "listed_sites",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "equal",
+              "reason": null
+            },
+            {
+              "metric": "nearest_listed_parking_m",
+              "values": [
+                163.3,
+                2394.3
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "listed_parking_within_radius",
+              "values": [
+                0,
+                0
+              ],
+              "unit": "listed_sites",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "equal",
+              "reason": null
+            },
+            {
+              "metric": "nearest_sports_facility_m",
+              "values": [
+                211.8,
+                256.1
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "sports_facilities_within_radius",
+              "values": [
+                0,
+                0
+              ],
+              "unit": "listed_sites",
+              "preference": "higher",
+              "status": "comparable",
+              "advantage": "equal",
+              "reason": null
+            },
+            {
+              "metric": "commute_straight_line_m",
+              "values": [
+                3524.9,
+                10477.3
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "comparable",
+              "advantage": "a",
+              "reason": null
+            },
+            {
+              "metric": "walking_distance_m",
+              "values": [
+                null,
+                null
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "unavailable",
+              "advantage": null,
+              "reason": "One or both measured values are unavailable"
+            },
+            {
+              "metric": "walking_duration_minutes",
+              "values": [
+                null,
+                null
+              ],
+              "unit": "minutes_estimated",
+              "preference": "lower",
+              "status": "unavailable",
+              "advantage": null,
+              "reason": "One or both measured values are unavailable"
+            },
+            {
+              "metric": "driving_distance_m",
+              "values": [
+                null,
+                null
+              ],
+              "unit": "metres",
+              "preference": "lower",
+              "status": "unavailable",
+              "advantage": null,
+              "reason": "One or both measured values are unavailable"
+            },
+            {
+              "metric": "driving_duration_minutes",
+              "values": [
+                null,
+                null
+              ],
+              "unit": "minutes_estimated",
+              "preference": "lower",
+              "status": "unavailable",
+              "advantage": null,
+              "reason": "One or both measured values are unavailable"
+            }
+          ],
+          "warnings": [
+            "Advantages compare measured values only, not comprehensive residential quality.",
+            "Park completeness is unverified; parking and sports cover limited listed facilities.",
+            "LifeScore is partial while Mobility is the only eligible numeric score.",
+            "Route durations are provider estimates; transit journeys are unavailable."
+          ]
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/score",
+        "raw_json": "{\"latitude\":52.2297,\"longitude\":21.0122,\"radius_m\":NaN}"
+      },
+      "response": {
+        "status_code": 422,
+        "json": {
+          "detail": [
+            {
+              "type": "finite_number",
+              "loc": [
+                "body",
+                "radius_m"
+              ],
+              "msg": "Input should be a finite number",
+              "input": "nan"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
