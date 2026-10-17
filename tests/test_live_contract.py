@@ -12,6 +12,12 @@ client = TestClient(app)
 COORDINATES = {"latitude": 52.2297, "longitude": 21.0122}
 
 
+@pytest.fixture(autouse=True)
+def mobility_contract_without_optional_datasets(monkeypatch):
+    monkeypatch.setattr(scoring_service, 'get_parks', lambda: None)
+    monkeypatch.setattr(scoring_service, 'get_parking', lambda: None)
+
+
 def test_radius_filters_real_platforms_without_changing_score():
     small = client.post('/api/score', json={**COORDINATES, 'radius_m': 500}).json()
     large = client.post('/api/score', json={**COORDINATES, 'radius_m': 2000}).json()

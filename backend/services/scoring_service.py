@@ -10,6 +10,8 @@ from shapely.geometry import Point
 from backend.schemas import validate_supported_coordinates
 
 from data_science.data_loader import load_stops
+from data_science.green import load_parks, calculate_green_features
+from data_science.parking import load_parking, calculate_parking_features
 from data_science.mobility import (
     calculate_mobility_features,
     calculate_mobility_score,
@@ -19,6 +21,16 @@ from data_science.mobility import (
 @lru_cache(maxsize=1)
 def get_stops():
     return load_stops()
+
+
+@lru_cache(maxsize=1)
+def get_parks():
+    return load_parks()
+
+
+@lru_cache(maxsize=1)
+def get_parking():
+    return load_parking()
 
 
 MAX_NEARBY_STOPS = 200
@@ -73,6 +85,23 @@ def get_location_score(latitude, longitude, radius_m=1000):
         for stop in nearby.head(MAX_NEARBY_STOPS).itertuples()
     ]
 
+    datasets = {}
+    sources = [{"name": "Warsaw transport stops (stops_clean.csv)"}]
+    unavailable = ["grocery", "pharmacy"]
+    for category, calculate, dataset in (
+        ("green", calculate_green_features, get_parks()),
+        ("parking", calculate_parking_features, get_parking()),
+    ):
+        extra_features, extra_places, metadata = calculate(latitude, longitude, radius_m, dataset)
+        features.update(extra_features)
+        places.extend(extra_places)
+        datasets[category] = metadata
+        if metadata["status"] == "unavailable":
+            unavailable.append(category)
+        else:
+            sources.append({"name": f"Warsaw {category} snapshot", "url": metadata["source_url"],
+                            "retrieved_at": metadata["retrieved_at"]})
+
     return {
         "location": {
             "latitude": latitude,
@@ -84,7 +113,8 @@ def get_location_score(latitude, longitude, radius_m=1000):
         "features": features,
         "radius_m": radius_m,
         "places": places,
-        "unavailable": ["grocery", "pharmacy", "green", "parking"],
+        "unavailable": unavailable,
+        "datasets": datasets,
         "nearby": {
             "total": len(nearby),
             "limit": MAX_NEARBY_STOPS,
