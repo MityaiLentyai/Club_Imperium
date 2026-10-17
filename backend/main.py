@@ -1,9 +1,13 @@
 from starlette.concurrency import run_in_threadpool
 
 import os
+import math
 from typing import Annotated
 
 from fastapi import FastAPI, Query
+from fastapi.encoders import jsonable_encoder
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.schemas import Address, AddressScoreRequest, ScoreRequest, CommuteRequest, ComparisonRequest
@@ -28,6 +32,16 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_error_response(request, exc):
+    # Python's JSON parser accepts NaN/Infinity, but JSONResponse rejects them.
+    # Preserve the standard 422 detail structure with JSON-safe error inputs.
+    detail = jsonable_encoder(
+        exc.errors(), custom_encoder={float: lambda value: value if math.isfinite(value) else str(value)}
+    )
+    return JSONResponse(status_code=422, content={"detail": detail})
 
 
 @app.get("/api/health")
