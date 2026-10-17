@@ -57,4 +57,3 @@ def test_line_response_body_is_bounded():
     with httpx.Client(transport=httpx.MockTransport(lambda _:httpx.Response(200,content=b' '*256001))) as http:
         with pytest.raises(IngestionError,match='RESPONSE_TOO_LARGE'):
             LineClient(http,'example-only',sleep=lambda _:None).fetch('0001','01')
-

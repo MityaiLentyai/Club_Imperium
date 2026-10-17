@@ -113,4 +113,3 @@ def test_resize_failed_batch_reuses_verified_checkpoint(tmp_path):
     report=process_all(raw,tmp_path,batch_size=3,fetch=fetch,sleep=lambda _:None)
     assert len(resumed)==3  # Seven unresolved sites; first ten are never fetched again.
     assert report['geolocated_addresses']==17
-
