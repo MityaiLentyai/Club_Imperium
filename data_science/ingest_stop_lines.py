@@ -22,47 +22,59 @@ class IngestionError(Exception):
     """Safe error codes only: never include requests, headers or response bodies."""
 
 
+class RequestBudgetExhausted(Exception):
+    """No request made; stop without creating a false observation."""
+
+
 class LineClient:
-    def __init__(self, client, token, *, interval=1.1, retries=2, sleep=time.sleep, clock=time.monotonic):
+    def __init__(self, client, token, *, interval=1.1, retries=2, sleep=time.sleep, clock=time.monotonic, max_requests=None):
         self.client, self.token = client, token
         self.interval, self.retries = interval, retries
         self.sleep, self.clock = sleep, clock
         self.last_request = None
+        self.max_requests, self.requests = max_requests, 0
 
     def fetch(self, stop_id, platform):
         for attempt in range(self.retries + 1):
+            if self.max_requests is not None and self.requests >= self.max_requests:
+                raise RequestBudgetExhausted()
             if self.last_request is not None:
                 self.sleep(max(0, self.interval - (self.clock() - self.last_request)))
             self.last_request = self.clock()
             retry_after = 0
             try:
-                response = self.client.post(API_URL, json={"busstopId": stop_id, "busstopNr": platform},
-                                            headers={"Authorization": self.token}, timeout=10.0)
-                if response.status_code == 429 or response.status_code >= 500:
-                    code = f"HTTP_{response.status_code}"
-                    try:
-                        retry_after = float(response.headers.get("Retry-After", "0"))
-                    except ValueError:
+                self.requests += 1
+                with self.client.stream("POST", API_URL, json={"busstopId": stop_id, "busstopNr": platform},
+                                        headers={"Authorization": self.token}, timeout=10.0) as response:
+                    if response.status_code == 429 or response.status_code >= 500:
+                        code = f"HTTP_{response.status_code}"
                         try:
-                            retry_after = (parsedate_to_datetime(response.headers["Retry-After"]) - datetime.now(timezone.utc)).total_seconds()
-                        except (ValueError, TypeError, OverflowError):
-                            raise IngestionError(code) from None
-                    # Do not retry earlier than a long provider-requested wait.
-                    # Leave this platform failed/resumable instead of blocking indefinitely.
-                    if not math.isfinite(retry_after) or retry_after > 30:
-                        raise IngestionError(code)
-                elif response.is_error or response.is_redirect:
-                    raise IngestionError(f"HTTP_{response.status_code}")
-                else:
-                    try:
-                        return parse_lines(response.json())
-                    except (ValueError, TypeError):
-                        raise IngestionError("INVALID_RESPONSE") from None
+                            retry_after = float(response.headers.get("Retry-After", "0"))
+                        except ValueError:
+                            try:
+                                retry_after = (parsedate_to_datetime(response.headers["Retry-After"]) - datetime.now(timezone.utc)).total_seconds()
+                            except (ValueError, TypeError, OverflowError):
+                                raise IngestionError(code) from None
+                        if not math.isfinite(retry_after) or retry_after > 30:
+                            raise IngestionError(code)
+                    elif response.is_error or response.is_redirect:
+                        raise IngestionError(f"HTTP_{response.status_code}")
+                    else:
+                        chunks, size = [], 0
+                        for chunk in response.iter_bytes():
+                            size += len(chunk)
+                            if size > 256_000:
+                                raise IngestionError("RESPONSE_TOO_LARGE")
+                            chunks.append(chunk)
+                        try:
+                            return parse_lines(json.loads(b"".join(chunks)))
+                        except (ValueError, TypeError):
+                            raise IngestionError("INVALID_RESPONSE") from None
             except httpx.TimeoutException:
                 code = "TIMEOUT"
             except httpx.TransportError:
                 code = "NETWORK_ERROR"
-            if attempt == self.retries:
+            if attempt == self.retries or self.max_requests is not None and self.requests >= self.max_requests:
                 raise IngestionError(code)
             self.sleep(max(min(2 ** attempt, 8), retry_after))
 
@@ -111,6 +123,10 @@ def ingest(platforms, path, fetch, *, refresh=False):
             retrieved = datetime.now(timezone.utc).isoformat()
             row = dict(zip(COLUMNS, [*key, lines, "success", retrieved, now, "", SOURCE_URL]))
             summary["succeeded"] += 1
+        except RequestBudgetExhausted:
+            summary["requested"] -= 1
+            summary["budget_exhausted"] = True
+            break
         except IngestionError as exc:
             code = str(exc)
             # A failed refresh keeps the last successful observation and its time.
