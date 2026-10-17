@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState, type ReactElement } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { Category, Location, Place } from "./types";
+import type { Category, Commute, Location, Place } from "./types";
 import { meters } from "./geo";
 import { flushSync } from "react-dom";
 import { createRoot } from "react-dom/client";
 import { House } from "lucide-react";
-import { cats } from "./ui";
+import { cats, PINNED } from "./ui";
 
 // Leaflet markers take HTML strings, so the icons are rendered to SVG markup once.
 function renderToStaticMarkup(el: ReactElement) {
@@ -37,6 +37,7 @@ export default function NeighborhoodMap({
   focusedId,
   hoveredId,
   destination,
+  routes,
   centerTick,
   onFocusPlace,
   onPick,
@@ -49,6 +50,7 @@ export default function NeighborhoodMap({
   focusedId: string | null;
   hoveredId: string | null;
   destination: Location | null;
+  routes: Commute | null;
   centerTick: number;
   onFocusPlace: (p: Place) => void;
   onPick: (p: Location) => void;
@@ -103,7 +105,7 @@ export default function NeighborhoodMap({
         pick.current({
           latitude: lat,
           longitude: lng,
-          label: `Pinned spot, ${lat.toFixed(4)} N ${lng.toFixed(4)} E`,
+          label: `${PINNED}, ${lat.toFixed(4)} N ${lng.toFixed(4)} E`,
         });
       };
       content.append(coords, confirm);
@@ -174,9 +176,19 @@ export default function NeighborhoodMap({
         [location.latitude, location.longitude],
         [destination.latitude, destination.longitude],
       ],
-      { color: "#7a4fa8", weight: 2.5, dashArray: "6 8", interactive: false },
+      { color: "#7a4fa8", weight: 2.5, dashArray: "6 8", opacity: routes ? 0.45 : 1, interactive: false },
     ).addTo(g);
-  }, [location, destination]);
+    // Routes come back as [latitude, longitude] pairs (converted from GeoJSON in api.ts).
+    for (const [route, color, name] of [
+      [routes?.driving, "#2f6fd0", "Driving route"],
+      [routes?.walking, "#2c8a55", "Walking route"],
+    ] as const) {
+      if (route?.status !== "available" || route.path.length < 2) continue;
+      L.polyline(route.path, { color, weight: 4, opacity: 0.85 })
+        .addTo(g)
+        .bindTooltip(textNode(name), { sticky: true });
+    }
+  }, [location, destination, routes]);
 
   useEffect(() => {
     const m = map.current;

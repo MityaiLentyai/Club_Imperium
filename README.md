@@ -110,7 +110,15 @@ npm run dev -- --port 5173 --strictPort
 
 Open http://localhost:5173. With `VITE_API_BASE_URL` set the app starts in Live mode; without it, in Demo mode with illustrative places. The mode can be switched in **Data & sources**. `VITE_API_BASE_URL` is public client configuration; never place secrets in `VITE_` variables. Restart Vite after changing environment variables.
 
-Live mode currently uses `POST /api/score`, `POST /api/score/address` and `GET /api/geocode`. It shows the Mobility Score, transport stops and the park, parking and sports places the backend returns; categories the backend doesn't report are shown as "No data yet". `/api/commute`, `/api/compare` and LifeScore weights are not wired into the UI yet: the Commute tab shows straight-line distance, and the Compare page compares saved homes in the browser.
+Live mode implements the endpoint contract in [docs/frontend-integration-check.md](docs/frontend-integration-check.md):
+
+- `POST /api/score` and `POST /api/score/address`: Mobility Score, the returned LifeScore `label`/`status` with requested vs. effective weights (adjustable under **Priorities**), transport stops, and park, listed-parking and sports places. A category counts as available only when `datasets.<category>.status` is `available`; otherwise it shows "No data yet". When nothing is within the radius, the nearest object outside it is shown from `features`.
+- `GET /api/geocode`: destination search in the Commute tab.
+- `POST /api/commute`: walking and driving routes, requested explicitly by the user, drawn on the map (GeoJSON is converted to Leaflet order). Each profile's `status` is checked; transit is shown as unavailable with the backend's reason. OSRM attribution and "Fix the map" are displayed.
+- `POST /api/compare`: used for exactly two saved homes (coordinates with each home's own radius, shared weights, optional destination and an explicit opt-in for routes). Rows show the backend's `advantage`, and `incomparable`/`unavailable` reasons; `warnings` are listed under the table. Demo mode compares up to three homes in the browser.
+- `GET /api/health`: shown in **Data & sources**; data problems are reported from score responses.
+
+Request timeouts follow the backend bounds (35 s for commute, 75 s for a comparison with routes). FastAPI `detail` errors are shown as plain sentences, including list-style validation errors.
 
 ```bash
 # From frontend/:

@@ -384,3 +384,34 @@ button:focus-visible,a:focus-visible,select:focus-visible,[tabindex="0"]:focus-v
   .add-card { grid-template-columns:1fr }
   .add-card .field-error,.add-card .matches { grid-column:auto }
 }
+
+/* Backend contract additions: LifeScore, priorities, routes, compare options */
+.life { display:flex; flex-direction:column; gap:6px; padding:12px 14px; border-radius:9px; background:var(--soft) }
+.life-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px }
+.life-head strong { display:block; font-size:22px; font-weight:700; letter-spacing:-.4px; line-height:1.2 }
+.life-head strong small { font-size:13px; font-weight:500; color:var(--muted); margin-left:2px }
+.status-pill { padding:1px 7px; border-radius:9px; background:#fff1d4; color:#7a5100; font-size:11px; font-weight:650; text-transform:capitalize }
+[data-theme=dark] .status-pill { background:#46380f; color:#f6d98f }
+.life-note { font-size:12.5px; color:var(--muted); line-height:1.5 }
+.weights { display:flex; flex-direction:column; gap:8px; margin-top:6px; padding-top:10px; border-top:1px solid var(--line) }
+.weight { display:grid; grid-template-columns:80px minmax(0,1fr) 32px; align-items:center; gap:10px; font-size:13px }
+.weight input { width:100%; accent-color:var(--accent) }
+.weight b { text-align:right; font-variant-numeric:tabular-nums }
+.weights-actions { display:flex; align-items:center; gap:14px; margin-top:4px }
+.weights-actions .text-btn { align-self:center }
+.route-ask { display:flex; flex-direction:column; align-items:flex-start; gap:6px; margin-top:8px; padding-top:10px; border-top:1px solid var(--line) }
+.route-ask p { font-size:12px; color:var(--muted) }
+.routes { list-style:none; margin:8px 0 0; padding:10px 0 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:8px }
+.commute-card .route { display:grid; grid-template-columns:20px minmax(0,1fr) auto; align-items:center; gap:10px; font-size:14px }
+.route svg { color:var(--muted) }
+.route small { display:block; font-size:12px; color:var(--muted) }
+.route-values { text-align:right }
+.route-values b { font-variant-numeric:tabular-nums }
+.route.is-unavailable { color:var(--muted) }
+.attribution { margin-top:6px; font-size:12px; color:var(--muted) }
+.compare-options { display:flex; flex-direction:column; gap:10px; margin-bottom:18px }
+.check { display:flex; align-items:flex-start; gap:10px; font-size:14px; cursor:pointer }
+.check input { margin-top:3px; accent-color:var(--accent) }
+.check small { display:block; font-size:12px; color:var(--muted) }
+.loading-line { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--muted) }
+.row-note { display:block; margin-top:2px; font-size:12px; font-weight:400; color:var(--warn) }

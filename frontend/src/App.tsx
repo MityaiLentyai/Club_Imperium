@@ -5,10 +5,10 @@ import Field from "./Field";
 import ResultsPanel from "./ResultsPanel";
 import ComparePage from "./ComparePage";
 import { homes, destinations, demoAnalysis } from "./demo";
-import { API_BASE_URL, geocode, scoreAddress, scorePoint } from "./api";
+import { API_BASE_URL, commute, geocode, health, scoreAddress, scorePoint } from "./api";
 import { inWarsaw, meters } from "./geo";
-import { cats, COMPARE_LIMIT, radii, samePlace, shortLabel } from "./ui";
-import type { Analysis, Category, Location, Place } from "./types";
+import { cats, compareLimit, nameSpot, radii, samePlace, shortLabel } from "./ui";
+import type { Analysis, Category, Commute, Location, Place, Weights } from "./types";
 
 type View = "start" | "results" | "compare";
 export type Target = { address: string } | { point: Location };
@@ -18,11 +18,11 @@ const OUTSIDE = "Choose a spot inside Warsaw.";
 
 // Resolves an address or map point into an analysis. Demo mode can return several
 // matching example addresses for the user to pick from.
-async function fetchAnalysis(mode: Mode, t: Target, radius: number): Promise<Analysis | Location[]> {
+async function fetchAnalysis(mode: Mode, t: Target, radius: number, weights?: Weights): Promise<Analysis | Location[]> {
   if ("point" in t && !inWarsaw(t.point)) throw new Error(OUTSIDE);
   if (mode === "live")
-    return "point" in t ? scorePoint(t.point, radius) : scoreAddress(t.address, radius);
-  if ("point" in t) return demoAnalysis(t.point, radius);
+    return "point" in t ? nameSpot(await scorePoint(t.point, radius, weights)) : scoreAddress(t.address, radius, weights);
+  if ("point" in t) return nameSpot(demoAnalysis(t.point, radius));
   const needle = t.address.toLowerCase().trim();
   const found = homes.filter((h) => h.label.toLowerCase().includes(needle) || needle.includes(shortLabel(h.label).toLowerCase()));
   if (found.length > 1) return found;
@@ -49,7 +49,15 @@ export default function App() {
   const [tab, setTab] = useState<"nearby" | "commute">("nearby");
   const [about, setAbout] = useState(false);
   const [centerTick, setCenterTick] = useState(0);
+  // undefined = backend default weights; set once the user adjusts priorities.
+  const [weights, setWeights] = useState<Weights | undefined>();
+  // Routes belong to one home + destination pair and are fetched only on request.
+  const [routes, setRoutes] = useState<{ key: string; data: Commute } | null>(null);
+  const [routesBusy, setRoutesBusy] = useState(false);
+  const [routesError, setRoutesError] = useState("");
+  const [alive, setAlive] = useState<boolean | null>(null);
   const revision = useRef(0);
+  const limit = compareLimit(mode);
   const modalRef = useRef<HTMLElement>(null);
   const [theme, setTheme] = useState(() => {
     try {
@@ -66,6 +74,11 @@ export default function App() {
       /* Storage may be disabled. */
     }
   }, [theme]);
+  useEffect(() => {
+    if (!about || mode !== "live" || !API_BASE_URL) return;
+    setAlive(null);
+    health().then(setAlive);
+  }, [about, mode]);
   useEffect(() => {
     if (!about) return;
     const previous = document.activeElement as HTMLElement | null;
@@ -91,13 +104,13 @@ export default function App() {
     };
   }, [about]);
 
-  async function openHome(t: Target, r = radius) {
+  async function openHome(t: Target, r = radius, w = weights) {
     const rev = ++revision.current;
     setBusy(true);
     setError("");
     setMatches([]);
     try {
-      const out = await fetchAnalysis(mode, t, r);
+      const out = await fetchAnalysis(mode, t, r, w);
       if (rev !== revision.current) return;
       if (Array.isArray(out)) {
         setMatches(out);
@@ -134,26 +147,48 @@ export default function App() {
     setResult(null);
     setSaved([]);
     setDestination(null);
+    setRoutes(null);
+    setWeights(undefined);
     setMatches([]);
     setError("");
     setView("start");
   }
+  function applyWeights(w: Weights | undefined) {
+    setWeights(w);
+    if (result) openHome({ point: result.location }, result.radius_m, w);
+  }
+  const routeKey = (home: Location, dest: Location) => `${home.latitude},${home.longitude}>${dest.latitude},${dest.longitude}`;
+  async function checkRoutes() {
+    if (!result || !destination) return;
+    const key = routeKey(result.location, destination);
+    setRoutesBusy(true);
+    setRoutesError("");
+    try {
+      setRoutes({ key, data: await commute(result.location, destination) });
+    } catch (e) {
+      setRoutesError((e as Error).message);
+    } finally {
+      setRoutesBusy(false);
+    }
+  }
+  const currentRoutes =
+    result && destination && routes?.key === routeKey(result.location, destination) ? routes.data : null;
   const isSaved = (a: Analysis) => saved.some((s) => samePlace(s.location, a.location));
   function toggleSave(a: Analysis) {
     setSaved((prev) =>
       prev.some((s) => samePlace(s.location, a.location))
         ? prev.filter((s) => !samePlace(s.location, a.location))
-        : prev.length >= COMPARE_LIMIT
+        : prev.length >= limit
           ? prev
           : [...prev, a],
     );
   }
   // Used by the Compare page to add a home without leaving it.
   async function addToCompare(t: Target): Promise<Location[] | void> {
-    const out = await fetchAnalysis(mode, t, radius);
+    const out = await fetchAnalysis(mode, t, radius, weights);
     if (Array.isArray(out)) return out;
     if (isSaved(out)) throw new Error(`${shortLabel(out.location.label)} is already in your comparison.`);
-    setSaved((prev) => (prev.length >= COMPARE_LIMIT ? prev : [...prev, out]));
+    setSaved((prev) => (prev.length >= limit ? prev : [...prev, out]));
   }
   async function findDestination(q: string): Promise<Location[]> {
     if (mode === "live") return [await geocode(q)];
@@ -234,6 +269,8 @@ export default function App() {
           current={result}
           destination={destination}
           mode={mode}
+          limit={limit}
+          weights={weights}
           onRemove={(a) => toggleSave(a)}
           onOpen={openSaved}
           onAdd={addToCompare}
@@ -331,7 +368,14 @@ export default function App() {
                 onPickMatch={(m) => openHome({ point: m })}
                 onNewSearch={() => setView("start")}
                 saved={isSaved(result)}
-                compareFull={saved.length >= COMPARE_LIMIT}
+                compareFull={saved.length >= limit}
+                compareLimit={limit}
+                live={mode === "live"}
+                onApplyWeights={applyWeights}
+                routes={currentRoutes}
+                routesBusy={routesBusy}
+                routesError={routesError}
+                onCheckRoutes={checkRoutes}
                 savedCount={saved.length}
                 onToggleSave={() => toggleSave(result)}
                 onOpenCompare={() => setView("compare")}
@@ -360,6 +404,7 @@ export default function App() {
               focusedId={focusedId}
               hoveredId={hoveredId}
               destination={view === "results" ? destination : null}
+              routes={view === "results" ? currentRoutes : null}
               centerTick={centerTick}
               onFocusPlace={focusPlace}
               onPick={(p) => openHome({ point: p })}
@@ -388,16 +433,21 @@ export default function App() {
             <div className="segmented" role="group" aria-label="Data mode">
               <button aria-pressed={mode === "demo"} onClick={() => changeMode("demo")}>Demo</button>
               <button aria-pressed={mode === "live"} onClick={() => changeMode("live")}>
-                Live <span className={`dot ${API_BASE_URL ? "is-on" : ""}`} />
+                Live <span className={`dot ${API_BASE_URL && alive !== false ? "is-on" : ""}`} />
               </button>
             </div>
             <p>
               {mode === "demo"
                 ? "Demo: places are made-up examples placed around the chosen point. The map itself is real."
                 : API_BASE_URL
-                  ? "Live: public transport stops come from Warsaw Open Data through our service. Other categories show “No data yet” until we have a reliable source."
+                  ? "Live: stops, parks, listed parking and school sports fields come from Warsaw Open Data through our service. Categories without a reliable source show “No data yet”."
                   : "Live: the data service isn’t connected in this build."}
             </p>
+            {mode === "live" && API_BASE_URL && (
+              <p className={alive === false ? "warning" : ""}>
+                {alive === null ? "Checking the data service…" : alive ? "Data service is reachable." : "Data service isn’t reachable right now."}
+              </p>
+            )}
             {(saved.length > 0 || destination) && <p className="warning">Switching mode clears your comparison and commute destination.</p>}
             <h3>Sources</h3>
             <div className="source-links">
@@ -407,15 +457,18 @@ export default function App() {
               <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">
                 © OpenStreetMap contributors: map and address search <ArrowUpRight size={16} />
               </a>
+              <a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noreferrer">
+                FOSSGIS OSRM: walking and driving routes (on request) <ArrowUpRight size={16} />
+              </a>
             </div>
             {result?.sources.map((s, i) => (
               <p key={i} className="source-note">
-                {s.name}
-                {s.retrieved_at && ` · ${s.retrieved_at}`}
+                {s.url ? <a href={s.url} target="_blank" rel="noreferrer">{s.name}</a> : s.name}
+                {s.retrieved_at && ` · retrieved ${new Date(s.retrieved_at).toLocaleDateString()}`}
               </p>
             ))}
             <p className="source-note">
-              Distances are straight-line (“as the crow flies”). Walking routes and travel times aren’t calculated yet.
+              Distances to places are straight-line (“as the crow flies”). Walking and driving times are provider estimates without live traffic; public transport journeys aren’t available.
             </p>
           </section>
         </div>
