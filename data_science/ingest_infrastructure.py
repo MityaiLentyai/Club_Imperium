@@ -160,13 +160,28 @@ def save_snapshot(category, raw, features, metadata, output=DATA_DIR):
     raw_path = archive / f"{category}-{digest[:16]}.{suffix}"
     if not raw_path.exists():
         raw_path.write_bytes(raw)
-    metadata = {**metadata, "retrieved_at": datetime.now(timezone.utc).isoformat(),
+    processed_at = datetime.now(timezone.utc).isoformat()
+    metadata = {**metadata, "retrieved_at": metadata.get("retrieved_at", processed_at), "processed_at": processed_at,
                 "sha256": digest, "record_count": len(features), "raw_file": f"raw/{raw_path.name}"}
     content = {"type": "FeatureCollection", "metadata": metadata, "features": features}
     with tempfile.NamedTemporaryFile(mode="w", dir=output, delete=False, suffix=".tmp") as f:
         json.dump(content, f, ensure_ascii=False, allow_nan=False)
     os.replace(f.name, output / f"{category}.geojson")
     return metadata
+
+
+def input_provenance(raw, category, input_path, output):
+    candidates = [Path(output) / f"{category}.geojson"]
+    if Path(input_path).parent.name == "raw":
+        candidates.append(Path(input_path).parent.parent / f"{category}.geojson")
+    for path in candidates:
+        try:
+            metadata = json.loads(path.read_text())["metadata"]
+            if metadata.get("sha256") == hashlib.sha256(raw).hexdigest():
+                return {"retrieved_at": metadata.get("retrieved_at"), "retrieval_time_basis": "preserved_matching_snapshot"}
+        except (OSError, ValueError, KeyError, TypeError):
+            continue
+    return {"retrieved_at": None, "retrieval_time_basis": "unknown_saved_input"}
 
 
 def main():
@@ -196,6 +211,8 @@ def main():
             metadata.update(source_url=PARKING_URL, catalogue_url=CATALOGUE_URL,
                             coverage="Participating ZTP, ZDM and PKiN facilities only; incomplete coverage",
                             availability="Observation timestamp absent; no current availability published")
+        if args.input:
+            metadata.update(input_provenance(raw, args.category, args.input, args.output))
         result = save_snapshot(args.category, raw, features, metadata, args.output)
         print(f"Saved {result['record_count']} {args.category} records")
     except (ValueError, OSError, httpx.HTTPError, ET.ParseError):
