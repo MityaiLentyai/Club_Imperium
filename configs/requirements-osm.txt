@@ -1,0 +1,2 @@
+# Offline ingestion only; the API reads the normalized snapshot without PyOsmium.
+osmium==4.3.1
