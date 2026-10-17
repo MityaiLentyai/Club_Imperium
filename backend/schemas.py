@@ -73,3 +73,26 @@ class RoutePoint(BaseModel):
 class CommuteRequest(BaseModel):
     origin: RoutePoint
     destination: RoutePoint
+
+
+class ComparisonRequest(PersonalizedRequest):
+    locations: list[ScoreRequest | AddressScoreRequest] = Field(min_length=2, max_length=2)
+    destination: RoutePoint | None = None
+    include_routes: bool = False
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_ambiguous_locations(cls, values):
+        if isinstance(values, dict) and isinstance(values.get("locations"), list):
+            for location in values["locations"]:
+                if isinstance(location, dict) and "address" in location and ("latitude" in location or "longitude" in location):
+                    raise HTTPException(status_code=422, detail="Each location must use either an address or coordinates")
+        return values
+
+    @model_validator(mode="after")
+    def validate_comparison(self):
+        if any(location.weights is not None for location in self.locations):
+            raise HTTPException(status_code=422, detail="Set shared comparison weights at the top level")
+        if self.include_routes and self.destination is None:
+            raise HTTPException(status_code=422, detail="A destination is required to compare routes")
+        return self

@@ -88,7 +88,7 @@ async def _fetch_route(client, base_url, origin, destination, profile):
         return result
 
 
-async def get_commute(origin, destination):
+async def get_commute(origin, destination, *, include_routes=True):
     result = {"origin": origin.model_dump(), "destination": destination.model_dump(),
               "baseline": {"distance_m": baseline(origin, destination), "distance_type": "straight_line"},
               "transit": {"status": "unavailable", "reason": "No verified timetable and transit routing service configured"},
@@ -96,8 +96,9 @@ async def get_commute(origin, destination):
                               "url": "https://routing.openstreetmap.de/about.html",
                               "fix_map_url": "https://www.openstreetmap.org/fixthemap"}}
     base = os.getenv("ROUTING_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
-    if not base or os.getenv("ROUTING_ENABLED", "true").lower() != "true":
-        result.update({mode: {"status": "unavailable", "reason": "Routing disabled"} for mode in ("walking", "driving")})
+    if not include_routes or not base or os.getenv("ROUTING_ENABLED", "true").lower() != "true":
+        reason = "Routes not requested" if not include_routes else "Routing disabled"
+        result.update({mode: {"status": "unavailable", "reason": reason} for mode in ("walking", "driving")})
         return result
     async with _lock:
         async with httpx.AsyncClient(timeout=8.0, follow_redirects=False) as client:
