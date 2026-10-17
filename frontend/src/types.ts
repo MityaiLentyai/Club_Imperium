@@ -3,7 +3,8 @@ export type Category =
   | "grocery"
   | "pharmacy"
   | "green"
-  | "parking";
+  | "parking"
+  | "sports";
 export interface Location {
   latitude: number;
   longitude: number;
@@ -16,24 +17,21 @@ export interface Place extends Location {
   distance_type?: "straight_line" | "walking";
   lines?: string[];
 }
+export interface Mobility {
+  score: number;
+  nearest_stop_m?: number;
+  stop_groups_500m?: number;
+  stop_groups_1000m?: number;
+}
 export interface Analysis {
   location: Location;
-  radius_m?: number;
+  radius_m: number;
   places: Place[];
   unavailable: Category[];
+  mobility?: Mobility;
+  // Set when the backend capped the transport list.
+  nearby?: { total: number; truncated: boolean };
   sources: { name: string; url?: string; retrieved_at?: string }[];
   retrieved_at?: string;
-  commute?: {
-    distance_m?: number;
-    duration_minutes?: number;
-    mode?: string;
-    status?: string;
-  };
   demo: boolean;
-}
-export interface AnalyzeRequest {
-  latitude: number;
-  longitude: number;
-  radius_m: number;
-  destination: Location | null;
 }

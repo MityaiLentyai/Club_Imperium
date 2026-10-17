@@ -1,6 +1,6 @@
 {
-  "name": "urbanlens-warsaw",
-  "version": "1.0.0",
+  "name": "olo-warsaw",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {

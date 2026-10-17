@@ -41,8 +41,9 @@ export function demoAnalysis(location: Location, radius: number): Analysis {
     .filter((p) => p.distance_m <= radius);
   return {
     location,
+    radius_m: radius,
     places,
-    unavailable: ["parking"],
+    unavailable: ["parking", "sports"],
     sources: [
       { name: "Illustrative fixture — not verified city data" },
       {
