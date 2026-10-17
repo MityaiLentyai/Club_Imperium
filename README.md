@@ -52,7 +52,7 @@ Existing response shapes are preserved.
 | `POST /api/score` | JSON `latitude`, `longitude` | Location, Mobility Score, transport features |
 | `POST /api/score/address` | JSON `address` | Score response with resolved address in `location` |
 
-Coordinates must be within latitude −90…90 and longitude −180…180. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace. Coordinate scoring retains global coordinate validation for compatibility; its Warsaw dataset is only meaningful near Warsaw.
+Scoring coordinates must be finite and within the supported Warsaw service envelope: latitude 52.0–52.4 and longitude 20.75–21.3, inclusive. These conservative bounds cover outer neighborhoods and are not an exact municipal-boundary check. Unsupported coordinates and unsafe projection results return HTTP 422. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace.
 
 ```bash
 curl http://localhost:8000/api/health
