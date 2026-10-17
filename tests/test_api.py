@@ -1,3 +1,4 @@
+import re
 
 from fastapi.testclient import TestClient
 
@@ -132,6 +133,55 @@ def test_react_cors_preflight():
     })
     assert response.status_code == 200
     assert response.headers["access-control-allow-origin"] == "http://localhost:5173"
+
+
+def test_cors_origins_are_normalized():
+    from backend.main import cors_settings
+    origins, regex = cors_settings({
+        "CORS_ORIGINS": ' https://club-imperium-qrbl.vercel.app/ , "http://localhost:5173",,',
+    })
+    assert origins == ["https://club-imperium-qrbl.vercel.app", "http://localhost:5173"]
+    assert regex is None
+
+
+def test_cors_defaults_to_local_frontend():
+    from backend.main import cors_settings
+    assert cors_settings({}) == (["http://localhost:5173"], None)
+
+
+def test_cors_preflight_with_dashboard_style_values():
+    from fastapi import FastAPI
+    from fastapi.middleware.cors import CORSMiddleware
+    from backend.main import cors_settings
+
+    origins, regex = cors_settings({
+        "CORS_ORIGINS": "https://club-imperium-qrbl.vercel.app/",
+        "CORS_ORIGIN_REGEX": r"^https://club-imperium-qrbl(-[a-z0-9-]+)?\.vercel\.app$",
+    })
+    probe = FastAPI()
+    probe.add_middleware(CORSMiddleware, allow_origins=origins, allow_origin_regex=regex,
+                         allow_methods=["GET", "POST"], allow_headers=["*"])
+    probe_client = TestClient(probe)
+
+    def preflight(origin):
+        return probe_client.options("/api/score", headers={
+            "Origin": origin,
+            "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "content-type",
+        })
+
+    for origin in ("https://club-imperium-qrbl.vercel.app",
+                   "https://club-imperium-qrbl-git-main-team.vercel.app"):
+        response = preflight(origin)
+        assert response.status_code == 200
+        assert response.headers["access-control-allow-origin"] == origin
+    assert preflight("https://evil.example").status_code == 400
+
+
+def test_invalid_cors_regex_fails_fast():
+    from backend.main import cors_settings
+    with pytest.raises(re.error):
+        cors_settings({"CORS_ORIGIN_REGEX": "("})
 
 
 def test_dataset_path_independent_of_cwd(tmp_path, monkeypatch):

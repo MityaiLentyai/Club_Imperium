@@ -155,7 +155,8 @@ Errors use FastAPI's `detail` envelope: validation errors return a list; service
 | Variable | Required | Default / purpose |
 | --- | --- | --- |
 | `GEOCODING_USER_AGENT` | For address routes | No default; app identifier and real team contact. Coordinate scoring and health work without it. |
-| `CORS_ORIGINS` | For deployed React integration | `http://localhost:5173`; comma-separated exact origins, e.g. `https://your-frontend.example,http://localhost:5173`. No trailing slash. Restart after changing. |
+| `CORS_ORIGINS` | For deployed React integration | `http://localhost:5173`; comma-separated origins, e.g. `https://your-frontend.example,http://localhost:5173`. Surrounding quotes and a trailing slash are ignored. Restart after changing; the allowed list is logged at startup. |
+| `CORS_ORIGIN_REGEX` | No | Unset. Optional regular expression for generated hostnames such as Vercel previews, e.g. `^https://club-imperium-qrbl(-[a-z0-9-]+)?\.vercel\.app$`. Keep it anchored to your own project. |
 | `GEOCODING_URL` | No | `https://nominatim.openstreetmap.org/search`; switch to another Nominatim-compatible provider without code changes. |
 | `WARSAW_API_TOKEN` | Only for parking snapshot refresh | Backend-only token for the official parking endpoint; scoring uses local files and needs no token. |
 | `ROUTING_ENABLED` | No | `true`; disable external route calls with `false`. |
