@@ -1,0 +1,15 @@
+{
+  "sha256": "6290a72ed311a4e0b7ab5609274b848074ada944f7c10d9a277904faeb88fe29",
+  "query_sha256": "012bdc1ef80ee90b6fe348745088698698af3cdd4f7134815b6624d968d7d0a0",
+  "retrieved_at": "2026-10-17T21:43:08.026409+00:00",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "wfs:PUNKTY_ADRESOWE_WGS84",
+    "maxFeatures": "500",
+    "outputFormat": "GML2",
+    "filter": "<ns0:Filter xmlns:ns0=\"http://www.opengis.net/ogc\"><ns0:Or><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Świderska</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>93</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Białołęka</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Stanisława Szobera</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>1/3</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Brygadzistów</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>18</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica gen. Wiktora Thomméego</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>1</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Karola Irzykowskiego</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>1A</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And></ns0:Or></ns0:Filter>"
+  }
+}

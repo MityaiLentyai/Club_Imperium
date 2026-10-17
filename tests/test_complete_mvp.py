@@ -69,8 +69,10 @@ def test_sports_bounded_cache_and_unresolved_states(tmp_path, monkeypatch):
 
 def test_real_sports_snapshot_counts_radius_missing_and_metadata():
     dataset = load_sports()
-    assert len(dataset['records']) == 7
-    assert dataset['metadata']['selected_sites'] == 8
+    assert len(dataset['records']) == 291
+    assert dataset['metadata']['selected_sites'] == 308
+    assert dataset['metadata']['processed_sites'] == 308
+    assert dataset['metadata']['geolocated_addresses'] == 293
     assert dataset['metadata']['source_sites'] == 308
     props, geom, _ = dataset['records'][0]
     f, places, state = calculate_sports_features(geom.y, geom.x, 1, dataset)

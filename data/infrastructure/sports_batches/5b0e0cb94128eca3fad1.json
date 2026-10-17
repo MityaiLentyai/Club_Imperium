@@ -1,0 +1,15 @@
+{
+  "sha256": "ef80ad3f4e2da4a5aa6bededb318744f9d6b1e999f78c401b5b0c6aca53ddabc",
+  "query_sha256": "5b0e0cb94128eca3fad16f02f3e968c61f10afba7b301beefa0fe9e6f91a1706",
+  "retrieved_at": "2026-10-17T21:44:00.966125+00:00",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "wfs:PUNKTY_ADRESOWE_WGS84",
+    "maxFeatures": "500",
+    "outputFormat": "GML2",
+    "filter": "<ns0:Filter xmlns:ns0=\"http://www.opengis.net/ogc\"><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Ceramiczna</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>11</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Białołęka</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And></ns0:Filter>"
+  }
+}

@@ -1,0 +1,2622 @@
+{
+  "source_records": 430,
+  "classifications": {
+    "Skwer": 171,
+    "Rondo": 121,
+    "Zaułek": 3,
+    "Park": 60,
+    "Plac": 67,
+    "Osiedle": 1,
+    "Rynek": 4,
+    "Skwerek": 1,
+    "Kopiec": 1,
+    "Zakątek": 1
+  },
+  "source_crs": "EPSG:2178",
+  "source_sha256": "ee33fa4d25b1815c35ece052e0f76cc46e34044c26c1c2e35c781bdcf49255b9",
+  "processed_records": 430,
+  "valid_park_objects": 60,
+  "decisions": {
+    "green_square_needs_vegetation_evidence": 172,
+    "excluded_other_named_space": 198,
+    "eligible_park": 60
+  },
+  "records": [
+    {
+      "source_id": "62138",
+      "name": "Skwer Psa Fafika",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62147",
+      "name": "Rondo Jana Webera",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62148",
+      "name": "Rondo Roberta Schumana",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62272",
+      "name": "Rondo Stanisława Rembeka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62164",
+      "name": "Rondo Kamili Skolimowskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62169",
+      "name": "Skwer Bolesława Dubickiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62171",
+      "name": "Rondo Bratanków",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62172",
+      "name": "Rondo Budowniczych Ursynowa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62173",
+      "name": "Rondo Ryszarda Kaczorowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62175",
+      "name": "Rondo Zegarmistrza Gałeckiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62177",
+      "name": "Skwer Martina Luthera Kinga",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62178",
+      "name": "Skwer François Mitterranda",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62193",
+      "name": "Rondo Beczka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62194",
+      "name": "Zaułek Marii i Aleksandra Żabczyńskich",
+      "classification": "Zaułek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62197",
+      "name": "Rondo Geografów",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62201",
+      "name": "Skwer Władysława Bartoszewskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62202",
+      "name": "Skwer Ronalda Reagana",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62209",
+      "name": "Skwer Jolanty Brzeskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62214",
+      "name": "Rondo Kazimierza Granzowa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62223",
+      "name": "Rondo Wąskotorówki",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62224",
+      "name": "Skwer Jerzego Jarnuszkiewicza",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62225",
+      "name": "Skwer Wasyla Stusa",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62226",
+      "name": "Skwer Teherański",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62227",
+      "name": "Rondo Legii Warszawa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62009",
+      "name": "Park Morskie Oko",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62013",
+      "name": "Park Czechowicki",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62014",
+      "name": "Park Franciszka Adolfa Achera",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62020",
+      "name": "Rondo Hutników Warszawskich",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62021",
+      "name": "Rondo ks. Zdzisława Peszkowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62023",
+      "name": "Skwer Powstańców Styczniowych",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62024",
+      "name": "Plac Czesława Niemena",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62029",
+      "name": "Rondo Akademii Wychowania Fizycznego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62030",
+      "name": "Rondo Haliny Szwarc",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62093",
+      "name": "Plac Trynopolski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62111",
+      "name": "Skwer Straży Obywatelskiej 1939 r.",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62123",
+      "name": "Rondo mjr. Zygmunta Szendzielarza „Łupaszki”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10011",
+      "name": "Skwer Batalionu AK „Ruczaj”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10012",
+      "name": "Skwer Batalionu AK „Zaremba-Piorun”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10013",
+      "name": "Skwer Batalionu Harcerskiego AK „Wigry”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10014",
+      "name": "Skwer 3 Batalionu Pancernego AK „Golski”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10015",
+      "name": "Skwer Bazy Lotniczej AK „Łużyce”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10016",
+      "name": "Plac Bernardyński",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10017",
+      "name": "Skwer Adolfa Marii Bocheńskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10018",
+      "name": "Zaułek Braci Pakulskich",
+      "classification": "Zaułek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10019",
+      "name": "Skwer Willy'ego Brandta",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10020",
+      "name": "Plac Czerwca 1976 Roku",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10021",
+      "name": "Rondo Ignacego Daszyńskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10022",
+      "name": "Plac Jana Henryka Dąbrowskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10023",
+      "name": "Rondo gen. Charles'a de Gaulle'a",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10024",
+      "name": "Skwer Jacka Decowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10056",
+      "name": "Park Romana Kozłowskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10057",
+      "name": "Plac Krasińskich",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10058",
+      "name": "Skwer Księdza Jerzego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10059",
+      "name": "Skwer płk. Zdzisława Kuźmirskiego-Pacaka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10060",
+      "name": "Plac Joachima Lelewela",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10062",
+      "name": "Rondo Zdzisława Lubomirskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10025",
+      "name": "Plac Defilad",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10026",
+      "name": "Rondo Romana Dmowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10027",
+      "name": "Rondo Dżochara Dudajewa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10028",
+      "name": "Skwer 1 Dywizji Grenadierów - Francja 1940",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10029",
+      "name": "Skwer 1 Dywizji Pancernej WP",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10030",
+      "name": "Rondo gen. Augusta Emila Fieldorfa „Nila”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10031",
+      "name": "Skwer Mieczysława Fogga",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10032",
+      "name": "Skwer Alfonsa Grotowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10033",
+      "name": "Plac Grunwaldzki",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10034",
+      "name": "Skwer Grupy AK „Granat”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10035",
+      "name": "Plac Grzybowski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10036",
+      "name": "Plac Gwardii",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10037",
+      "name": "Skwer Gwiazda Polski",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10038",
+      "name": "Plac gen. Józefa Hallera",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10039",
+      "name": "Plac Dionizego Henkla",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10040",
+      "name": "Plac Inwalidów",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10041",
+      "name": "Skwer Mirosława Iringha",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10042",
+      "name": "Rondo Jazdy Polskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10043",
+      "name": "Skwer gen. Jana Jura-Gorzechowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10044",
+      "name": "Skwer Tadeusza Kahla",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10045",
+      "name": "Skwer Jerzego Kastrioty Skanderbega",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10046",
+      "name": "Plac Kasztelański",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10047",
+      "name": "Rondo Kercelak",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10048",
+      "name": "Plac Ferenca Keresztesa-Fischera",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10049",
+      "name": "Skwer Stefana Kisielewskiego „Kisiela”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10050",
+      "name": "Park Kombatantów",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10051",
+      "name": "Skwer Kompanii AK „Żniwiarz”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10052",
+      "name": "Plac Konfederacji",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10053",
+      "name": "Plac Konstytucji",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10054",
+      "name": "Skwer mjr. Bolesława Kontryma „Żmudzina”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10055",
+      "name": "Plac Tadeusza Kotarbińskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10000",
+      "name": "Skwer ks. Stefana Niedzielaka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10100",
+      "name": "Plac Słoneczny",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61500",
+      "name": "Rondo ks. Wacława Karłowicza",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62000",
+      "name": "Park Wilanowski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10001",
+      "name": "Skwer Jerzego Giedroycia",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10002",
+      "name": "Skwer Stanisława Wisłockiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10003",
+      "name": "Park Akcji „Burza”",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10004",
+      "name": "Rondo Krystyny Krahelskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10005",
+      "name": "Skwer ks. Kazimierza Szklarczyka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10007",
+      "name": "Plac Bankowy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10008",
+      "name": "Skwer Batalionu AK „Czata 49”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10009",
+      "name": "Skwer Batalionu AK „Gozdawa”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10010",
+      "name": "Skwer Batalionu AK „Miłosz”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61947",
+      "name": "Rondo Czterdziestolatka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61948",
+      "name": "Skwer Janusza Grabiańskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61951",
+      "name": "Rondo kard. Adama Sapiehy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61952",
+      "name": "Plac Europejski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61960",
+      "name": "Rondo płk. Józefa Kleibera",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61961",
+      "name": "Rondo Emanuela Bułhaka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61962",
+      "name": "Rondo Mansweta Śmigielskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61963",
+      "name": "Rondo ks. Stanisława Witkowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61964",
+      "name": "Rondo Macierowe Bagno",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62004",
+      "name": "Park Ujazdowski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62005",
+      "name": "Park Stefana Żeromskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62006",
+      "name": "Park Wielkopolski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62007",
+      "name": "Park Szustrów",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62008",
+      "name": "Park Promenada",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61965",
+      "name": "Rondo Pohulanka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61966",
+      "name": "Rondo Miłosna",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61967",
+      "name": "Rondo Józefa Maroszka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61968",
+      "name": "Rondo Starej Cegielni",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61974",
+      "name": "Skwer Franciszka Pieniaka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61983",
+      "name": "Rondo o. Bogusława Palecznego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61986",
+      "name": "Rondo Marii Tarnowskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61987",
+      "name": "Skwer Michała i Marii Radziwiłłów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61988",
+      "name": "Dolina Szwajcarska",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61989",
+      "name": "Ogród Botaniczny",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61990",
+      "name": "Ogród Krasińskich",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61991",
+      "name": "Ogród Saski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61992",
+      "name": "Park Agrykola",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61993",
+      "name": "Park Belwederski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61994",
+      "name": "Park Józefa Sowińskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61995",
+      "name": "Park Kaskada",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61996",
+      "name": "Park Królikarnia",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61997",
+      "name": "Park Łazienkowski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61998",
+      "name": "Park Marii Skłodowskiej-Curie",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61999",
+      "name": "Park Morysin",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62001",
+      "name": "Park Natolin",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62002",
+      "name": "Park Rozkosz",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62003",
+      "name": "Park Sielecki",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61677",
+      "name": "Rondo Jana Himilsbacha",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61678",
+      "name": "Rondo Zdzisława Maklakiewicza",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61681",
+      "name": "Rondo Jonasza Kofty",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61685",
+      "name": "Rondo Tadeusza Kifera „Kruszynki”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61830",
+      "name": "Skwer kpt. Zygmunta Pawlaczyka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61836",
+      "name": "Rondo Polskich Kryptologów Enigmy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61837",
+      "name": "Rondo Ronalda Reagana",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61910",
+      "name": "Rondo Małej Brzozy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61913",
+      "name": "Rondo płk. Łukasza Cieplińskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61920",
+      "name": "Skwer Ormiański",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61921",
+      "name": "Park Polskich Wynalazców",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61922",
+      "name": "Park imienia Cichociemnych Spadochroniarzy AK",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61923",
+      "name": "Rondo Radia Wolna Europa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61924",
+      "name": "Skwer Grzegorza Ciechowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61928",
+      "name": "Rondo Jerzego Kondrackiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10086",
+      "name": "Park Praski Żołnierzy I Armii WP",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10087",
+      "name": "Osiedle Przyjaźń",
+      "classification": "Osiedle",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10088",
+      "name": "Plac Przymierza",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10089",
+      "name": "Skwer 7 Pułku Piechoty AK „Garłuch”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10090",
+      "name": "Skwer 30 Pułku Strzelców Kaniowskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10091",
+      "name": "Plac Aleksandra Rembowskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10092",
+      "name": "Plac 1831 Roku",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10093",
+      "name": "Plac 1905 Roku",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10094",
+      "name": "Skwer Sue Ryder",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10095",
+      "name": "Park Marszałka Edwarda Rydza-Śmigłego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10096",
+      "name": "Skwer Ryski",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10097",
+      "name": "Rondo Stanisława Sedlaczka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10098",
+      "name": "Park Skaryszewski im. Ignacego Paderewskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10099",
+      "name": "Skwer kpt. Stanisława Skibniewskiego „Cubryny”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10101",
+      "name": "Skwer Antoniego Słonimskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10102",
+      "name": "Rynek Solecki",
+      "classification": "Rynek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10103",
+      "name": "Rynek Starego Miasta",
+      "classification": "Rynek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10104",
+      "name": "Plac Sokratesa Starynkiewicza",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10105",
+      "name": "Rondo Stefana Starzyńskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10106",
+      "name": "Skwer płk. dr. Leona Strehla",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10107",
+      "name": "Skwer Sybiraków",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10108",
+      "name": "Rondo Józefa Szczepańskiego „Ziutka”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10109",
+      "name": "Park Czesława Szczubełka",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10110",
+      "name": "Plac Piotra Szembeka",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10111",
+      "name": "Skwer Tarasa Szewczenki",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10112",
+      "name": "Szkolny Park Sportowy im. Janusza Kusocińskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10113",
+      "name": "Park płk. Jana Szypowskiego „Leśnika”",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10114",
+      "name": "Plac Światowida",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10115",
+      "name": "Plac Teatralny",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10116",
+      "name": "Park Romualda Traugutta",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10117",
+      "name": "Plac Trzech Krzyży",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10119",
+      "name": "Plac Unii Lubelskiej",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10120",
+      "name": "Rondo Jerzego Waszyngtona",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10121",
+      "name": "Plac Weteranów 1863 Roku",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10122",
+      "name": "Rondo Wiatraczna",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10124",
+      "name": "Skwer Więźniów Politycznych Stalinizmu",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10125",
+      "name": "Plac Wileński",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10126",
+      "name": "Plac Thomasa Woodrowa Wilsona",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10127",
+      "name": "Skwer Bohdana Wodiczko",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10128",
+      "name": "Plac Wojska Polskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10129",
+      "name": "Plac Wolności",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10130",
+      "name": "Skwer Wołyński",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10131",
+      "name": "Skwer Andrzeja Woyciechowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10132",
+      "name": "Skwer kard. Stefana Wyszyńskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10133",
+      "name": "Plac Zamkowy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10134",
+      "name": "Plac Artura Zawiszy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10135",
+      "name": "Plac Zbawiciela",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10136",
+      "name": "Rondo Zesłańców Syberyjskich",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10137",
+      "name": "Skwer Zgrupowania AK „Chrobry II”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10138",
+      "name": "Rondo Zgrupowania AK „Radosław”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10139",
+      "name": "Skwer Zgrupowania AK „Róg”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10140",
+      "name": "Skwerek Złotówki",
+      "classification": "Skwerek",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10141",
+      "name": "Skwer Szmula Zygelbojma",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10142",
+      "name": "Rondo Żaba",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10143",
+      "name": "Plac Żelaznej Bramy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10144",
+      "name": "Park Żołnierzy „Żywiciela”",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10145",
+      "name": "Skwer płk. Antoniego Władysława Żurowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10146",
+      "name": "Skwer Przyjaciół Węgierskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10147",
+      "name": "Plac Zofii Wóycickiej",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10148",
+      "name": "Skwer Muzyki Węgierskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10149",
+      "name": "Park Kazimierzowski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10150",
+      "name": "Park Karola Beyera",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10151",
+      "name": "Skwer płk. Ignacego Boernera",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10152",
+      "name": "Rondo Pawła Jasienicy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10153",
+      "name": "Skwer Pamięci",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10154",
+      "name": "Rondo ppor. Feliksa Zaremby",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10155",
+      "name": "Park Marka Kotańskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10156",
+      "name": "Skwer Matki Sybiraczki",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10157",
+      "name": "Skwer ks. Jana Salamuchy",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10158",
+      "name": "Skwer Herberta Clarka Hoovera",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10159",
+      "name": "Skwerek Berek",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10160",
+      "name": "Skwer Tadeusza, Marii, Barbary, Włodzimierza Fijewskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10161",
+      "name": "Skwer 16 Września 1944 r.",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10162",
+      "name": "Skwer Stanisława Broniewskiego „Orszy”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10163",
+      "name": "Skwer „Starszych Panów”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10164",
+      "name": "Skwer Reduty Kaliskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10165",
+      "name": "Skwer Stanisława Jankowskiego „Agatona”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10166",
+      "name": "Park Stanisława Dygata",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10167",
+      "name": "Rondo Powstania Węgierskiego'56",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10168",
+      "name": "Skwer Rodziny Lilpopów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10169",
+      "name": "Skwer Duśki Trafankowskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10170",
+      "name": "Skwer Prymasowski",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10171",
+      "name": "Plac Jacka Kuronia",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10063",
+      "name": "Skwer Wandy Lurie",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10064",
+      "name": "Park Zasława Malickiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10065",
+      "name": "Plac Stanisława Małachowskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10066",
+      "name": "Skwer Olgi i Andrzeja Małkowskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10067",
+      "name": "Rynek Mariensztacki",
+      "classification": "Rynek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10068",
+      "name": "Plac Mirowski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10069",
+      "name": "Plac Emila Młynarskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10070",
+      "name": "Plac Na Rozdrożu",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10071",
+      "name": "Plac Gabriela Narutowicza",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10072",
+      "name": "Rynek Nowego Miasta",
+      "classification": "Rynek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10073",
+      "name": "Park Obwodu Praga Armii Krajowej",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10074",
+      "name": "Rondo Ofiar Zbrodni Katyńskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10075",
+      "name": "Skwer Oleandrów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10076",
+      "name": "Plac Opolski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10077",
+      "name": "Rondo Organizacji Narodów Zjednoczonych",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10078",
+      "name": "Plac Juliusza Osterwy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10079",
+      "name": "Skwer Alojzego Pawełka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "10080",
+      "name": "Park Józefa Piłsudskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10081",
+      "name": "Plac marsz. Józefa Piłsudskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10082",
+      "name": "Park Józefa Polińskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "10083",
+      "name": "Plac Politechniki",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10084",
+      "name": "Kopiec Powstania Warszawskiego",
+      "classification": "Kopiec",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "10085",
+      "name": "Plac Powstańców Warszawy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62909",
+      "name": "Skwer Robinsonów Warszawskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62912",
+      "name": "Rondo Grafen",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62312",
+      "name": "Skwer Seniora",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62316",
+      "name": "Plac Farmacji",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62322",
+      "name": "Zakątek Złotej Kaczki",
+      "classification": "Zakątek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62525",
+      "name": "Plac Jaśminowy Zakątek",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62616",
+      "name": "Skwer gen. Marka Bezruczki",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62920",
+      "name": "Skwer Kota Filemona",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62921",
+      "name": "Skwer Wojciecha Młynarskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62923",
+      "name": "Skwer IV Zgrupowania AK „Gurt”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62925",
+      "name": "Skwer Zofii i Kazimierza Moczarskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62332",
+      "name": "Plac Ireneusza Gugulskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62672",
+      "name": "Skwer Václava Havla",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62929",
+      "name": "Rondo Henryka Linowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62930",
+      "name": "Rondo Agnieszki Osieckiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62931",
+      "name": "Skwer Ewangelicki",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62335",
+      "name": "Park Tadeusza Mazowieckiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62339",
+      "name": "Skwer Stefana Kuryłowicza",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62340",
+      "name": "Skwer Integracji",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62685",
+      "name": "Rondo Romana Wilhelmiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62687",
+      "name": "Rondo Sprawiedliwych wśród Narodów Świata",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62690",
+      "name": "Skwer „Sierpnia 1944”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62940",
+      "name": "Rondo Polskich Maratończyków",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62943",
+      "name": "Skwer Barbary Wachowicz",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62946",
+      "name": "Skwer Tomasza Stańko",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62357",
+      "name": "Skwer Józefa Rotblata",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62699",
+      "name": "Skwer Leopolda Kronenberga",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62703",
+      "name": "Rondo Elżbiety Zahorskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62954",
+      "name": "Rondo Tajnej Komisji Zakładowej NSZZ „Solidarność” w Ursusie",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62959",
+      "name": "Skwer Ameryki Łacińskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62963",
+      "name": "Skwer Janusza Głowackiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62964",
+      "name": "Skwer Kazimierza Dejmka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62714",
+      "name": "Skwer Pokolenia Kolumbów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62966",
+      "name": "Rondo Ireny Kwiatkowskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62967",
+      "name": "Skwer Rudolfa Weigla",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62371",
+      "name": "Skwer Zofii Kuratowskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62372",
+      "name": "Skwer Anki Kowalskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62373",
+      "name": "Skwer Karoliny Lanckorońskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62375",
+      "name": "Skwer Barbary i Stanisława Brukalskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62376",
+      "name": "Skwer Niedźwiedzia Wojtka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62378",
+      "name": "Skwer Hanki Bielickiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62380",
+      "name": "Skwer Isaaca Bashevisa Singera",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62721",
+      "name": "Rondo Ochrony Przyrody",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62725",
+      "name": "Rondo Stanisława Saksa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62981",
+      "name": "Skwer Zofii Szydłowskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62986",
+      "name": "Rondo Niedźwiadka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62381",
+      "name": "Skwer Miry Zimińskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62382",
+      "name": "Skwer Anieli Steinsbergowej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62383",
+      "name": "Plac Tulipanów",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62394",
+      "name": "Rondo Kazimierza Pelczara",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62728",
+      "name": "Plac Służewski",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62729",
+      "name": "Skwer Wacława Lipińskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62731",
+      "name": "Rondo Jana Cierlińskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62995",
+      "name": "Skwer Wróbelka Elemelka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62997",
+      "name": "Skwer Krzysztofa Dunin-Wąsowicza",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62998",
+      "name": "Rondo Bydgoskie",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "63004",
+      "name": "Rondo Jadwigi Szczawińskiej-Dawidowej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62397",
+      "name": "Skwer Tadeusza Zawadzkiego „Zośki”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62405",
+      "name": "Skwer Nauczycieli Tajnego Nauczania",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62741",
+      "name": "Rondo Rozalii",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62742",
+      "name": "Skwer Ziemi Aniołów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62743",
+      "name": "Skwer Rodziny Wolskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62744",
+      "name": "Skwer ks. Jana Ignacego Golędzinowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62745",
+      "name": "Skwer Anny Jantar",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "63013",
+      "name": "Skwer Lane’a Kirklanda",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62746",
+      "name": "Rondo Wolnej Białorusi",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62758",
+      "name": "Rondo Liczby π",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "63023",
+      "name": "Skwer Haliny Skibniewskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "63030",
+      "name": "Skwer Jerzego Franciszka Kulczyckiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "63034",
+      "name": "Rondo Ryszarda Szurkowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62426",
+      "name": "Rondo Jawaharlala Nehru",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62430",
+      "name": "Rondo Ligi Morskiej i Rzecznej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62759",
+      "name": "Rondo „Miś”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62760",
+      "name": "Rondo Jerzego Jelińskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62842",
+      "name": "Skwer Karaimski",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62843",
+      "name": "Rondo Mariana Kociniaka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "63035",
+      "name": "Skwer Góry Szwedzkie",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "63036",
+      "name": "Rondo Jerzego Jednaszewskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "63041",
+      "name": "Skwer Tadeusza Janczara",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "63043",
+      "name": "Rondo Akcydensu",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "63047",
+      "name": "Skwer Zygmunta Nissenbauma",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62432",
+      "name": "Skwer Andrzeja Struja",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62443",
+      "name": "Rondo Soczewka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62846",
+      "name": "Rondo Stanisława Lema",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62847",
+      "name": "Skwer Andrzeja Wajdy",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62849",
+      "name": "Rondo Wacława Makowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62851",
+      "name": "Park Pięciu Sióstr",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62859",
+      "name": "Skwer Aliny Scholtz",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62457",
+      "name": "Rondo Michała Scipio del Campo",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62460",
+      "name": "Rondo Ruda",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62862",
+      "name": "Skwer Aleksandry Piłsudskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62863",
+      "name": "Park Stefana Wiecheckiego „Wiecha”",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62864",
+      "name": "Skwer Nelsona Mandeli",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62478",
+      "name": "Skwer Georges'a Clemenceau",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62481",
+      "name": "Plac Wielopole",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62482",
+      "name": "Skwer Szpitala Ewangelickiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62868",
+      "name": "Skwer Zbigniewa Wójcika",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62869",
+      "name": "Skwer Rodziny Kuczerów",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62874",
+      "name": "Skwer Trzech Pokoleń",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62274",
+      "name": "Plac Konesera",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62275",
+      "name": "Skwer Marka Edelmana",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62276",
+      "name": "Skwer Bronisława Geremka",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62277",
+      "name": "Zaułek Ku Szarytkom",
+      "classification": "Zaułek",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62278",
+      "name": "Skwer Maryny Falskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62279",
+      "name": "Rondo Wallów",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62280",
+      "name": "Skwer Gwary Warszawskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62497",
+      "name": "Plac Bohaterów Getta Warszawskiego",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62501",
+      "name": "Skwer Bohdana Lacherta",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62875",
+      "name": "Rondo Janusza A. Zajdla",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62879",
+      "name": "Park Michałowski",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62882",
+      "name": "Skwer Wiesława Michnikowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62883",
+      "name": "Skwer Teodora Klincewicza",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62504",
+      "name": "Rondo Jędrzeja Moraczewskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62886",
+      "name": "Skwer Polskich Olimpijczyków",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62887",
+      "name": "Rondo Jana Kazimierczaka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62888",
+      "name": "Skwer Judyty Zbytkower",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62889",
+      "name": "Rondo Stanisława Królaka",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62301",
+      "name": "Park Ireny Jarockiej",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "62306",
+      "name": "Plac Klonowego Liścia",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62513",
+      "name": "Rondo Artemiego Aroniszydzego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62515",
+      "name": "Rondo Miasta Ogrodu Włochy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62518",
+      "name": "Rondo Wielkiej Orkiestry Świątecznej Pomocy",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "62893",
+      "name": "Skwer Racheli Auerbach",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62898",
+      "name": "Skwer Jerzego Wasowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "62905",
+      "name": "Skwer Krzysztofa Michalskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61480",
+      "name": "Rondo ks. Mieczysława Krygiera",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61484",
+      "name": "Plac Pole Elekcyjne",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61487",
+      "name": "Rondo Jana Szala",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61489",
+      "name": "Park Nad Balatonem",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61490",
+      "name": "Park Zbigniewa Herberta",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61492",
+      "name": "Park Olszyna",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61493",
+      "name": "Park Harcerskiej Poczty Polowej Powstania Warszawskiego",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61494",
+      "name": "Rondo Braci Skurów",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61497",
+      "name": "Park Stawy Kellera",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61501",
+      "name": "Skwer Igora Newerlego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61511",
+      "name": "Park Moczydełko",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61512",
+      "name": "Skwer Słoweński",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61514",
+      "name": "Skwer ks. Jana Twardowskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61515",
+      "name": "Rondo Feliksa Stamma",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61527",
+      "name": "Rondo Karola Edmunda Wolframa",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61535",
+      "name": "Plac Władysława Szczepaniaka",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61540",
+      "name": "Skwer Ludwika Bergera „Goliata”",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61543",
+      "name": "Plac Bociani Zakątek",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61544",
+      "name": "Skwer Chorwacki",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61550",
+      "name": "Skwer Książąt Czartoryskich",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61551",
+      "name": "Rondo Unii Europejskiej",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61561",
+      "name": "Plac Ratuszowy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61562",
+      "name": "Plac Ostrej Bramy",
+      "classification": "Plac",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61573",
+      "name": "Rondo płk. Bernarda Adameckiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61577",
+      "name": "Rondo Jerzego Turowicza",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61581",
+      "name": "Skwer Dobrego Maharadży",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61588",
+      "name": "Rondo László Osvátha",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61591",
+      "name": "Skwer Jacka Kaczmarskiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61594",
+      "name": "Park gen. Gustawa Orlicz-Dreszera",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61596",
+      "name": "Skwer Adama Mickiewicza",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61597",
+      "name": "Skwer Wolnego Słowa",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61604",
+      "name": "Rondo Józefa Mackiewicza",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61610",
+      "name": "Kamionkowskie Błonia Elekcyjne",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61638",
+      "name": "Rondo Ignacego Mościckiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61456",
+      "name": "Rondo Tybetu",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61458",
+      "name": "Skwer Samuela Orgelbranda",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61461",
+      "name": "Rondo Bohdana Pniewskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61462",
+      "name": "Park Janiny Porazińskiej",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61463",
+      "name": "Skwer Jerzego Janickiego",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61464",
+      "name": "Rondo Aleksandra Żabczyńskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61465",
+      "name": "Rondo Jerzego Wojnara",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61469",
+      "name": "Park Hassów",
+      "classification": "Park",
+      "decision": "eligible_park"
+    },
+    {
+      "source_id": "61470",
+      "name": "Rondo Emilii Malessy „Marcysi”",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61472",
+      "name": "Rondo Aleksandra Kulikowskiego",
+      "classification": "Rondo",
+      "decision": "excluded_other_named_space"
+    },
+    {
+      "source_id": "61473",
+      "name": "Skwer Radiowej Rodziny Matysiaków",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61476",
+      "name": "Skwer Żołnierzy Tułaczy",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    },
+    {
+      "source_id": "61477",
+      "name": "Skwer Tekli Bądarzewskiej",
+      "classification": "Skwer",
+      "decision": "green_square_needs_vegetation_evidence"
+    }
+  ],
+  "coverage": "All returned named-space records processed below the explicit 500-record cap; not all Warsaw green space",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "ns92528565:PLACE_SKWERY",
+    "maxFeatures": 500,
+    "outputFormat": "GML2"
+  },
+  "checked_at": "2026-10-17T21:45:17.183411+00:00",
+  "municipal_inventory_url": "https://zzw.waw.pl/nasze-tereny/parki/",
+  "municipal_name_not_in_snapshot": "Park Żerański",
+  "result_type_hits": "Server returned the same full collection; no independent count inferred",
+  "processed_at": "2026-10-17T21:49:20.319156+00:00",
+  "source_retrieved_at": "2026-10-17T21:45:17.185282+00:00"
+}
