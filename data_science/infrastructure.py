@@ -28,7 +28,7 @@ def load_snapshot(category, path=None):
         if (data.get("type") != "FeatureCollection"
                 or not isinstance(data.get("features"), list)
                 or not isinstance(data.get("metadata"), dict)
-                or not data["metadata"].get("retrieved_at")
+                or "retrieved_at" not in data["metadata"]
                 or not data["metadata"].get("source_url")):
             return None
         records, seen, seen_points = [], set(), set()

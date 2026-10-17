@@ -9,7 +9,7 @@ import re
 import time
 import xml.etree.ElementTree as ET
 
-from data_science.ingest_infrastructure import download, save_snapshot, WFS_URL, GML, MAX_BYTES
+from data_science.ingest_infrastructure import download, save_snapshot, WFS_URL, GML, MAX_BYTES, input_provenance
 from data_science.infrastructure import DATA_DIR, valid_coordinates
 
 SPORTS_URL = "https://dane.um.warszawa.pl/api/action/get_be_otwarte_boiska"
@@ -18,8 +18,14 @@ DAYS = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "N
 
 
 def address_parts(address):
-    match = re.fullmatch(r"(?:ul\.|ulica)\s+(.+?)\s+(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)?)", address.strip())
-    return ("ulica " + match[1], match[2]) if match else None
+    # Remove explicit postal/district annotations, never guess expanded names.
+    address = re.sub(r",\s*\d{2}-\d{3}\s+Warszawa$", "", address.strip())
+    address = address.removesuffix(" - filia szkoły").replace(" (Wesoła)", "").replace(" (Białołeka)", "").replace(" (Białołęka)", "")
+    match = re.fullmatch(r"(?:(ul\.|ulica|al\.|aleja|plac|pl\.)\s+)?(.+?)\s+(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)?)", address, re.IGNORECASE)
+    if not match:
+        return None
+    prefix = {"al.": "aleja", "aleja": "aleja", "plac": "plac", "pl.": "plac"}.get((match[1] or "").lower(), "ulica")
+    return prefix + " " + match[2], match[3]
 
 
 def parse_sites(payload):
@@ -32,7 +38,7 @@ def parse_sites(payload):
         address, name = row.get("Adres obiektu"), row.get("Nazwa placówki oświatowej")
         if not isinstance(address, str) or not isinstance(name, str) or not address.strip() or not name.strip():
             continue
-        key = " ".join(address.casefold().split())
+        key = (" ".join(address.casefold().split()), str(row.get("Dzielnica") or "").casefold())
         site = sites.setdefault(key, {"name": name.strip(), "address": address.strip(),
             "district": row.get("Dzielnica"), "sport_types": set(), "schedules": []})
         for field in ("Typ obiektu", "Boisk uniwersalne zawiera"):
@@ -159,6 +165,11 @@ def main():
         metadata.update(source_url=SPORTS_URL, catalogue_url=CATALOGUE, source_records=len(payload),
             coordinate_source_url=WFS_URL, source_crs="EPSG:4326",
             coverage="Small bounded sample of educational sports sites; incomplete Warsaw coverage; address-point proxies")
+        previous = args.output / "sports.geojson"
+        if previous.exists() and len(json.loads(previous.read_text())["features"]) > len(features):
+            raise ValueError("A bounded sample must not replace a fuller snapshot; use complete_sports")
+        if args.input:
+            metadata.update(input_provenance(raw, "sports", args.input, args.output))
         saved = save_snapshot("sports", raw, features, metadata, args.output)
         print(f"Saved {saved['record_count']} located sports sites; {metadata['unresolved_count']} unresolved in selected sample")
     except Exception:

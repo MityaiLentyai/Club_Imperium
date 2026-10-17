@@ -1,0 +1,15 @@
+{
+  "sha256": "c0ed19594a4d3c6db1a95af852ee9b48e1a895e4fd2168469d047c97ddf2db89",
+  "query_sha256": "9a740521a3357103174f4ab1623a6495e4f4458881c45889f5495f7341a47156",
+  "retrieved_at": "2026-10-17T21:43:09.317481+00:00",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "wfs:PUNKTY_ADRESOWE_WGS84",
+    "maxFeatures": "500",
+    "outputFormat": "GML2",
+    "filter": "<ns0:Filter xmlns:ns0=\"http://www.opengis.net/ogc\"><ns0:Or><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Anieli Krzywoń</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>3</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica gen. Waleriana Czumy</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>8</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Oławska</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>3</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Zachodzącego Słońca</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>25</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Tkaczy</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>27</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And></ns0:Or></ns0:Filter>"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "sha256": "01db754017bc1371d30239dab186a34e5c14f9da4e7efd8058c76493f5f34ec8",
+  "query_sha256": "ffa0ce5c0da1d41bdb0e25584d8878f81243007662d5647b20fe209d4f7e7bbd",
+  "retrieved_at": "2026-10-17T21:43:10.597139+00:00",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "request_parameters": {
+    "service": "WFS",
+    "version": "1.1.0",
+    "request": "GetFeature",
+    "typeName": "wfs:PUNKTY_ADRESOWE_WGS84",
+    "maxFeatures": "500",
+    "outputFormat": "GML2",
+    "filter": "<ns0:Filter xmlns:ns0=\"http://www.opengis.net/ogc\"><ns0:And><ns0:PropertyIsEqualTo><ns0:PropertyName>NAZWA_PODST</ns0:PropertyName><ns0:Literal>ulica Jana Heweliusza</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>NR_PORZADK</ns0:PropertyName><ns0:Literal>3</ns0:Literal></ns0:PropertyIsEqualTo><ns0:PropertyIsEqualTo><ns0:PropertyName>DZIELNICA</ns0:PropertyName><ns0:Literal>Bemowo</ns0:Literal></ns0:PropertyIsEqualTo></ns0:And></ns0:Filter>"
+  }
+}

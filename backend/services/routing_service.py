@@ -3,6 +3,8 @@ import asyncio
 from collections import OrderedDict
 import copy
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
+from urllib.parse import urlsplit
 import math
 import os
 import time
@@ -73,7 +75,11 @@ async def _fetch_route(client, base_url, origin, destination, profile):
                 seconds = float(response.headers.get("Retry-After", "60"))
                 seconds = max(60, min(seconds, 3600)) if math.isfinite(seconds) else 60
             except ValueError:
-                seconds = 60
+                try:
+                    seconds = (parsedate_to_datetime(response.headers["Retry-After"]) - datetime.now(timezone.utc)).total_seconds()
+                    seconds = max(60, min(seconds, 3600))
+                except (KeyError, ValueError, TypeError, OverflowError):
+                    seconds = 60
             _cooldown_until = time.monotonic() + seconds
         response.raise_for_status()
         chunks, size = [], 0
@@ -101,6 +107,20 @@ async def get_commute(origin, destination, *, include_routes=True):
         reason = "Routes not requested" if not include_routes else "Routing disabled"
         result.update({mode: {"status": "unavailable", "reason": reason} for mode in ("walking", "driving")})
         return result
+    try:
+        parsed = urlsplit(base)
+        if (parsed.scheme not in {"http", "https"} or not parsed.hostname
+                or parsed.username is not None or parsed.password is not None
+                or parsed.query or parsed.fragment):
+            raise ValueError("Invalid routing configuration")
+        parsed.port  # Validate malformed and out-of-range ports before HTTPX.
+    except ValueError:
+        result.update({mode: {"status": "unavailable", "reason": "Routing configuration unavailable"}
+                       for mode in ("walking", "driving")})
+        return result
+    if base != DEFAULT_BASE_URL:
+        result["attribution"] = {"name": "Configured OSRM / © OpenStreetMap contributors",
+                                 "url": base, "fix_map_url": "https://www.openstreetmap.org/fixthemap"}
     try:
         await asyncio.wait_for(_lock.acquire(), timeout=QUEUE_TIMEOUT)
     except TimeoutError:

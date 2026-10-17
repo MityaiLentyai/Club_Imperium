@@ -1,5 +1,7 @@
 # Backend integration review
 
+Historical review of PR #9. For current dataset counts, final validation and exact response examples, see [the current coverage and handoff](data-coverage-final.md).
+
 Reviewed from `origin/main` commit `380268c` on 2026-10-17. Backend and Data Science fixes only: no new endpoint, dataset, score, formula, frontend change or deployment setting.
 
 ## Endpoint contract

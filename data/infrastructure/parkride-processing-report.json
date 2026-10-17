@@ -1,0 +1,289 @@
+{
+  "source_records": 14,
+  "processed_records": 14,
+  "valid_records": 14,
+  "rejections": {},
+  "records": [
+    {
+      "source_id": "1",
+      "name": "Parking P+R Metro Młociny",
+      "longitude": 20.927564,
+      "latitude": 52.290327,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "1",
+        "OPIS": "Bielany, okolice skrzyżowania ulicy Kasprowicza i Nocznickiego, przy węźle komunikacyjnym \"Młociny\"",
+        "AUTA": "1010",
+        "MOTORY": "86",
+        "NAZWA": "Parking P+R Metro Młociny",
+        "NIEPELNO": "24",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "2",
+      "name": "Parking P+R Al. Krakowska",
+      "longitude": 20.94335,
+      "latitude": 52.175097,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "2",
+        "OPIS": "Włochy, Al. Krakowska, przy skrzyżowaniu z Mineralną. Przy pętli autobusowej P+R Al. Krakowska oraz pętli tramwajowej",
+        "AUTA": "415",
+        "MOTORY": "100",
+        "NAZWA": "Parking P+R Al. Krakowska",
+        "NIEPELNO": "11",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "3",
+      "name": "Parking P+R Metro Wawrzyszew",
+      "longitude": 20.936825,
+      "latitude": 52.287624,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "3",
+        "OPIS": "Bielany, okolice skrzyżowania ulicy Kasprowicza i Przytyk, przy stacji metra \"Wawrzyszew\"",
+        "AUTA": "80",
+        "MOTORY": "0",
+        "NAZWA": "Parking P+R Metro Wawrzyszew",
+        "NIEPELNO": "2",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "4",
+      "name": "Parking P+R Połczyńska",
+      "longitude": 20.922495,
+      "latitude": 52.22237,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "4",
+        "OPIS": "Bemowo, ul. Połczyńska 8, pomiędzy salonem samochodowym a torami kolejowymi.",
+        "AUTA": "500",
+        "MOTORY": "20",
+        "NAZWA": "Parking P+R Połczyńska",
+        "NIEPELNO": "12",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "5",
+      "name": "Parking P+R Ursus Niedźwiadek",
+      "longitude": 20.867834,
+      "latitude": 52.191142,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "5",
+        "OPIS": "Ursus, ul. Orląt Lwowskich, przy pętli autobusowej i stacji kolejowej Ursus Niedźwiadek",
+        "AUTA": "345",
+        "MOTORY": "24",
+        "NAZWA": "Parking P+R Ursus Niedźwiadek",
+        "NIEPELNO": "8",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "6",
+      "name": "Parking P+R Metro Ursynów",
+      "longitude": 21.027439,
+      "latitude": 52.162709,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "6",
+        "OPIS": "Ursynów, al. Komisji Edukacji Narodowej przy Beli Bartoka, nad stacją metra \"Ursynów\".",
+        "AUTA": "166",
+        "MOTORY": "100",
+        "NAZWA": "Parking P+R Metro Ursynów",
+        "NIEPELNO": "7",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "7",
+      "name": "Parking P+R Wawer SKM",
+      "longitude": 21.150397,
+      "latitude": 52.222111,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "7",
+        "OPIS": "Wawer, okolice skrzyżowania ulicy Widocznej i Nagietkowej, przy stacji SKM Warszawa Wawer",
+        "AUTA": "133",
+        "MOTORY": "144",
+        "NAZWA": "Parking P+R Wawer SKM",
+        "NIEPELNO": "4",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "8",
+      "name": "Parking P+R Anin SKM",
+      "longitude": 21.160875,
+      "latitude": 52.213133,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "8",
+        "OPIS": "Anin, rejon skrzyżowania ul. Szpotańskiego i VIII Poprzecznej, przy stacji SKM Warszawa Anin",
+        "AUTA": "83",
+        "MOTORY": "100",
+        "NAZWA": "Parking P+R Anin SKM",
+        "NIEPELNO": "3",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "9",
+      "name": "Parking P+R Metro Marymont",
+      "longitude": 20.969979,
+      "latitude": 52.271319,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "9",
+        "OPIS": "Żoliborz, okolice skrzyżowania ulicy Słowackiego i Włościańskiej, przy stacji metra \"Marymont\"",
+        "AUTA": "395",
+        "MOTORY": "28",
+        "NAZWA": "Parking P+R Metro Marymont",
+        "NIEPELNO": "6",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "10",
+      "name": "Parking P+R Metro Imielin",
+      "longitude": 21.047239,
+      "latitude": 52.150309,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "10",
+        "OPIS": "Ursynów, okolice skrzyżowania alei Komisji Edukacji Narodowej i ulicy Indiry Gandhi, na tyłach Multikina",
+        "AUTA": "236",
+        "MOTORY": "0",
+        "NAZWA": "Parking P+R Metro Imielin",
+        "NIEPELNO": "0",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "11",
+      "name": "Parking P+R Metro Wilanowska",
+      "longitude": 21.024679,
+      "latitude": 52.180313,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "11",
+        "OPIS": "Mokotów, okolice skrzyżowania ulicy Puławskiej i Alei Wilanowskiej, przy pętli autobusowej",
+        "AUTA": "280",
+        "MOTORY": "30",
+        "NAZWA": "Parking P+R Metro Wilanowska",
+        "NIEPELNO": "6",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "12",
+      "name": "Parking P+R Metro Młociny II",
+      "longitude": 20.928802,
+      "latitude": 52.292436,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "12",
+        "OPIS": "Bielany, okolice skrzyżowania ulicy 30 Pułku Strzelców Kaniowskich i Zgrupowania AK \"Kampinos\", przy węźle komunikacyjnym \"Młociny\"",
+        "AUTA": "72",
+        "MOTORY": "0",
+        "NAZWA": "Parking P+R Metro Młociny II",
+        "NIEPELNO": "0",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "13",
+      "name": "Parking P+R Metro Stokłosy",
+      "longitude": 21.037267,
+      "latitude": 52.153919,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "13",
+        "OPIS": "Ursynów, okolice skrzyżowania alei Komisji Edukacji Narodowej i ulicy Ciszewskiego, przy stacji metra \"Stokłosy\"",
+        "AUTA": "393",
+        "MOTORY": "20",
+        "NAZWA": "Parking P+R Metro Stokłosy",
+        "NIEPELNO": "6",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    },
+    {
+      "source_id": "14",
+      "name": "Parking P+R Stadion Narodowy",
+      "longitude": 21.044584,
+      "latitude": 52.244498,
+      "source_updated_at_text": "kwiecień 2015",
+      "source_properties": {
+        "OBJECTID": "14",
+        "OPIS": "Praga Południe, błonie Stadionu Narodowego, przy stacji kolejowej SKM Warszawa Stadion",
+        "AUTA": "110",
+        "MOTORY": "0",
+        "NAZWA": "Parking P+R Stadion Narodowy",
+        "NIEPELNO": "0",
+        "AKTU_DAN": "kwiecień 2015",
+        "SHAPE": null
+      }
+    }
+  ],
+  "source_sha256": "bbbe1d57e66ae12a232aa96e01383271f90e1eb93450ddfdba8f501b3bacfc38",
+  "imported_into_live_facilities": false,
+  "reason": "Historical P+R layer; current operation/membership not verified against current WTP directory. Retained for review, not mixed into current listed-facility counts.",
+  "source_url": "https://wfs.um.warszawa.pl/serwis",
+  "type_name": "wfs:PARKINGI_PARK_AND_RIDE",
+  "retrieved_at": "2026-10-17T21:45:17.214049+00:00",
+  "raw_file": "raw/parkride-bbbe1d57e66ae12a.gml",
+  "processed_at": "2026-10-17T21:49:20.327895+00:00",
+  "source_retrieved_at": "2026-10-17T21:45:17.214049+00:00",
+  "cross_source_overlap_candidates": [
+    {
+      "historic_source_id": "1",
+      "historic_name": "Parking P+R Metro Młociny",
+      "listed_source_id": "56087682633535a0",
+      "listed_name": "Parking P+R Metro Młociny I",
+      "distance_m": 28.3,
+      "decision": "overlap candidate only; not counted as a new live facility"
+    },
+    {
+      "historic_source_id": "2",
+      "historic_name": "Parking P+R Al. Krakowska",
+      "listed_source_id": "9a7249ff23ea5e6c",
+      "listed_name": "Parking P+R Al. Krakowska",
+      "distance_m": 27.7,
+      "decision": "overlap candidate only; not counted as a new live facility"
+    },
+    {
+      "historic_source_id": "7",
+      "historic_name": "Parking P+R Wawer SKM",
+      "listed_source_id": "0973f2eaead64de4",
+      "listed_name": "Parking P+R Wawer SKM",
+      "distance_m": 34.4,
+      "decision": "overlap candidate only; not counted as a new live facility"
+    },
+    {
+      "historic_source_id": "11",
+      "historic_name": "Parking P+R Metro Wilanowska",
+      "listed_source_id": "a79f1e591949c226",
+      "listed_name": "Parking P +R Metro Wilanowska",
+      "distance_m": 29.8,
+      "decision": "overlap candidate only; not counted as a new live facility"
+    }
+  ]
+}
