@@ -2,7 +2,6 @@ import React, { useState, useMemo, useEffect, useRef } from "react";
 import { createRoot } from "react-dom/client";
 import { ArrowUpRight, ArrowRight, MapPin, Search, TrainFront, ShoppingBasket, TreePine, Cross, ParkingCircle, Navigation, Info, X, ChevronDown, LoaderCircle, Compass, Moon, Sun, ArrowLeftRight, } from "lucide-react";
 import NeighborhoodMap from "./Map";
-import { InfrastructureSummary, FacilityDetails } from "./Infrastructure";
 import { homes, destinations, demoAnalysis } from "./demo";
 import { analyze, geocode, API_BASE_URL } from "./api";
 import { distance, meters, inWarsaw } from "./geo";
@@ -364,17 +363,16 @@ function App() {
                   const places = result.places.filter(p => p.category === c.id);
                   const unavailable = result.unavailable.includes(c.id);
                   return <button key={c.id} aria-pressed={category === c.id} onClick={() => { setCategory(c.id); setFocusedId(null); }}>
-                    <c.icon size={18}/><span>{c.label}<small>{unavailable ? "Unavailable" : `${result.datasets?.[c.id]?.total ?? places.length} nearby`}</small></span><ChevronDown size={14}/>
+                    <c.icon size={18}/><span>{c.label}<small>{unavailable ? "Unavailable" : `${places.length} nearby`}</small></span><ChevronDown size={14}/>
                   </button>;
                 })}
                 <div className="environment"><span>Air quality<strong>Unavailable</strong></span><span>Noise<strong>Unavailable</strong></span></div>
               </div>
               <div className="category-detail">
                 <div className="detail-heading"><div><span className="section-kicker">Within {meters(radius)}</span><h3>{selectedCategory.label}</h3></div><span className="distance-note">{result.demo ? "Demo · Straight-line distances" : "Distance type shown per place"}</span></div>
-                <InfrastructureSummary result={result} category={category}/>
                 {result.unavailable.includes(category) ? <div className="empty-comparison"><selectedCategory.icon size={30}/><h3>Data unavailable</h3><p>No reliable dataset is connected for this category.</p></div> : !categoryPlaces.length ? <div className="empty-comparison"><h3>No places returned</h3><p>Try a larger search radius.</p></div> : <div className="places-and-detail">
                   <div className="place-list">{categoryPlaces.map(p => <button className={`place-row ${focusedPlace?.id === p.id ? "chosen" : ""}`} key={p.id} onClick={() => setFocusedId(p.id)}><span>{p.label}{p.lines?.length ? <small>Lines: {p.lines.join(", ")}</small> : null}</span><span><strong>{meters(p.distance_m)}</strong><small>{p.distance_type === "walking" ? "Walking" : p.distance_type === "straight_line" ? "Straight line" : "Type unspecified"}</small></span></button>)}</div>
-                  {focusedPlace && <div className="place-inspector"><selectedCategory.icon size={26}/><span className="section-kicker">{result.demo ? "Illustrative place" : selectedCategory.label}</span><h3>{focusedPlace.label}</h3><strong>{meters(focusedPlace.distance_m)}</strong><p>{focusedPlace.distance_type === "walking" ? "Walking distance" : focusedPlace.distance_type === "straight_line" ? "Straight-line distance" : "Distance type unspecified"}</p>{focusedPlace.lines?.length ? <p>Lines {focusedPlace.lines.join(" · ")}</p> : null}<FacilityDetails place={focusedPlace}/><small>{focusedPlace.latitude.toFixed(5)}, {focusedPlace.longitude.toFixed(5)}</small></div>}
+                  {focusedPlace && <div className="place-inspector"><selectedCategory.icon size={26}/><span className="section-kicker">{result.demo ? "Illustrative place" : selectedCategory.label}</span><h3>{focusedPlace.label}</h3><strong>{meters(focusedPlace.distance_m)}</strong><p>{focusedPlace.distance_type === "walking" ? "Walking distance" : focusedPlace.distance_type === "straight_line" ? "Straight-line distance" : "Distance type unspecified"}</p>{focusedPlace.lines?.length ? <p>Lines {focusedPlace.lines.join(" · ")}</p> : null}<small>{focusedPlace.latitude.toFixed(5)}, {focusedPlace.longitude.toFixed(5)}</small></div>}
                 </div>}
               </div>
             </div>
@@ -488,7 +486,7 @@ function App() {
                             ? "—"
                             : saved[i].unavailable.includes(c.id)
                                 ? "Unavailable"
-                                : `${saved[i].datasets?.[c.id]?.total ?? saved[i].places.filter((p) => p.category === c.id).length} places`}
+                                : `${saved[i].places.filter((p) => p.category === c.id).length} places`}
                           </td>))}
                       </tr>))}
                     <tr>

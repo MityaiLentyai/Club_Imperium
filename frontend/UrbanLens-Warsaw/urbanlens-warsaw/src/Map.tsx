@@ -104,7 +104,7 @@ export default function NeighborhoodMap({
           }),
         })
           .addTo(g)
-          .bindPopup(popupText(`${p.label}${p.distance_m !== undefined ? ` · ${Math.round(p.distance_m)} m straight line${p.distance_basis === "park_area" ? " to park area" : ""}` : ""}${p.capacity !== undefined ? ` · Capacity: ${p.capacity}` : ""}${p.category === "parking" ? " · Availability unverified" : ""}`));
+          .bindPopup(popupText(p.label));
       });
     if (destination) {
       L.marker([destination.latitude, destination.longitude], {

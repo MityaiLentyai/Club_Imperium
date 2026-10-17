@@ -1198,8 +1198,3 @@ summary {
  .is-expanded .back-to-search { right:20px; top:135px; }
  .is-expanded .category-bar { margin-top:14px; }
 }
-
-.infrastructure-summary { margin: 12px 0; font-size: .85rem; line-height: 1.5; }
-.infrastructure-summary p { margin: 6px 0; }
-.facility-details { font-size: .85rem; overflow-wrap: anywhere; }
-.facility-details summary { cursor: pointer; margin: 8px 0; }
