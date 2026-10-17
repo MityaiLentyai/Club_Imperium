@@ -204,6 +204,7 @@ def test_dry_run_has_no_token_network_or_cache_writes(tmp_path, monkeypatch, sto
 
 
 def test_api_backward_compatibility_and_marker_limits(monkeypatch, stops, cache):
+    monkeypatch.setattr(scoring_service, "load_retail", lambda: None)
     monkeypatch.setattr(scoring_service, "get_stops", lambda: stops)
     monkeypatch.setattr(scoring_service, "get_stop_lines", lambda: LineCache())
     client = TestClient(app)
