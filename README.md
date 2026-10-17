@@ -1,8 +1,17 @@
 # Warsaw LifeScore
 
-Warsaw Open Data hackathon project (`MityaiLentyai/Club_Imperium`). The FastAPI backend scores transport accessibility using the committed `data/stops_clean.csv` dataset. It supports coordinates or a Warsaw address for integration with the team's React frontend.
+Warsaw Open Data hackathon project (`MityaiLentyai/Club_Imperium`). The FastAPI backend scores transport accessibility using the committed `data/stops_clean.csv` dataset. It supports coordinates or a Warsaw address for integration with the team's React + TypeScript + Vite frontend.
 
 The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. No other LifeScore categories are implemented yet.
+
+## Configuration layout
+
+- `configs/requirements.txt`: backend Python dependencies.
+- `configs/.env.example`: example backend environment variables without credentials.
+- `render.yaml`, `.gitignore`, `.python-version`, and `README.md`: kept in the repository root.
+- Frontend-specific configuration belongs in `frontend/`.
+
+Python source files remain in `backend/` and `data_science/`.
 
 ## Install and run locally
 
@@ -11,8 +20,8 @@ Use Python 3.11. From the repository root:
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
+python -m pip install -r configs/requirements.txt
+cp configs/.env.example .env
 ```
 
 Edit `.env`: set `GEOCODING_USER_AGENT` to identify Warsaw LifeScore and include your team's real contact email or URL. The example contact is a placeholder. Then load the environment and start FastAPI:
@@ -40,10 +49,10 @@ Existing response shapes are preserved.
 | --- | --- | --- |
 | `GET /api/health` | None | `{"status":"ok"}` (process liveness) |
 | `GET /api/geocode` | `address` query parameter | Address and coordinates |
-| `POST /api/score` | JSON `latitude`, `longitude` | Location, Mobility Score, transport features |
-| `POST /api/score/address` | JSON `address` | Score response with resolved address in `location` |
+| `POST /api/score` | JSON `latitude`, `longitude`, optional `radius_m` | Location, Mobility Score, transport features |
+| `POST /api/score/address` | JSON `address`, optional `radius_m` | Score response with resolved address in `location` |
 
-Coordinates must be within latitude −90…90 and longitude −180…180. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace. Coordinate scoring retains global coordinate validation for compatibility; its Warsaw dataset is only meaningful near Warsaw.
+Scoring coordinates must be finite and within the supported Warsaw service envelope: latitude 52.0–52.4 and longitude 20.75–21.3, inclusive. These conservative bounds cover outer neighborhoods and are not an exact municipal-boundary check. Unsupported coordinates and unsafe projection results return HTTP 422. Address inputs must contain 3–300 characters after trimming. Geocoding additionally normalizes internal whitespace.
 
 ```bash
 curl http://localhost:8000/api/health
@@ -56,7 +65,7 @@ curl -X POST http://localhost:8000/api/score/address \
   -d '{"address":"Stokłosy 7"}'
 ```
 
-Example `/api/score` response for the coordinates above, calculated using the committed CSV:
+The existing `location`, `scores`, and `features` fields retain their meanings. The example below shows those fields; responses additionally include `radius_m`, `places`, `unavailable`, `nearby`, and `sources` as described below. Values are calculated using the committed CSV:
 
 ```json
 {
@@ -72,9 +81,46 @@ Example `/api/score` response for the coordinates above, calculated using the co
 
 `/api/geocode` returns `{"address": <resolved string>, "latitude": <number>, "longitude": <number>}`. `/api/score/address` returns the score structure above plus `location.address`.
 
-React can use the deployed backend's HTTPS URL (locally `http://localhost:8000`):
+## Live transport contract
 
-```javascript
+Both scoring endpoints accept optional integer `radius_m` (1–2000 metres; default 1000). The radius filters map markers only. Mobility Score and `features.stop_groups_500m` / `stop_groups_1000m` always use their original fixed radii and unchanged formula.
+
+Additional response fields:
+
+- `radius_m`: the requested marker radius.
+- `places`: transport platform objects with `id` (`stop_id:platform`), `stop_id`, `platform`, `category: "transport"`, `label` (CSV stop name), `latitude`, `longitude`, `distance_m`, and `distance_type: "straight_line"`. Coordinates come from the real CSV; distances use the projected EPSG:2180 geometry. Lists are sorted nearest first and limited to 200 platforms.
+- `nearby`: `{ "total": <platform count within radius>, "limit": 200, "truncated": <boolean> }`. Counts refer to platforms, while scoring density counts unique stop groups. A capped list is explicitly marked.
+- `unavailable`: `["grocery", "pharmacy", "green", "parking"]`. An empty transport list means zero nearby platforms, not unavailable data.
+- `sources`: a source-name list identifying `stops_clean.csv`. No live retrieval timestamp is invented for this static dataset.
+
+`POST /api/score/address` uses the same contract and adds `location.address`. `/api/geocode` retains its single-object response. No `/analyze` endpoint is needed. Grocery/pharmacy/park/parking data and travel-time routing are not implemented. Destination straight-line comparisons remain a frontend calculation; destinations are not sent to scoring.
+
+## TypeScript and Vite frontend integration
+
+The React or TypeScript + HTML/CSS frontend can use the same API. Keep Vite configuration and frontend dependencies inside `frontend/urbanlens-warsaw/`. Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/urbanlens-warsaw/.env.local` for local development; use the deployed backend's HTTPS URL for production. Restart Vite after changing environment variables. This URL is public client configuration; never place secrets in `VITE_` variables.
+
+Run the frontend in a second terminal from the repository root (Node 22 was used for verification):
+
+```bash
+cd frontend/urbanlens-warsaw
+npm ci
+cp .env.example .env.local
+npm run dev -- --port 5173 --strictPort
+```
+
+Open <http://localhost:5173>, select **Live**, submit an address or pick a map location, then explore. Demo mode uses its existing illustrative fixtures and never calls scoring/geocoding. Live mode never falls back to fixtures. Stops shown on the map are individual platforms.
+
+```bash
+# From frontend/urbanlens-warsaw:
+./node_modules/.bin/tsc --noEmit
+npm test
+npm run build
+```
+
+Set the backend's `CORS_ORIGINS` to the exact frontend origin (`http://localhost:5173` by default). CORS is already environment-configurable; the frontend does not need to add CORS response headers. Send JSON with `Content-Type: application/json`:
+
+```typescript
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
 const response = await fetch(`${API_BASE_URL}/api/score/address`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -124,7 +170,7 @@ The frontend must visibly display “© OpenStreetMap contributors” linked to 
 For manual setup, connect `MityaiLentyai/Club_Imperium` as a Python Web Service, leave the root directory at the repository root, and configure:
 
 ```text
-Build command: pip install -r requirements.txt
+Build command: pip install -r configs/requirements.txt
 Start command: uvicorn backend.main:app --host 0.0.0.0 --port $PORT --workers 1
 Health check path: /api/health
 Python version: 3.11.11
@@ -133,3 +179,5 @@ Python version: 3.11.11
 Set `CORS_ORIGINS` to the exact React origin and `GEOCODING_USER_AGENT` to your app identifier with real contact details. Set `GEOCODING_URL` if using a different compatible provider. Render supplies `PORT`; keep a single instance. The CSV must remain committed and included in the deployment. Render instructions follow its [FastAPI deployment guide](https://render.com/docs/deploy-fastapi), using this repository's `backend.main:app` entrypoint.
 
 After deployment, check `/api/health`, `/docs`, and coordinate scoring. Test address scoring manually with one explicitly submitted Warsaw address after configuring the User-Agent. Health reports process liveness; it does not probe the external geocoder.
+
+Frontend hosting: configure a separate static site with root `frontend/urbanlens-warsaw`, build command `npm ci && npm run build`, and publish directory `dist`. Set `VITE_API_BASE_URL` to the backend HTTPS origin before building and `CORS_ORIGINS` on the backend to the frontend origin. Rebuild the frontend after environment changes. `render.yaml` configures only the backend. The frontend no longer contacts Nominatim directly; provider/contact settings live only on the backend. Map tiles still require access to OpenStreetMap.

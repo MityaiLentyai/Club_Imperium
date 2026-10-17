@@ -37,6 +37,7 @@ def score_location(request: ScoreRequest):
     return get_location_score(
         request.latitude,
         request.longitude,
+        request.radius_m,
     )
 
 
@@ -52,6 +53,7 @@ async def score_address(request: AddressScoreRequest):
     result = get_location_score(
         location["latitude"],
         location["longitude"],
+        request.radius_m,
     )
 
     result["location"]["address"] = location["address"]
