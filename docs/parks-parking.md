@@ -53,38 +53,21 @@ Distances use EPSG:2180 metres. Nearest-distance features search the entire load
 
 `scores.mobility` and all transport features/formulas remain unchanged. Neither `scores.green` nor `scores.parking` is emitted: named-park coverage has not been verified as representative of all green space, and parking coverage is explicitly partial. No overall LifeScore is invented.
 
-## Frontend and local verification
+## Backend verification and frontend handoff
 
-The actual frontend is `frontend/UrbanLens-Warsaw/urbanlens-warsaw`. Live mode calls `/api/score` and preserves the selected address label. Existing green/parking filters now control real markers. The category panel shows nearest distance, full nearby counts, snapshot retrieval time, truncation, park-distance interpretation and incomplete parking coverage. Facility details show source capacity, hours and tariff tables when present. Comparisons use full category totals. Demo mode retains its illustrative fixtures and never supplies a fallback for Live mode. Map popup text is inserted as text, not source HTML.
+This branch retains the backend/data portion of PR #7. Its frontend changes were reverted, so `frontend/` is identical to `origin/main`. The API returns categorized markers, nearest distances, counts, timestamps and limitations, but this branch does not render those fields in React.
 
-Backend, from repository root:
+Run the backend from the repository root:
 
 ```bash
 source .venv/bin/activate
-python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
-```
-
-Frontend, in another terminal from repository root:
-
-```bash
-cd frontend/UrbanLens-Warsaw/urbanlens-warsaw
-npm ci
-VITE_API_BASE_URL=http://127.0.0.1:8000 npm run dev -- --host localhost --port 5173 --strictPort
-```
-
-Open http://localhost:5173, choose Live, pick a Warsaw point and run analysis. This works without a token or geocoding credentials because scoring uses local data. Submitted address search retains the existing frontend Nominatim path; configure backend `GEOCODING_USER_AGENT` when exercising `/api/score/address`. Backend CORS defaults to http://localhost:5173.
-
-```bash
-# Repository root
+python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000 --workers 1
 python -m pytest -q
 curl -X POST http://127.0.0.1:8000/api/score -H 'Content-Type: application/json' -d '{"latitude":52.2297,"longitude":21.0122,"radius_m":1000}'
-# Actual frontend directory
-npm test
-./node_modules/.bin/tsc --noEmit
-npm run build
+git diff --exit-code origin/main -- frontend
 ```
 
-Tests use saved official fixtures and synthetic geometry only in test cases, never in Live mode. They cover CRS, strict park classification, inside/outside polygon distances, coordinate rejection, duplicate facilities, missing/corrupt/empty snapshots, category limits, radius filtering, old API contracts, unchanged Mobility Score, frontend component rendering and the Live request path.
+Tests use saved official fixtures and synthetic geometry only in tests. They cover CRS, strict park classification, inside/outside polygon distances, coordinate rejection, duplicate facilities, missing/corrupt/empty snapshots, category limits, radius filtering, old API contracts and unchanged Mobility Score. See [Complete backend MVP](complete-mvp.md) for sports, lines, LifeScore, commute and comparison APIs.
 
 ## Remaining verification
 
