@@ -17,10 +17,10 @@ export async function analyze(
     throw new Error(
       "Live analysis is not connected yet. Add VITE_API_BASE_URL and rebuild, or explore Demo mode.",
     );
-  const r = await fetch(`${API_BASE_URL}/analyze`, {
+  const r = await fetch(`${API_BASE_URL}/api/score`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
+    body: JSON.stringify({ latitude: request.latitude, longitude: request.longitude, radius_m: request.radius_m }),
     signal: signal || AbortSignal.timeout(20000),
   });
   if (!r.ok)
@@ -63,6 +63,8 @@ export function adaptAnalysis(raw: any, request: AnalyzeRequest): Analysis {
       const latitude = Number(p.latitude ?? p.lat),
         longitude = Number(p.longitude ?? p.lon);
       if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) continue;
+      if (latitude < 52.0 || latitude > 52.4 || longitude < 20.75 || longitude > 21.3) continue;
+      if (typeof p.distance_m === "number" && p.distance_m > request.radius_m) continue;
       places.push({
         id: String(p.id ?? `${category}-${i}`),
         category,
@@ -80,11 +82,19 @@ export function adaptAnalysis(raw: any, request: AnalyzeRequest): Analysis {
               ? "straight_line"
               : undefined,
         lines: Array.isArray(p.lines) ? p.lines.map(String) : undefined,
+        distance_basis: ["park_area", "facility_point"].includes(p.distance_basis) ? p.distance_basis : undefined,
+        capacity: Number.isInteger(p.capacity) && p.capacity >= 0 ? p.capacity : undefined,
+        address: typeof p.address === "string" ? p.address : undefined,
+        opening_hours: Array.isArray(p.opening_hours) ? p.opening_hours : undefined,
+        tariffs: Array.isArray(p.tariffs) ? p.tariffs : undefined,
+        availability_status: typeof p.availability_status === "string" ? p.availability_status : undefined,
       });
     }
   }
   return {
-    location: { ...request, label: raw.location?.label || "Selected location" },
+    location: { latitude: request.latitude, longitude: request.longitude,
+      label: raw.location?.address || raw.location?.label || (request as AnalyzeRequest & { label?: string }).label || "Selected location" },
+    radius_m: request.radius_m,
     places,
     unavailable: [
       ...new Set([
@@ -100,6 +110,9 @@ export function adaptAnalysis(raw: any, request: AnalyzeRequest): Analysis {
     retrieved_at:
       typeof raw.retrieved_at === "string" ? raw.retrieved_at : undefined,
     commute: raw.commute,
+    scores: raw.scores,
+    features: raw.features,
+    datasets: raw.datasets,
     demo: false,
   };
 }
