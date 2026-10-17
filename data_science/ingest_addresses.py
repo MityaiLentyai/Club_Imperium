@@ -162,7 +162,7 @@ def publish_index(records,report,output=ROOT):
                              'CREATE TABLE lookup(kind TEXT,street_key TEXT,building_key TEXT,district_key TEXT,id TEXT,PRIMARY KEY(kind,street_key,building_key,district_key,id));')
             for r in sorted(records,key=lambda r:r['id']):
                 db.execute('INSERT INTO addresses VALUES(?,?,?,?,?,?,?)',tuple(r[k] for k in ['id','street','short_name','building','district','latitude','longitude']))
-                for name in set([r['street'],r['short_name'],street_without_type(r['street']),street_without_type(r['short_name'])]):
+                for name in sorted(set([r['street'],r['short_name'],street_without_type(r['street']),street_without_type(r['short_name'])])):
                     if not name:continue
                     key=street_key(name)
                     for kind,value in [('unicode',key),('folded',fold_key(key))]:
