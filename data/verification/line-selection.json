@@ -1,5 +1,5 @@
 {
-  "status": "planned_not_requested",
+  "status": "executed_with_single_attempt_per_platform",
   "maximum_requests": 20,
   "attempts_per_platform": 1,
   "selection_method": "Nearest previously uncached platforms at three municipal-verified address anchors; quotas 7, 7, 6, within 1500 metres",
@@ -143,6 +143,22 @@
       "stop_name": "Markowska",
       "anchor": "Ząbkowska 12",
       "distance_m": 379.2
+    }
+  ],
+  "completed_at": "2026-10-17T21:15:37.463694+00:00",
+  "exit_code": 1,
+  "summary": {
+    "selected": 20,
+    "requested": 20,
+    "skipped": 0,
+    "succeeded": 19,
+    "failed": 1
+  },
+  "failed_platforms": [
+    {
+      "stop_id": "1920",
+      "platform": "80",
+      "error_code": "HTTP_500"
     }
   ]
 }

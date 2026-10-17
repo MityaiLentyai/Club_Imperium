@@ -31,7 +31,7 @@ Existing backend endpoints work without this token. The backend never fetches
 line data while scoring and never returns the token.
 
 The complete-MVP branch incorporates the existing Mobility 2.0 local snapshot:
-15 successfully observed platforms across three stop groups, out of 6,652
+34 successfully observed platforms across eleven stop groups, out of 6,652
 platforms in the transport dataset. It was retrieved on 2026-10-17; the exact
 per-platform timestamps are retained. No new line API calls were made for this
 integration. This deliberately small sample is not representative of Warsaw.
@@ -182,7 +182,7 @@ exists. Existing JSON consumers may ignore the new fields.
 
 This branch integrates only backend/Data Science changes. The API exposes optional line fields for frontend consumers, while `frontend/` remains identical to `origin/main`. No line-number display or frontend API adapter is delivered here.
 
-Line count measures choice, not frequency, reliability, connectivity, walking access or useful destinations. Counts in partial samples are observed counts, not full-area totals. A spatial window containing no stops differs from a window whose stop lines have not been ingested. Current shipped coverage is 15/6,652 platforms across three stop groups, with 33 distinct observed line identifiers. Per-platform timestamps and local/global coverage are included in API responses.
+Line count measures choice, not frequency, reliability, connectivity, walking access or useful destinations. Counts in partial samples are observed counts, not full-area totals. A spatial window containing no stops differs from a window whose stop lines have not been ingested. Current shipped coverage is 34/6,652 platforms across eleven stop groups, with 57 distinct observed line identifiers. A separate failed platform observation remains unknown rather than zero. Per-platform timestamps and local/global coverage are included in API responses.
 
 ## Verification
 

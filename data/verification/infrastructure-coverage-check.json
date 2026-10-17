@@ -5,5 +5,14 @@
     "valid_records": 60,
     "added_ids": [],
     "removed_ids": []
+  },
+  "parking": {
+    "checked_at": "2026-10-17T21:15:37.612557+00:00",
+    "source_records": 19,
+    "provider_response_timestamp": "2026-10-17T23:15:02",
+    "valid_records": 18,
+    "added_ids": [],
+    "removed_ids": [],
+    "snapshot_updated": true
   }
 }

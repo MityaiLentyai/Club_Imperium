@@ -30,7 +30,7 @@
     ]
   },
   "credential_operations": {
-    "line_expansion": "Prepared, not requested; separate approval pending after automatic review rejection",
-    "parking_refresh": "Not requested; catalogue coverage checked without authentication"
+    "line_expansion": "Explicitly authorized: 20 single-attempt requests executed; 19 succeeded, one HTTP_500; no retry. Cache now 34 successful platforms across 11 groups, 57 distinct observed lines.",
+    "parking_refresh": "Explicitly authorized: one request executed; 19 source records, 18 valid facilities; unchanged membership and refreshed observation metadata, no current availability claim."
   }
 }

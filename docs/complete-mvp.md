@@ -23,7 +23,7 @@ Backend CORS defaults to http://localhost:5173. Coordinate scoring needs neither
 | Category | Shipped data | Interpretation |
 | --- | --- | --- |
 | Transport | 6,652 stop platforms in existing `stops_clean.csv` | Original Mobility Score is unchanged |
-| Observed lines | 15 platforms at 3 stop groups; 33 distinct observed line identifiers | Existing Mobility 2.0 cache; small sample, not citywide service coverage |
+| Observed lines | 34 successful platforms at 11 stop groups; 57 distinct observed line identifiers | Existing cache plus 19 newly verified platforms; about 0.51% of platforms, not citywide service coverage |
 | Parks | 60 `OBIEKT=Park` polygons from 430 named public spaces | Parks only; square greenery and completeness are unverified |
 | Parking | 18 valid facilities from 19 source rows | Participating ZTP/ZDM/PKiN operators; one row lacked coordinates |
 | Sports | 16 located sites across six districts; 1 unresolved selected address | Source has 1,227 records grouped into 308 distinct site addresses; only 16/308 source sites are located (about 5.2%); coverage remains limited |
@@ -52,7 +52,7 @@ python -m data_science.ingest_infrastructure parking
 python -m data_science.ingest_stop_lines --limit 15 --dry-run
 ```
 
-The existing line pipeline caps each explicit run at 20 platforms, caches/resumes successful observations, preserves failures and uses no network during scoring. No additional line requests were made for this branch.
+The existing line pipeline caps each explicit run at 20 platforms, caches/resumes successful observations, preserves failures and uses no network during scoring. An explicitly authorized batch made 20 single-attempt requests: 19 succeeded and one returned HTTP 500 without retry. Parking was refreshed once with unchanged 18-facility membership. See the follow-up report for exact evidence.
 
 Sports refresh (manual operator action, never part of scoring):
 

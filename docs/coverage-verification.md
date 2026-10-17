@@ -7,9 +7,9 @@ This iteration changes Python backend, Data Science, datasets and documentation 
 | Dataset | Actual result | Score decision |
 | --- | --- | --- |
 | Stop platforms | Existing 6,652-platform snapshot | Original Mobility Score retained |
-| Observed lines | Still 15 successful cached platforms; a specific 20-platform expansion is prepared but not executed | Observed lines do not establish frequency or a schedule |
+| Observed lines | 34 successful cached platforms across 11 stop groups; 57 distinct observed lines (34/6,652 platforms, about 0.51%) | Observed lines do not establish frequency or a schedule |
 | Parks | One bounded WFS refresh returned the same 430 named spaces and 60 qualifying Park objects, with unchanged source-ID membership | No Green Score: completeness is not verified |
-| Parking | Existing 18 valid facilities; official catalogue scope reconfirmed without authentication | No Parking Score or current availability claim |
+| Parking | One authenticated refresh: 19 source rows, 18 valid facilities; unchanged membership | No Parking Score or current availability claim |
 | Sports | Expanded from 7 to 16 located sites, in Mokotów, Praga-Północ, Ursynów, Wola, Śródmieście and Żoliborz | No Sports Score: only 16/308 educational source-site addresses, about 5.2%, are located |
 
 Sports source still contains 1,227 records grouped into 308 distinct addresses. The ten-address enrichment batch used source-site indices `7,135,137,83,85,160,161,216,217,14` in that exact source hash. Nine were added; `Aleja Wojska Polskiego 1A` remains unresolved. No public or commercial bulk geocoding was used: queries used exact street/avenue, building number and district equality in the official municipal WFS, with at most five matches per query. Address points are proxies for sites, not mapped courts or entrances. No source-address/district conflicts were found in this saved source.
@@ -20,9 +20,9 @@ Machine-readable evidence and actual results are in `data/verification/`. The or
 
 ## Credential-operation status
 
-The existing backend token is available, but automatic approval review rejected its use for the new line-expansion batch without separate confirmation of that exact credential-dependent action. The requested approval covers up to 20 line requests and one parking refresh. Until approved, neither operation is executed; no authentication failure or token validity is inferred from that policy rejection.
+After explicit user authorization, exactly 20 single-attempt line requests and one parking request were executed with the existing server-side token. No credentials were logged or committed. Nineteen platform requests succeeded; platform `1920:80` returned HTTP 500 and was retained as an error with its attempt timestamp, without a retry or invented empty-service record. Existing observations were preserved.
 
-`data/verification/line-selection.json` is a **plan**, not observations: it selects the nearest previously uncached platforms around three independently verified municipal address points, with quotas 7/7/6 and a 1,500 m bound. The committed line CSV remains the existing 15-platform observations. Parking membership/availability is not represented as freshly authenticated data; only its public catalogue scope was checked in this iteration.
+`data/verification/line-selection.json` records the executed selection and summary: nearest previously uncached platforms around three independently verified municipal address points, with quotas 7/7/6 and a 1,500 m bound. The line CSV now contains 34 successful observations plus one error. Parking returned the same 18 valid facility IDs from 19 rows; retrieval and verification timestamps were refreshed. Provider response time is retained separately and does not establish availability observation time.
 
 Preview without token, network or cache writes:
 

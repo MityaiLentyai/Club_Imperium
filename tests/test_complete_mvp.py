@@ -107,10 +107,11 @@ def test_combined_api_mobility_lines_sources_and_optional_categories():
     assert data['life_score']['value'] == 92.7
     assert data['life_score']['normalized_weights'] == {'mobility': 100}
     assert all(data['datasets'][key]['status'] == 'available' for key in ['green', 'parking', 'sports'])
-    assert data['line_features']['line_data_coverage']['known_platforms'] == 15
+    assert data['line_features']['line_data_coverage']['known_platforms'] == 34
     assert len(data['sources']) == 5
     assert 'nearest_sports_facility_m' in data['features']
-    assert len(read_cache().records) == 15
+    assert len(read_cache().records) == 35
+    assert read_cache().records[('1920', '80')]['status'] == 'error'
 
 
 @pytest.fixture
