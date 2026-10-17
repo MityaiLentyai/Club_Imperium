@@ -36,28 +36,34 @@ class LineClient:
             self.last_request = self.clock()
             retry_after = 0
             try:
-                response = self.client.post(API_URL, json={"busstopId": stop_id, "busstopNr": platform},
-                                            headers={"Authorization": self.token}, timeout=10.0)
-                if response.status_code == 429 or response.status_code >= 500:
-                    code = f"HTTP_{response.status_code}"
-                    try:
-                        retry_after = float(response.headers.get("Retry-After", "0"))
-                    except ValueError:
+                with self.client.stream("POST", API_URL, json={"busstopId": stop_id, "busstopNr": platform},
+                                        headers={"Authorization": self.token}, timeout=10.0) as response:
+                    if response.status_code == 429 or response.status_code >= 500:
+                        code = f"HTTP_{response.status_code}"
                         try:
-                            retry_after = (parsedate_to_datetime(response.headers["Retry-After"]) - datetime.now(timezone.utc)).total_seconds()
-                        except (ValueError, TypeError, OverflowError):
-                            raise IngestionError(code) from None
-                    # Do not retry earlier than a long provider-requested wait.
-                    # Leave this platform failed/resumable instead of blocking indefinitely.
-                    if not math.isfinite(retry_after) or retry_after > 30:
-                        raise IngestionError(code)
-                elif response.is_error or response.is_redirect:
-                    raise IngestionError(f"HTTP_{response.status_code}")
-                else:
-                    try:
-                        return parse_lines(response.json())
-                    except (ValueError, TypeError):
-                        raise IngestionError("INVALID_RESPONSE") from None
+                            retry_after = float(response.headers.get("Retry-After", "0"))
+                        except ValueError:
+                            try:
+                                retry_after = (parsedate_to_datetime(response.headers["Retry-After"]) - datetime.now(timezone.utc)).total_seconds()
+                            except (ValueError, TypeError, OverflowError):
+                                raise IngestionError(code) from None
+                        # Do not retry earlier than a long provider-requested wait.
+                        # Leave this platform failed/resumable instead of blocking indefinitely.
+                        if not math.isfinite(retry_after) or retry_after > 30:
+                            raise IngestionError(code)
+                    elif response.is_error or response.is_redirect:
+                        raise IngestionError(f"HTTP_{response.status_code}")
+                    else:
+                        try:
+                            chunks, size = [], 0
+                            for chunk in response.iter_bytes():
+                                size += len(chunk)
+                                if size > 256_000:
+                                    raise IngestionError("RESPONSE_TOO_LARGE")
+                                chunks.append(chunk)
+                            return parse_lines(json.loads(b"".join(chunks)))
+                        except (ValueError, TypeError):
+                            raise IngestionError("INVALID_RESPONSE") from None
             except httpx.TimeoutException:
                 code = "TIMEOUT"
             except httpx.TransportError:
@@ -129,14 +135,34 @@ def main(argv=None):
     parser.add_argument("--limit", type=int, default=15, help="Maximum selected platforms (1–20; default 15)")
     parser.add_argument("--offset", type=int, default=0, help="Offset in stable stop_id/platform order")
     parser.add_argument("--platform", action="append", default=[], help="Select stop_id:platform explicitly; repeat up to --limit")
+    parser.add_argument("--selection-file", type=Path, help="Explicit bounded list of stop_id/platform objects; supports a platforms manifest")
     parser.add_argument("--output", type=Path, default=CACHE_PATH)
     parser.add_argument("--refresh", action="store_true", help="Refetch selected successful records")
+    parser.add_argument("--max-attempts", type=int, default=3, choices=(1, 2, 3), help="Bound attempts per selected platform; use 1 for one-request verification")
     parser.add_argument("--dry-run", action="store_true", help="Print selection without token, network or writes")
     args = parser.parse_args(argv)
     if not 1 <= args.limit <= 20 or args.offset < 0:
         parser.error("--limit must be 1–20 and --offset must be nonnegative")
     stops = load_stops()
     available = sorted(set(zip(stops.stop_id, stops.platform)))
+    if args.selection_file:
+        if args.platform or args.offset:
+            parser.error("--selection-file cannot be combined with --platform or --offset")
+        try:
+            if args.selection_file.stat().st_size > 100_000:
+                raise ValueError("Selection file exceeds 100 KB")
+            selection = json.loads(args.selection_file.read_text())
+            if isinstance(selection, dict):
+                selection = selection["platforms"]
+            if not isinstance(selection, list) or not 1 <= len(selection) <= args.limit:
+                raise ValueError("Selection must fit the platform limit")
+            args.platform = []
+            for row in selection:
+                if not isinstance(row, dict) or not all(isinstance(row.get(key), str) for key in ("stop_id", "platform")):
+                    raise ValueError("Stop/platform identifiers must be strings")
+                args.platform.append(row["stop_id"] + ":" + row["platform"])
+        except (OSError, ValueError, KeyError, TypeError):
+            parser.error("Invalid bounded selection file; no requests made")
     if args.platform:
         selected = []
         for value in args.platform:
@@ -163,7 +189,7 @@ def main(argv=None):
     if pending and not token:
         parser.error("Set WARSAW_API_TOKEN in the backend environment, or use --dry-run")
     with httpx.Client(follow_redirects=False, trust_env=False) as client:
-        summary = ingest(selected, args.output, LineClient(client, token).fetch, refresh=args.refresh)
+        summary = ingest(selected, args.output, LineClient(client, token, retries=args.max_attempts - 1).fetch, refresh=args.refresh)
     print(json.dumps(summary))
     return 1 if summary["failed"] else 0
 
