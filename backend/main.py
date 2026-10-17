@@ -1,11 +1,15 @@
 
-from fastapi import FastAPI
+import os
+from typing import Annotated
+
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.schemas import ScoreRequest
-from backend.services.scoring_service import get_location_score
+from backend.schemas import Address, AddressScoreRequest, ScoreRequest
 from backend.services.geocoding_service import geocode_address
-from backend.schemas import ScoreRequest, AddressScoreRequest
+from backend.services.scoring_service import get_location_score
+
+
 app = FastAPI(
     title="Warsaw LifeScore API",
     version="0.2.0",
@@ -13,7 +17,11 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        origin.strip()
+        for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
+        if origin.strip()
+    ],
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
@@ -31,8 +39,9 @@ def score_location(request: ScoreRequest):
         request.longitude,
     )
 
+
 @app.get("/api/geocode")
-async def geocode_location(address: str):
+async def geocode_location(address: Annotated[Address, Query()]):
     return await geocode_address(address)
 
 

@@ -1,5 +1,6 @@
 
 import asyncio
+import math
 import os
 import time
 from collections import OrderedDict
@@ -18,14 +19,27 @@ _request_lock = asyncio.Lock()
 _last_request_time = 0.0
 
 
+def _cached_result(result):
+    if result is None:
+        raise HTTPException(status_code=404, detail="Address not found in Warsaw")
+    return result.copy()
+
+
+def _save_result(key, result):
+    _cache[key] = (time.monotonic(), result.copy() if result else None)
+    _cache.move_to_end(key)
+    if len(_cache) > CACHE_MAXSIZE:
+        _cache.popitem(last=False)
+
+
 async def geocode_address(address: str):
     global _last_request_time
 
     address = " ".join(address.strip().split())
-    if not address:
+    if not 3 <= len(address) <= 300:
         raise HTTPException(
             status_code=422,
-            detail="Address cannot be empty",
+            detail="Address must contain between 3 and 300 characters",
         )
 
     cache_key = address.casefold()
@@ -36,7 +50,7 @@ async def geocode_address(address: str):
         timestamp, result = cached
         if now - timestamp < CACHE_TTL:
             _cache.move_to_end(cache_key)
-            return result.copy()
+            return _cached_result(result)
         del _cache[cache_key]
 
     async with _request_lock:
@@ -48,21 +62,31 @@ async def geocode_address(address: str):
             timestamp, result = cached
             if now - timestamp < CACHE_TTL:
                 _cache.move_to_end(cache_key)
-                return result.copy()
+                return _cached_result(result)
             del _cache[cache_key]
+
+        user_agent = os.getenv("GEOCODING_USER_AGENT", "").strip()
+        if not user_agent:
+            raise HTTPException(
+                status_code=503, detail="Geocoding is not configured"
+            )
 
         elapsed = time.monotonic() - _last_request_time
         if _last_request_time and elapsed < 1.1:
             await asyncio.sleep(1.1 - elapsed)
 
         headers = {
-            "User-Agent": os.environ["GEOCODING_USER_AGENT"],
+            "User-Agent": user_agent,
         }
 
         params = {
             "q": f"{address}, Warszawa, Poland",
             "format": "jsonv2",
             "limit": 1,
+            "countrycodes": "pl",
+            "addressdetails": 1,
+            "viewbox": "20.75,52.4,21.3,52.0",
+            "bounded": 1,
         }
 
         # Reserve the request slot before the network call.
@@ -71,35 +95,55 @@ async def geocode_address(address: str):
         try:
             async with httpx.AsyncClient(timeout=10.0) as client:
                 response = await client.get(
-                    GEOCODING_URL,
+                    os.getenv("GEOCODING_URL", GEOCODING_URL),
                     params=params,
                     headers=headers,
                 )
                 response.raise_for_status()
                 results = response.json()
+        except httpx.TimeoutException as exc:
+            raise HTTPException(
+                status_code=504, detail="Geocoding service timed out"
+            ) from exc
         except (httpx.HTTPError, ValueError) as exc:
             raise HTTPException(
                 status_code=502,
                 detail="Geocoding service unavailable",
             ) from exc
 
-        if not results:
+        try:
+            if not isinstance(results, list):
+                raise ValueError("Expected a list")
+            result = None
+            if results:
+                first = results[0]
+                latitude, longitude = float(first["lat"]), float(first["lon"])
+                display_name = first["display_name"]
+                if not (math.isfinite(latitude) and math.isfinite(longitude)):
+                    raise ValueError("Non-finite coordinates")
+                if not isinstance(display_name, str) or not display_name.strip():
+                    raise ValueError("Missing display name")
+                details = first.get("address", {})
+                city = next(
+                    (details[k] for k in ("city", "town", "village") if details.get(k)),
+                    None,
+                )
+                in_warsaw = (
+                    52.0 <= latitude <= 52.4
+                    and 20.75 <= longitude <= 21.3
+                    and details.get("country_code", "pl").casefold() == "pl"
+                    and (city is None or city.casefold() in {"warszawa", "warsaw"})
+                )
+                if in_warsaw:
+                    result = {
+                        "address": display_name,
+                        "latitude": latitude,
+                        "longitude": longitude,
+                    }
+        except (KeyError, TypeError, ValueError, AttributeError) as exc:
             raise HTTPException(
-                status_code=404,
-                detail="Address not found",
-            )
+                status_code=502, detail="Invalid response from geocoding service"
+            ) from exc
 
-        first = results[0]
-        result = {
-            "address": first["display_name"],
-            "latitude": float(first["lat"]),
-            "longitude": float(first["lon"]),
-        }
-
-        _cache[cache_key] = (time.monotonic(), result.copy())
-        _cache.move_to_end(cache_key)
-
-        if len(_cache) > CACHE_MAXSIZE:
-            _cache.popitem(last=False)
-
-        return result
+        _save_result(cache_key, result)
+        return _cached_result(result)
