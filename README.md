@@ -4,6 +4,15 @@ Warsaw Open Data hackathon project (`MityaiLentyai/Club_Imperium`). The FastAPI 
 
 The current Mobility Score is a preliminary 0–100 metric based on straight-line distance to the nearest stop and stop group density. It does not measure travel time or service frequency. No other LifeScore categories are implemented yet.
 
+## Configuration layout
+
+- `configs/requirements.txt`: backend Python dependencies.
+- `configs/.env.example`: example backend environment variables without credentials.
+- `render.yaml`, `.gitignore`, `.python-version`, and `README.md`: kept in the repository root.
+- Frontend-specific configuration belongs in `frontend/`.
+
+Python source files remain in `backend/` and `data_science/`.
+
 ## Install and run locally
 
 Use Python 3.11. From the repository root:
@@ -11,8 +20,8 @@ Use Python 3.11. From the repository root:
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-cp .env.example .env
+python -m pip install -r configs/requirements.txt
+cp configs/.env.example .env
 ```
 
 Edit `.env`: set `GEOCODING_USER_AGENT` to identify Warsaw LifeScore and include your team's real contact email or URL. The example contact is a placeholder. Then load the environment and start FastAPI:
@@ -72,9 +81,14 @@ Example `/api/score` response for the coordinates above, calculated using the co
 
 `/api/geocode` returns `{"address": <resolved string>, "latitude": <number>, "longitude": <number>}`. `/api/score/address` returns the score structure above plus `location.address`.
 
-React can use the deployed backend's HTTPS URL (locally `http://localhost:8000`):
+## TypeScript and Vite frontend integration
 
-```javascript
+The React or TypeScript + HTML/CSS frontend can use the same API. Keep Vite configuration and frontend dependencies inside `frontend/`. Set `VITE_API_BASE_URL=http://localhost:8000` in `frontend/.env.local` for local development; use the deployed backend's HTTPS URL for production. Restart Vite after changing environment variables. This URL is public client configuration; never place secrets in `VITE_` variables.
+
+Set the backend's `CORS_ORIGINS` to the exact frontend origin (`http://localhost:5173` by default). CORS is already environment-configurable; the frontend does not need to add CORS response headers. Send JSON with `Content-Type: application/json`:
+
+```typescript
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000';
 const response = await fetch(`${API_BASE_URL}/api/score/address`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -124,7 +138,7 @@ The frontend must visibly display “© OpenStreetMap contributors” linked to 
 For manual setup, connect `MityaiLentyai/Club_Imperium` as a Python Web Service, leave the root directory at the repository root, and configure:
 
 ```text
-Build command: pip install -r requirements.txt
+Build command: pip install -r configs/requirements.txt
 Start command: uvicorn backend.main:app --host 0.0.0.0 --port $PORT --workers 1
 Health check path: /api/health
 Python version: 3.11.11
