@@ -46,7 +46,7 @@
         "name": "levels",
         "type": "Integer",
         "description": "Liczba poziomów parkingu"
-      },      
+      },
       {
         "name": "total_places",
         "type": "List",
@@ -61,12 +61,12 @@
         "name": "dimensions",
         "type": "List",
         "description": "Wymiary pojazdów"
-      },      
+      },
       {
         "name": "acceptedPaymentMethod",
         "type": "String",
         "description": "Wymiary pojazdów"
-      },      
+      },
       {
         "name": "allowedVehicleType",
         "type": "String",
@@ -101,7 +101,7 @@
         "name": "parkingCategory",
         "type": "String",
         "description": "Kategoria parkingu"
-      }      
+      }
     ]
   }
 ]
