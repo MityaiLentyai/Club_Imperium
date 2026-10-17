@@ -189,3 +189,7 @@ Frontend hosting: configure a separate static site with root `frontend`, build c
 Current source coverage, sports refresh/reproduction, weight normalization, route cache limits and comparison warnings are documented in [Backend MVP](docs/complete-mvp.md). Review those limitations before deployment; this feature does not change production configuration.
 
 Current full-source processing, quality reports, API examples and frontend handoff: [Data coverage and stabilization](docs/data-coverage-final.md). The complete saved sports source has 308 addresses: 293 located addresses consolidated into 291 facility points, with 15 unresolved. This does not imply complete Warsaw sports coverage.
+
+## OpenStreetMap groceries and pharmacies
+
+The optional local OSM snapshot covers mapped supermarkets, convenience/grocery stores and pharmacies across all 18 Warsaw districts. See [source counts, ingestion and API contract](docs/osm-retail.md) and [ODbL attribution/data-sharing notice](data/osm/README.md). Existing scoring formulas are unchanged; the frontend must display attribution and incomplete-coverage warnings.
