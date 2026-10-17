@@ -1,0 +1,107 @@
+[
+  {
+    "section_name": "Parametry wywołania",
+    "section_elements": [
+      {
+        "name": "token_uzytkownika",
+        "type": "token",
+        "description": "Token API - obowiązkowy"
+      }
+    ]
+  },
+  {
+    "section_name": "Parametry odpowiedzi",
+    "section_elements": [
+      {
+        "name": "start_date",
+        "type": "String",
+        "description": "Nazwa Parkingu"
+      },
+      {
+        "name": "latitude",
+        "type": "Number",
+        "description": "Szerokość geograficzna"
+      },
+      {
+        "name": "longitude",
+        "type": "Number",
+        "description": "Długość geograficzna"
+      },
+      {
+        "name": "adress",
+        "type": "String",
+        "description": "Adres parkingu"
+      },
+      {
+        "name": "opening_hours",
+        "type": "List",
+        "description": "Godziny otwarcia parkingu"
+      },
+      {
+        "name": "tariffs",
+        "type": "Table",
+        "description": "Cennik parkingu"
+      },
+      {
+        "name": "levels",
+        "type": "Integer",
+        "description": "Liczba poziomów parkingu"
+      },      
+      {
+        "name": "total_places",
+        "type": "List",
+        "description": "Wolne miejsca w podziale na poziomy"
+      },
+      {
+        "name": "free_places_total",
+        "type": "Dictionary",
+        "description": "Wolne miejsca"
+      },
+      {
+        "name": "dimensions",
+        "type": "List",
+        "description": "Wymiary pojazdów"
+      },      
+      {
+        "name": "acceptedPaymentMethod",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },      
+      {
+        "name": "allowedVehicleType",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },
+      {
+        "name": "additionalSecurity",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },
+      {
+        "name": "manager",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },
+      {
+        "name": "managerEmail",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },
+      {
+        "name": "managerTelephone",
+        "type": "String",
+        "description": "Wymiary pojazdów"
+      },
+      {
+        "name": "operatorTelephone",
+        "type": "String",
+        "description": "Numer telefonu operatora"
+      },
+      {
+        "name": "parkingCategory",
+        "type": "String",
+        "description": "Kategoria parkingu"
+      }      
+    ]
+  }
+]

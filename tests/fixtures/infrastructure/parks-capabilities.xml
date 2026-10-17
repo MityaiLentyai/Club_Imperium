@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<wfs:WFS_Capabilities
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:wfs="http://www.opengis.net/wfs"
+  xmlns:ows="http://www.opengis.net/ows"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ogc="http://www.opengis.net/ogc"
+  xmlns="http://www.opengis.net/wfs"
+  version="1.1.0" 
+  xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd"
+ >
+ 
+  
+    <!-- ================================================================== -->
+    <!-- SERVICE IDENTIFICATION SECTION                                     -->
+    <!-- ================================================================== -->
+    <ows:ServiceIdentification>
+    <ows:Title>Server WFS m.st. Warszawy</ows:Title>
+    <ows:Abstract>Server WFS m.st. Warszawy</ows:Abstract>
+    <ows:Keywords>
+      <ows:Keyword>GIS WFS Server</ows:Keyword>
+    </ows:Keywords>
+    <ows:ServiceType>WFS</ows:ServiceType>
+    <ows:ServiceTypeVersion>1.0.0</ows:ServiceTypeVersion><ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+    <ows:Fees>opłaty zgodnie z prawem</ows:Fees>
+    <ows:AccessConstraints>none</ows:AccessConstraints>
+  </ows:ServiceIdentification>
+  
+  
+  
+    <!-- ================================================================== -->
+    <!-- SERVICE PROVIDER SECTION                                           -->
+    <!-- ================================================================== -->
+    <ows:ServiceProvider>
+    <ows:ProviderName></ows:ProviderName>
+    <ows:ProviderSite></ows:ProviderSite>
+    <ows:ServiceContact>
+      <ows:IndividualName>Urząd m.st. Warszawy</ows:IndividualName>
+      <ows:PositionName></ows:PositionName>
+      <ows:ContactInfo>
+        <ows:Phone>
+          <ows:Voice></ows:Voice>
+          <ows:Facsimile></ows:Facsimile>
+        </ows:Phone>
+        <ows:Address>
+          <ows:DeliveryPoint>Sandomierska 12</ows:DeliveryPoint>
+          <ows:City>Warszawa</ows:City>
+          <ows:AdministrativeArea></ows:AdministrativeArea>
+          <ows:PostalCode></ows:PostalCode>
+          <ows:Country>Polska</ows:Country>
+          <ows:ElectronicMailAddress>mapa@um.warszawa.pl</ows:ElectronicMailAddress>
+        </ows:Address>
+        <ows:OnlineResource xlink:href="https://www.your-domain.com"/>
+        <ows:HoursOfService>24x7</ows:HoursOfService>
+        <ows:ContactInstructions></ows:ContactInstructions>
+      </ows:ContactInfo>
+      <ows:Role></ows:Role>
+    </ows:ServiceContact>
+  </ows:ServiceProvider>
+  
+  
+  
+    <!-- ================================================================== -->
+    <!-- OPERATIONS METADATA SECTION                                        -->
+    <!-- ================================================================== -->
+    <ows:OperationsMetadata>
+
+    <!-- GetCapabilities -->
+    <ows:Operation name="GetCapabilities">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+		  <ows:Post xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="AcceptVersions">
+        <ows:Value>1.0.0</ows:Value><ows:Value>1.1.0</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="AcceptFormats">
+        <ows:Value>text/xml</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="Sections">
+        <ows:Value>ServiceIdentification</ows:Value>
+        <ows:Value>ServiceProvider</ows:Value>
+        <ows:Value>OperationsMetadata</ows:Value>
+        <ows:Value>FeatureTypeList</ows:Value>
+        <ows:Value>Filter_Capabilities</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+
+    <!-- DescribeFeatureType -->
+    <ows:Operation name="DescribeFeatureType">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+          <ows:Post xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>GML2</ows:Value><ows:Value>text/xml; subtype=gml/2.1.2</ows:Value><ows:Value>GML3</ows:Value><ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+
+
+    <!-- GetFeature -->
+    <ows:Operation name="GetFeature">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+          <ows:Post xlink:href="https://wfs.um.warszawa.pl/mapguide31/mapagent/mapagent.fcgi?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="resultType">
+        <ows:Value>results</ows:Value>
+        <ows:Value>hits</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>GML2</ows:Value><ows:Value>text/xml; subtype=gml/2.1.2</ows:Value><ows:Value>GML3</ows:Value><ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+
+
+    <!--
+         Common Parameters
+      -->
+
+    <ows:Constraint name="DefaultMaxFeatures">
+      <ows:Value>200000</ows:Value>
+    </ows:Constraint>
+
+  </ows:OperationsMetadata>
+  
+  
+  
+     <!-- ================================================================== -->
+     <!-- FEATURE TYPE LIST SECTION                                          -->
+     <!-- ================================================================== -->
+     <wfs:FeatureTypeList>
+       
+  <!--
+       Feature class #1
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:BIBLIOTEKI</wfs:Name>
+   <wfs:Title>BIBLIOTEKI</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #2
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:CMENTARZE</wfs:Name>
+   <wfs:Title>CMENTARZE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #3
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:DOMY_DZIECKA</wfs:Name>
+   <wfs:Title>DOMY_DZIECKA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #4
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:DOMY_POMOCY_SPOLECZNEJ</wfs:Name>
+   <wfs:Title>DOMY_POMOCY_SPOLECZNEJ</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #5
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:E_PRACOWNIE</wfs:Name>
+   <wfs:Title>E_PRACOWNIE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #6
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:GRANICE_DZIELNIC</wfs:Name>
+   <wfs:Title>GRANICE_DZIELNIC</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #7
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:INNE_POMOC_SPOLECZNA</wfs:Name>
+   <wfs:Title>INNE_POMOC_SPOLECZNA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #8
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:KLUBY_SENIORA</wfs:Name>
+   <wfs:Title>KLUBY_SENIORA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #9
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:MSI</wfs:Name>
+   <wfs:Title>MSI</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #10
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:OBWODY_SZKOL_PODSTAWOWYCH</wfs:Name>
+   <wfs:Title>OBWODY_SZKOL_PODSTAWOWYCH</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #11
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:OSRODKI_ADOPCYJNO_OPIEKUNCZE</wfs:Name>
+   <wfs:Title>OSRODKI_ADOPCYJNO_OPIEKUNCZE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #12
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:PLACE_SKWERY</wfs:Name>
+   <wfs:Title>PLACE_SKWERY</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #13
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:PLANY_ZAKRESY_OBOWIAZUJACE</wfs:Name>
+   <wfs:Title>PLANY_ZAKRESY_OBOWIAZUJACE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #14
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:PLANY_ZAKRESY_SPORZADZANE</wfs:Name>
+   <wfs:Title>PLANY_ZAKRESY_SPORZADZANE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #15
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:POMOC_PRAWNA</wfs:Name>
+   <wfs:Title>POMOC_PRAWNA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #16
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:ULICE</wfs:Name>
+   <wfs:Title>ULICE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #17
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:UNIWERSYTETY_TRZECIEGO_WIEKU</wfs:Name>
+   <wfs:Title>UNIWERSYTETY_TRZECIEGO_WIEKU</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #18
+    -->
+  <wfs:FeatureType
+     xmlns:ns92528565="Library://Warszawa/Dane/wfs_2000.FeatureSource">
+   <wfs:Name>ns92528565:ZIELEN_DRZEWA</wfs:Name>
+   <wfs:Title>ZIELEN_DRZEWA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS w układzie PL-2000</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:2178</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>7400000 5700000</ows:LowerCorner>
+   <ows:UpperCorner>7600000 5900000</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #19
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:AKADEMIKI</wfs:Name>
+   <wfs:Title>AKADEMIKI</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #20
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:APTEKI</wfs:Name>
+   <wfs:Title>APTEKI</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #21
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:BIURA_URZEDU</wfs:Name>
+   <wfs:Title>BIURA_URZEDU</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #22
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:HOTELE</wfs:Name>
+   <wfs:Title>HOTELE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #23
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:METRO_WEJSCIA</wfs:Name>
+   <wfs:Title>METRO_WEJSCIA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #24
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:NIERUCHOMOSCI_NA_SPRZEDAZ</wfs:Name>
+   <wfs:Title>NIERUCHOMOSCI_NA_SPRZEDAZ</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #25
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:NIERUCHOMOSCI_NA_WYNAJEM</wfs:Name>
+   <wfs:Title>NIERUCHOMOSCI_NA_WYNAJEM</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #26
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:PARKINGI_PARK_AND_RIDE</wfs:Name>
+   <wfs:Title>PARKINGI_PARK_AND_RIDE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #27
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:PILKA_NOZNA</wfs:Name>
+   <wfs:Title>PILKA_NOZNA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #28
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:PLACE_SKWERY_WGS84</wfs:Name>
+   <wfs:Title>PLACE_SKWERY_WGS84</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #29
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:PLYWALNIE</wfs:Name>
+   <wfs:Title>PLYWALNIE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #30
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:POLICJA</wfs:Name>
+   <wfs:Title>POLICJA</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #31
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:PUNKTY_ADRESOWE_WGS84</wfs:Name>
+   <wfs:Title>PUNKTY_ADRESOWE_WGS84</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #32
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:STACJE_ROWEROWE</wfs:Name>
+   <wfs:Title>STACJE_ROWEROWE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #33
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:TEATRY</wfs:Name>
+   <wfs:Title>TEATRY</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #34
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:TRASY_ROWEROWE</wfs:Name>
+   <wfs:Title>TRASY_ROWEROWE</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+  <!--
+       Feature class #35
+    -->
+  <wfs:FeatureType
+     xmlns:wfs="Library://Warszawa/Dane/dbcen-san01_wfs.FeatureSource">
+   <wfs:Name>wfs:ULICE_WGS84</wfs:Name>
+   <wfs:Title>ULICE_WGS84</wfs:Title>
+   <wfs:Abstract>Warstwy WFS WGS84</wfs:Abstract>
+   
+   <wfs:DefaultSRS>urn:ogc:def:crs:EPSG:4326</wfs:DefaultSRS>
+   
+   <wfs:OutputFormats>
+    <Format>GML2</Format><Format>text/xml; subtype=gml/2.1.2</Format><Format>GML3</Format><Format>text/xml; subtype=gml/3.1.1</Format>
+   </wfs:OutputFormats>
+   <ows:WGS84BoundingBox>
+   
+    
+      
+   <ows:LowerCorner>20 52</ows:LowerCorner>
+   <ows:UpperCorner>22 53</ows:UpperCorner>
+ 
+    
+   
+   </ows:WGS84BoundingBox>
+  </wfs:FeatureType>
+ 
+     </wfs:FeatureTypeList>
+  
+ 
+  <!-- ================================================================== -->
+  <!-- FILTER CAPABILITIES SECTION                                        -->
+  <!-- ================================================================== -->
+
+  <ogc:Filter_Capabilities>
+    <ogc:Spatial_Capabilities>
+      <ogc:GeometryOperands>
+        <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand><ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand><ogc:GeometryOperand>gml:Point</ogc:GeometryOperand><ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
+      </ogc:GeometryOperands>
+      <ogc:SpatialOperators>
+        <ogc:SpatialOperator name="BBOX"/><ogc:SpatialOperator name="Contains"/><ogc:SpatialOperator name="Crosses"/><ogc:SpatialOperator name="Disjoint"/><ogc:SpatialOperator name="DWithin"/><ogc:SpatialOperator name="Equals"/><ogc:SpatialOperator name="Intersects"/><ogc:SpatialOperator name="Overlaps"/><ogc:SpatialOperator name="Touches"/><ogc:SpatialOperator name="Within"/>
+      </ogc:SpatialOperators>
+    </ogc:Spatial_Capabilities>
+
+    <ogc:Scalar_Capabilities>
+      <ogc:LogicalOperators/>
+      <ogc:ComparisonOperators>
+       <ogc:ComparisonOperator>LessThan</ogc:ComparisonOperator><ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator><ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator><ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator><ogc:ComparisonOperator>EqualTo</ogc:ComparisonOperator><ogc:ComparisonOperator>NotEqualTo</ogc:ComparisonOperator><ogc:ComparisonOperator>Like</ogc:ComparisonOperator><ogc:ComparisonOperator>Between</ogc:ComparisonOperator><ogc:ComparisonOperator>NullCheck</ogc:ComparisonOperator>
+      </ogc:ComparisonOperators>
+      <ogc:ArithmeticOperators>
+        <ogc:SimpleArithmetic/>
+        <ogc:Functions>
+          <ogc:FunctionNames>
+            
+          </ogc:FunctionNames>
+        </ogc:Functions>
+      </ogc:ArithmeticOperators>
+    </ogc:Scalar_Capabilities>
+    <ogc:Id_Capabilities>
+      <ogc:EID/>
+      <ogc:FID/>
+    </ogc:Id_Capabilities>
+  </ogc:Filter_Capabilities>
+
+ </wfs:WFS_Capabilities>

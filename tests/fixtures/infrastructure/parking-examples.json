@@ -1,0 +1,20 @@
+[
+  {
+    "section_name": "Przykład wywołania",
+    "section_elements": [
+      {
+        "title": "Przykład zapytania dla pobrania Utrudnienia drogowe",
+        "content": "curl --location --request POST 'https://dane.um.warszawa.pl/api/action/get_m_parkingi_wolne_miejsca' --header 'Authorization: token_uzytkownika'"        
+      }
+    ]
+  },
+  {
+    "section_name": "Przykład odpowiedzi",
+    "section_elements": [
+      {
+        "title": "Przykład odpowiedzi dla pobrania Utrudnienia drogowe",
+        "content": "\"Parkings\": [\n {\n \"name\": \"Parking na Pl. Żelaznej Bramy\",\n \"latitude\": \"52.239560\",\n \"longitude\": \"21.001779\",\n \"adress\": \"\",\n \"opening_hours\": [\n {\n \"monday\": \"00:00-23:59\",\n \"tuesday\": \"00:00-23:59\",\n \"wednesday\": \"00:00-23:59\",\n \"thursday\": \"00:00-23:59\",\n \"friday\": \"00:00-23:59\",\n \"saturday\": \"00:00-23:59\",\n \"sunday\": \"00:00-23:59\"\n }\n ],\n \"tariffs\": [\n {\n \"VehicleType\": \"Motor\",\n \"Prices\": [\n {\n \"StayLength\": \"1.00\",\n \"StayPrice\": \"5.00\"\n },\n {\n \"StayLength\": \"2.00\",\n \"StayPrice\": \"11.00\"\n },\n {\n \"StayLength\": \"3.00\",\n \"StayPrice\": \"14.00\"\n },\n {\n \"StayLength\": \"4.00\",\n \"StayPrice\": \"18.00\"\n },\n {\n \"StayLength\": \"24.00\",\n \"StayPrice\": \"98.00\"\n }\n ]\n },\n {\n \"VehicleType\": \"Samochód dostawczy\",\n \"Prices\": [\n {\n \"StayLength\": \"1.00\",\n \"StayPrice\": \"6.00\"\n },\n {\n \"StayLength\": \"2.00\",\n \"StayPrice\": \"13.00\"\n },\n {\n \"StayLength\": \"3.00\",\n \"StayPrice\": \"18.00\"\n },\n {\n \"StayLength\": \"4.00\",\n \"StayPrice\": \"22.00\"\n },\n {\n \"StayLength\": \"24.00\",\n \"StayPrice\": \"102.00\"\n }\n ]\n },\n {\n \"VehicleType\": \"Samochód osobowy\",\n \"Prices\": [\n {\n \"StayLength\": \"1.00\",\n \"StayPrice\": \"5.00\"\n },\n {\n \"StayLength\": \"2.00\",\n \"StayPrice\": \"11.00\"\n },\n {\n \"StayLength\": \"3.00\",\n \"StayPrice\": \"14.00\"\n },\n {\n \"StayLength\": \"4.00\",\n \"StayPrice\": \"18.00\"\n },\n {\n \"StayLength\": \"24.00\",\n \"StayPrice\": \"98.00\"\n }\n ]\n }\n ],\n \"levels\": 1,\n \"total_places\": [\n {\n \"level\": \"0\",\n \"standard\": 47,\n \"disabled\": 0,\n \"electric\": 0\n }\n ],\n \"free_places_total\": {\n \"public\": 0,\n \"disabled\": 0,\n \"electric\": 0\n },\n \"dimensions\": [\n {\n \"Length\": \"5.00\",\n \"Width\": \"2.50\",\n \"VehicleType\": \"Samochód osobowy\"\n },\n {\n \"Length\": \"5.00\",\n \"Width\": \"2.50\",\n \"VehicleType\": \"Samochód dostawczy\"\n }\n ],\n \"acceptedPaymentMethod\": \"Gotówka, karta płatnicza\",\n \"allowedVehicleType\": \"samochód osobowy, samochód dostawczy, motor\",\n \"additionalSecurity\": \"Parking strzeżony\",\n \"manager\": \"Zarząd Terenów Publicznych\",\n \"managerEmail\": \"nopar@wp.pl\",\n \"managerTelephone\": \"+48 601-248-664\",\n \"operatorTelephone\": \"+48 730-255-220\",\n \"parkingCategory\": \"Publiczny\"\n },\n]"
+      }
+    ]
+  }
+]
