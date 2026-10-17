@@ -43,9 +43,9 @@ def load_snapshot(category, path=None):
                 if category == "green" and (props.get("classification") != "Park"
                         or geom.geom_type not in ("Polygon", "MultiPolygon")):
                     continue
-                if category == "parking" and geom.geom_type != "Point":
+                if category in ("parking", "sports") and geom.geom_type != "Point":
                     continue
-                if category == "parking":
+                if category in ("parking", "sports"):
                     key = (round(geom.x, 6), round(geom.y, 6))
                     if key in seen_points:
                         continue
@@ -56,7 +56,7 @@ def load_snapshot(category, path=None):
                 if not all(math.isfinite(v) for v in projected.bounds):
                     continue
                 seen.add(identifier)
-                if category == "parking":
+                if category in ("parking", "sports"):
                     seen_points.add(key)
                 records.append((props, geom, projected))
             except (KeyError, TypeError, ValueError, ShapelyError):
@@ -74,8 +74,9 @@ def nearby_features(latitude, longitude, radius_m, dataset, category, limit=50):
         raise ValueError("Invalid Warsaw coordinates")
     if not 1 <= radius_m <= 2000:
         raise ValueError("Invalid radius")
-    keys = (("nearest_park_m", "parks_within_radius") if category == "green"
-            else ("nearest_listed_parking_m", "listed_parking_within_radius"))
+    keys = {"green": ("nearest_park_m", "parks_within_radius"),
+            "parking": ("nearest_listed_parking_m", "listed_parking_within_radius"),
+            "sports": ("nearest_sports_facility_m", "sports_facilities_within_radius")}[category]
     if dataset is None:
         return {keys[0]: None, keys[1]: None}, [], {"status": "unavailable"}
     point = transform(Point(longitude, latitude), TO_METRES, interleaved=False)
@@ -99,6 +100,10 @@ def nearby_features(latitude, longitude, radius_m, dataset, category, limit=50):
                 if key in props:
                     place[key] = props[key]
             place["availability_status"] = "unknown_observation_time"
+        if category == "sports":
+            for key in ("sport_types", "schedules", "address", "coordinate_source"):
+                if key in props:
+                    place[key] = props[key]
         places.append(place)
     return ({keys[0]: round(measured[0][0], 1) if measured else None,
              keys[1]: len(nearby)}, places,
